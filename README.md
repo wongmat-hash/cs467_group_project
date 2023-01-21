@@ -3,7 +3,7 @@ Plan your trip around amazing experiences wherever you go! This app lets users c
 ## Objectives:
 Note:  This app may be delivered as a web app, native iOS or Android, or cross-platform app.
 
-###Users will be able to do the following:
+### Users will be able to do the following:
 
 #### Register and login
 #### Create an experience
