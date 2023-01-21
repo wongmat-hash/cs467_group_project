@@ -1,7 +1,7 @@
 # Crowd-Sourced Travel Planner
 Plan your trip around amazing experiences wherever you go! This app lets users create and share their travel experiences.
 ## Objectives:
-Note:  This app may be delivered as a web app, native iOS or Android, or cross-platform app.
+Note:  This app may be delivered as a web app, native iOS or Android, or cross-platform app. ![alt text]([http://url/to/img.png](https://eecs.engineering.oregonstate.edu/capstone/submission/images/41qcQHWInPcXilO6))
 
 ### Users will be able to do the following:
 Register and login
