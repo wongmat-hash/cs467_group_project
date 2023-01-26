@@ -32,7 +32,6 @@ Note:  This app may be delivered as a web app, native iOS or Android, or cross-p
 The hope is that through this app you would find out about events, places, or people that they might not normally hear about. Festivals, restaurants, entertainers, events, history… This will make travel a richer experience!
 
 ## Team Members:
-Allison Goldstein, 
 Melissa Perez, 
 Matthew Wong, 
 Dan Norton
