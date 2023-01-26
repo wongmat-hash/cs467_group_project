@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!REGISTRATION PAGE>
+      <title>Registration</title>
+      <!Boostrap>
+        <!work cited: https://www.bootstrapdash.com/blog/use-bootstrap-with-html>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <div class="container h-100">
+      <div class="row h-100 justify-content-center align-items-center">
+        <form>
+          <!REGISTER CONTAINER>
+            <h1 class="text-center">Registration</h1>
+            <div class="form-group"><input type="text" class="form-control" placeholder="Username" id="username"></div>
+            <div class="form-group"><input type="email" class="form-control" placeholder="Email" id="email"></div>
+            <div class="form-group"><input type="password" class="form-control" placeholder="Password" id="password"></div>
+            <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" id="password-confirm"></div>
+            <div class="form-group text-center"><button type="button" class="btn btn-primary" onclick="register()">Submit</button></div>
+            <div class="form-group text-center">
+              <!login redirect>
+                <p>Already have an account? <a href="login.html" id="loginLink">Login</a></p>
+            </div>
+        </form>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

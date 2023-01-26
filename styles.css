@@ -1,0 +1,59 @@
+.login-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+}
+ form {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 20px;
+     border: 1px solid #ccc;
+     border-radius: 10px;
+}
+ input[type="text"], input[type="password"] {
+     margin-bottom: 20px;
+     padding: 12px 20px;
+     border: 1px solid #ccc;
+     border-radius: 10px;
+     width: 100%;
+}
+ button[type="button"] {
+     padding: 12px 20px;
+     background-color: #4CAF50;
+     color: white;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+}
+ .registration-container {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+}
+ form {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     padding: 20px;
+     border: 1px solid #ccc;
+     border-radius: 10px;
+}
+ input[type="text"], input[type="password"] {
+     margin-bottom: 20px;
+     padding: 12px 20px;
+     border: 1px solid #ccc;
+     border-radius: 10px;
+     width: 100%;
+}
+ button[type="button"] {
+     padding: 12px 20px;
+     background-color: #4CAF50;
+     color: white;
+     border: none;
+     border-radius: 10px;
+     cursor: pointer;
+}
+ 
