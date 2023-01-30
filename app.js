@@ -19,32 +19,30 @@ app.engine(
     defaultLayout: 'index.hbs',
     extname: '.hbs',
     layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials'
+    partialsDir: __dirname + '/views/partials',
   })
 )
 app.set('view engine', '.hbs')
-
 
 /*************************************
   LISTENER
 **************************************/
 app.listen(process.env.PORT || PORT, function () {
-    console.log(
-      'Express started on http://localhost:' +
-        PORT +
-        '; press Ctrl-C to terminate.'
-    )
-  })
-
+  console.log(
+    'Express started on http://localhost:' +
+      PORT +
+      '; press Ctrl-C to terminate.'
+  )
+})
 
 /*************************************
   HOME ROUTE
 **************************************/
 // Page to render for home
 app.get('/', function (req, res) {
-    res.render('home.hbs', {
-      layout: 'index.hbs',
-      pageTitle: 'Travel Planner',
-    })
+  res.render('home.hbs', {
+    layout: 'index.hbs',
+    pageTitle: 'Travel Planner',
+    isHomeRender: false,
   })
-  
+})
