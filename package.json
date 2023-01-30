@@ -1,10 +1,12 @@
 {
-  "name": "cs467_group_project",
+  "name": "Travel_Planner",
   "version": "1.0.0",
   "description": "467 capstone project",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node -r app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,8 @@
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
     "express-handlebars": "^6.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
