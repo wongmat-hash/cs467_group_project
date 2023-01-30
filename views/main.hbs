@@ -2,7 +2,7 @@
 <div class="container-md p-3 my-3 mx-auto border border-secondary">
     <h5>Add New Experience</h5>
     <p>* = required field</p>
-    <form action="" method="post">
+    <form action="/" method="POST" encType="multipart/form-data">
         <div class="row mb-3">
             <label for="expereinceTitle" class="col-sm-2 col-form-label">Title of Experience *</label>
             <div class="col-sm-10">
@@ -24,7 +24,7 @@
         <div class="row mb-3">
             <label for="image" class="col-sm-2 col-form-label">Share Photo of Experience *</label>
             <div class="col-sm-10">
-                <input type="file" class="form-control" id="image" name="sampleImage" accept="image/*"/>
+                <input type="file" class="form-control" name="sampleImage" accept="image/*"/>
             </div>
         </div>
         <div class="row mb-3">

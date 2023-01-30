@@ -3,7 +3,7 @@ var exphbs = require('express-handlebars');
 var fileupload = require('express-fileupload');
 
 var app = express();
-port = 5252;
+port = 5253;
 
 // default option
 app.use(fileupload());
@@ -15,12 +15,12 @@ app.set('view engine', 'hbs');
 
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
+app.get('', (req, res) => {
     //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
     res.render('main', {layout : 'index'});
 });
 
-app.post('/', (req, res) => {
+app.post('', (req, res) => {
     let sampleImage;
     let uploadPath;
 
