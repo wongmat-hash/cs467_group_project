@@ -1,0 +1,16 @@
+{{> navbar}}
+
+<div class="h-50 d-flex align-items-center justify-content-center vstack gap-3">
+  <p>Results for "search term" by {{searchType}} </p>
+  {{#each searchResults}}
+    <div class="row">
+      <img src="{{this.experiencePhoto}}" alt="Experience" width="100" height="100" class="inline-block">
+      <div>
+        <h3>{{this.experienceName}}</h3>
+        <p>Location: {{this.experienceLocation}}</p>
+        <p>Keywords: {{#each this.experienceKeywords}}{{this}}, {{/each}}</p>
+        <p>Rating: {{this.experienceRating}}/5</p>
+      </div>
+    </div>
+  {{/each}}
+</div>
