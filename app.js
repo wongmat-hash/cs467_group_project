@@ -5,6 +5,9 @@ var fileupload = require('express-fileupload');
 var app = express();
 port = 5253;
 
+var db = require('./database/db-connector')
+app.use(express.json())
+
 // default option
 app.use(fileupload());
 
@@ -14,6 +17,11 @@ app.engine('hbs', exphbs.engine({extname: ".hbs"}));
 app.set('view engine', 'hbs');
 
 app.use(express.static('public'))
+
+db.pool.getConnection((err, connection) => {
+    if(err) throw err;
+    console.log('Connected!');
+});
 
 app.get('', (req, res) => {
     //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
@@ -36,9 +44,20 @@ app.post('', (req, res) => {
     sampleImage.mv(uploadPath, function(err) {
         if(err) return res.status(500).send(err);
 
-    res.send('File Uploaded!');
+    //res.send('File Uploaded!');
 
-    });
+    let insertQuery = "INSERT INTO Experiences (experienceTitle, description, location, image, note) VALUES (?,?,?,?,?)"
+    let insertData = [req.body.expTitle, req.body.desc, req.body.loc, sampleImage.name, req.body.note]
+    db.pool.query(insertQuery, insertData, function(error, rows, fiedls) {
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            res.redirect('/')
+        }
+    }
+    
+)});
 
 
 });
