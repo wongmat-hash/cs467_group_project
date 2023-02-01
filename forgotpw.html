@@ -16,7 +16,8 @@
           <h2 class="text-center">Forgot Password</h2>
           <div class="form-group">
             <!FOR DB LATER: id=email>
-            <!email field><label for="email">Email:</label><input type="text" class="form-control" placeholder="Enter email" id="email">
+            <!email field>
+            <label for="email">Email:</label><input type="text" class="form-control" placeholder="Enter email" id="email">
           </div>
           <!FOR DB LATER: onclick=reset()>
           <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="reset()">Reset Password</button></div>
@@ -35,7 +36,7 @@
       });
 
       document.getElementById("email").addEventListener("blur", function() {
-        this.placeholder = "Enter username";
+        this.placeholder = "Enter email";
       });
       </script>
   </body>
