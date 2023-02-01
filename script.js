@@ -1,19 +1,21 @@
 function login() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  var errorMessage = "";
 
-    // Validate the input
-    if (!username) {
-        alert("Please enter a username");
-        return;
-    }
-    if (!password) {
-        alert("Please enter a password");
-        return;
-    }
+  if (!username) {
+    errorMessage = "Please enter a valid username.";
+  } else if (!password) {
+    errorMessage = "Please enter a valid password.";
+  } else if (username !== "user" || password !== "password") {
+    errorMessage = "Incorrect username or password.";
+  }
 
-    // Check with the database
-    // ...
+  if (errorMessage) {
+    document.getElementById("error").innerHTML = errorMessage;
+  } else {
+    // logic to log in user
+  }
 }
 
 
