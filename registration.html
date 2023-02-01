@@ -6,26 +6,32 @@
       <!Boostrap>
         <!work cited: https://www.bootstrapdash.com/blog/use-bootstrap-with-html>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-          <link rel="stylesheet" type="text/css" href="styles.css">
+          <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <div class="container h-100">
-      <div class="row h-100 justify-content-center align-items-center">
+    <!REGISTER CONTAINER>
+    <div class="d-flex h-100 justify-content-center align-items-center" id="registrationForm" style="margin-top:50px;">
         <form>
-          <!REGISTER CONTAINER>
-            <h1 class="text-center">Registration</h1>
-            <div class="form-group"><input type="text" class="form-control" placeholder="Username" id="username"></div>
-            <div class="form-group"><input type="email" class="form-control" placeholder="Email" id="email"></div>
-            <div class="form-group"><input type="password" class="form-control" placeholder="Password" id="password"></div>
+            <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
+            <h2 class="text-center">Registration</h2>
+            <div class="form-group">
+              <!USERNAME FIELD>
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" placeholder="Enter username" id="username"></div>
+            <div class="form-group">
+              <!EMAIL FIELD>
+              <label for="e-mail">Email:</label>
+              <input type="email" class="form-control" placeholder="Enter e-mail" id="email"></div>
+            <div class="form-group">
+              <!PASSWORD FIELD>
+              <label for="password">Password:</label>
+              <input type="password" class="form-control" placeholder="Enter password" id="password"></div>
             <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" id="password-confirm"></div>
-            <div class="form-group text-center"><button type="button" class="btn btn-primary" onclick="register()">Submit</button></div>
-            <div class="form-group text-center">
-              <!login redirect>
-                <p>Already have an account? <a href="login.html" id="loginLink">Login</a></p>
-            </div>
+            <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="register()">Register</button></div>
+              <!LOGIN/ FORGOT redir>
+            <div class="d-flex justify-content-between"><a href="login.html" id="loginLink">Already have an account?</a><a href="forgotpw.html" id="forgotLink">Forgot Password</a></div>
         </form>
       </div>
-    </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
