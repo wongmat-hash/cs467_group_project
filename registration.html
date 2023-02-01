@@ -15,23 +15,69 @@
           <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
           <h2 class="text-center">Registration</h2>
           <div class="form-group">
+            <!FOR DB LATER: id=username>
             <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" id="username">
           </div>
           <div class="form-group">
+            <!FOR DB LATER: id=email>
             <!EMAIL FIELD><label for="e-mail">Email:</label><input type="email" class="form-control" placeholder="Enter email" id="email">
           </div>
           <div class="form-group">
+            <!FOR DB LATER: id=phone>
+            <!PHONE FIELD><label for="phone">Phone Number:</label><input type="password" class= "form-control" placeholder="Enter phone number" id="phone">
+          </div>
+          <div class="form-group">
+            <!FOR DB LATER: id=password>
             <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" id="password">
           </div>
           <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" id="password-confirm"></div>
           <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="register()">Register</button></div>
-          <!LOGIN / FORGOT redir>
-            <div class="d-flex justify-content-between"><a href="login.html" id="loginLink">Already have an account?</a><a href="forgotpw.html" id="forgotLink">Forgot Password</a></div>
+            <!LOGIN / FORGOT redir>
+            <div class="d-flex justify-content-between" style="margin-top:5px;"><a href="login.html" id="loginLink">Already have an account?</a><a href="forgotpw.html" id="forgotLink">Forgot Password</a></div>
         </form>
       </div>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
       <script src="script.js"></script>
+      <!JS to make the fields empty when clicked>
+      <script>
+      document.getElementById("username").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+
+      document.getElementById("username").addEventListener("blur", function() {
+        this.placeholder = "Enter username";
+      });
+      document.getElementById("email").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+
+      document.getElementById("email").addEventListener("blur", function() {
+        this.placeholder = "Enter username";
+      });
+
+      document.getElementById("phone").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+
+      document.getElementById("phone").addEventListener("blur", function() {
+        this.placeholder = "Enter password";
+      });
+      document.getElementById("password").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+
+      document.getElementById("password").addEventListener("blur", function() {
+        this.placeholder = "Enter username";
+      });
+      document.getElementById("password-confirm").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+
+      document.getElementById("password-confirm").addEventListener("blur", function() {
+        this.placeholder = "Enter username";
+      });
+      </script>
   </body>
 </html>
