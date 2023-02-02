@@ -16,22 +16,22 @@
           <h2 class="text">Registration</h2>
           <div class = "box">
             <div class="form-group">
-              <!FOR DB LATER: id=username>
+              <!FOR JS LATER: id=username>
               <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" id="username">
 
             <div id="error"></div>
 
-              <!FOR DB LATER: id=email>
+              <!FOR JS LATER: id=email>
               <!EMAIL FIELD><label for="e-mail">Email:</label><input type="email" class="form-control" placeholder="Enter email" id="email">
 
             <div id="error"></div>
             <div class="form-group">
-              <!FOR DB LATER: id=phone>
+              <!FOR JS LATER: id=phone>
               <!PHONE FIELD><label for="phone">Phone Number:</label><input type="password" class= "form-control" placeholder="Enter phone number" id="phone">
             </div>
             <div id="error"></div>
             <div class="form-group">
-              <!FOR DB LATER: id=password>
+              <!FOR JS LATER: id=password>
               <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" id="password">
             </div>
             <div id="error"></div>
@@ -55,6 +55,7 @@
       document.getElementById("username").addEventListener("blur", function() {
         this.placeholder = "Enter username";
       });
+
       document.getElementById("email").addEventListener("focus", function() {
         this.placeholder = "";
       });
@@ -77,6 +78,7 @@
       document.getElementById("password").addEventListener("blur", function() {
         this.placeholder = "Enter password";
       });
+
       document.getElementById("password-confirm").addEventListener("focus", function() {
         this.placeholder = "";
       });
