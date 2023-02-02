@@ -1,3 +1,4 @@
+console.log("i am in register");
 function login()
 {
   var username = document.getElementById("username").value;
@@ -30,43 +31,44 @@ function login()
 
 function register()
 {
-    var fullName = document.getElementById("fullName").value;
+    var username = document.getElementById("username").value;
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("confirmPassword").value;
+    var confirmPassword = document.getElementById("password-confirm").value;
 
     // Validate the input
-    if(!fullName)
-    {
-        alert("Please enter your full name");
-        return;
-    }
-    if(!email)
-    {
-        alert("Please enter your email");
-        return;
-    }
-    if(!password)
-    {
-        alert("Please enter a password");
-        return;
-    }
-    if(!confirmPassword)
-    {
-        alert("Please confirm your password");
-        return;
-    }
-    if(password !== confirmPassword)
-    {
-        alert("Passwords do not match");
-        return;
-    }
+  if (!username)
+  {
+    errorMessage = "Please enter a username.";
+  }
+  else if (!email)
+  {
+    errorMessage = "Please enter your email.";
+  }
+  else if (!password)
+  {
+    errorMessage = "Please enter a password.";
+  }
+  else if (!confirmPassword)
+  {
+    errorMessage = "Please confirm your password.";
+  }
+  else if (password !== confirmPassword)
+  {
+    errorMessage = "Passwords do not match.";
+  }
 
     // Check if email is already used
     // ...
-
+    if (errorMessage)
+    {
+    document.getElementById("error").innerHTML = errorMessage;
+    }
+    else
+    {
     // If everything is valid, then send the data to the server to save it
     // ...
+  }
 }
 
 function reset()
