@@ -6,7 +6,7 @@
       <!Boostrap>
         <!work cited: https://www.bootstrapdash.com/blog/use-bootstrap-with-html>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-          <link rel="stylesheet" type="text/css" href="style.css">
+          <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
     <!REGISTER CONTAINER>
@@ -14,24 +14,26 @@
         <form>
           <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
           <h2 class="text-center">Registration</h2>
-          <div class="form-group">
-            <!FOR DB LATER: id=username>
-            <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" id="username">
+          <div class = "box">
+            <div class="form-group">
+              <!FOR DB LATER: id=username>
+              <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" id="username">
+            </div>
+            <div class="form-group">
+              <!FOR DB LATER: id=email>
+              <!EMAIL FIELD><label for="e-mail">Email:</label><input type="email" class="form-control" placeholder="Enter email" id="email">
+            </div>
+            <div class="form-group">
+              <!FOR DB LATER: id=phone>
+              <!PHONE FIELD><label for="phone">Phone Number:</label><input type="password" class= "form-control" placeholder="Enter phone number" id="phone">
+            </div>
+            <div class="form-group">
+              <!FOR DB LATER: id=password>
+              <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" id="password">
+            </div>
+            <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" id="password-confirm"></div>
+            <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="register()">Register</button></div>
           </div>
-          <div class="form-group">
-            <!FOR DB LATER: id=email>
-            <!EMAIL FIELD><label for="e-mail">Email:</label><input type="email" class="form-control" placeholder="Enter email" id="email">
-          </div>
-          <div class="form-group">
-            <!FOR DB LATER: id=phone>
-            <!PHONE FIELD><label for="phone">Phone Number:</label><input type="password" class= "form-control" placeholder="Enter phone number" id="phone">
-          </div>
-          <div class="form-group">
-            <!FOR DB LATER: id=password>
-            <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" id="password">
-          </div>
-          <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" id="password-confirm"></div>
-          <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="register()">Register</button></div>
             <!LOGIN / FORGOT redir>
             <div class="d-flex justify-content-between" style="margin-top:5px;"><a href="login.html" id="loginLink">Already have an account?</a><a href="forgotpw.html" id="forgotLink">Forgot Password</a></div>
         </form>
