@@ -6,7 +6,7 @@
       <!Boostrap>
         <!work cited: https://www.bootstrapdash.com/blog/use-bootstrap-with-html>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-          <link rel="stylesheet" type="text/css" href="style.css">
+          <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
     <!LOGIN CONTAINER>
@@ -14,16 +14,18 @@
         <form>
           <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
           <h2 class="text-center">Login</h2>
-          <div class="form-group">
-            <!FOR DB LATER: id=username>
-            <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" id="username">
+          <div class = "box">
+            <div class="form-group">
+              <!FOR DB LATER: id=username>
+              <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" id="username";>
+            </div>
+            <div class="form-group">
+              <!FOR DB LATER: id=password>
+              <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" id="password">
+            </div>
+            <!FOR DB LATER: onclick=login()>
+            <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="login()">Sign In</button></div>
           </div>
-          <div class="form-group">
-            <!FOR DB LATER: id=password>
-            <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" id="password">
-          </div>
-          <!FOR DB LATER: onclick=login()>
-          <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="login()">Sign In</button></div>
           <div class="d-flex justify-content-between"><a href="registration.html" id="registerLink">Don't have an account? Register</a><a href="forgotpw.html" id="forgotLink">Forgot Password</a></div>
         </form>
       </div>

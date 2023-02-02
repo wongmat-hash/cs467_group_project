@@ -6,7 +6,7 @@
       <!Boostrap>
         <!work cited: https://www.bootstrapdash.com/blog/use-bootstrap-with-html>
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-          <link rel="stylesheet" type="text/css" href="style.css">
+          <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
     <!REGISTER CONTAINER>
@@ -14,13 +14,15 @@
         <form>
           <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
           <h2 class="text-center">Forgot Password</h2>
-          <div class="form-group">
-            <!FOR DB LATER: id=email>
-            <!email field>
-            <label for="email">Email:</label><input type="text" class="form-control" placeholder="Enter email" id="email">
+          <div class = "box">
+            <div class="form-group">
+              <!FOR DB LATER: id=email>
+              <!email field>
+              <label for="email">Email:</label><input type="text" class="form-control" placeholder="Enter email" id="email">
+            </div>
+            <!FOR DB LATER: onclick=reset()>
+            <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="reset()">Reset Password</button></div>
           </div>
-          <!FOR DB LATER: onclick=reset()>
-          <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="reset()">Reset Password</button></div>
           <!LOGIN / FORGOT redir>
             <div class="d-flex justify-content-between"><a href="login.html" id="loginLink">Already have an account?</a><a href="registration.html" id="registerLink">Register for a new account</a></div>
         </form>
