@@ -1,4 +1,3 @@
-console.log("i am in register");
 function login()
 {
   var username = document.getElementById("username").value;
@@ -31,15 +30,24 @@ function login()
 
 function register()
 {
-    var username = document.getElementById("username").value;
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-    var confirmPassword = document.getElementById("password-confirm").value;
+  var username = document.getElementById("username").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var confirmPassword = document.getElementById("password-confirm").value;
 
+  if (username == "")
+  {
+
+  }
+  if (username ==  "" || email == "" || password == "" || password-confirm == "")
+  {
+    alert("all fields must be complete");
+    return false;
+  }
     // Validate the input
   if (!username)
   {
-    errorMessage = "Please enter a username.";
+    errorMessage = "Please enter a valid username.";
   }
   else if (!email)
   {
