@@ -92,18 +92,20 @@ function register()
 
 function reset()
 {
-  const email = document.getElementById("email").value;
-
-  if (email)
-  {
-    // send a request to the server to reset the password
-    // ...
-    console.log("doing something");
-    // show the confirmation message
-    alert("A password reset link has been sent to your email. Please check your inbox.");
-  }
-  else
-  {
-    alert("Please enter your email.");
-  }
+    console.log("in reset function now!")
+    let email = document.getElementById("email").value;
+    let checkQuery = "SELECT * FROM Users WHERE email = ?";
+    let checkData = [email];
+    db.pool.query(checkQuery, checkData, function(error, rows, fields) {
+        if(error)
+        {
+            console.error(error);
+        } else if(rows.length === 0) \
+        {
+            alert("Email not found.");
+        } else
+        {
+            res.rediret('/resetpw.html')
+        }
+    });
 }
