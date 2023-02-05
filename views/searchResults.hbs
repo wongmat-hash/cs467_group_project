@@ -1,20 +1,23 @@
 {{> searchNavbar}}
 
-<div class="mt-5 d-flex align-items-center justify-content-center vstack gap-3">
-
-  <p>Results for "search term" by {{searchType}} </p>
-  {{#each searchResults}}
-    <div class="row">
-      <div class="col">
-        <img src="{{this.experiencePhoto}}" alt="Experience" width="100" height="100" class="inline-block">
+<div class="mt-5 ml-auto d-flex align-items-center justify-content-center vstack gap-3">
+  <div class="col-lg-10 col-xs-12">
+    <p>Results for "search term" by {{searchType}} </p>
+  </div>
+  <div>
+    {{#each searchResults}}
+      <div class="row m-3">
+        <div class="col-lg-4 m-1">
+          <img src="{{this.experiencePhoto}}" alt="Experience location photo." class="img-thumbnail">
+        </div>
+        <div class="col-lg-7 experienceDetails m-1 p-3">
+          <h3>{{this.experienceName}}</h3>
+          <p>Location: {{this.experienceLocation}}</p>
+          <p>Keywords: {{#each this.experienceKeywords}}{{this}}{{#unless @last}},{{/unless}}
+            {{/each}}</p>
+          <p>Rating: {{this.experienceRating}}/5</p>
+        </div>
       </div>
-      <div class="col">
-        <h3>{{this.experienceName}}</h3>
-        <p>Location: {{this.experienceLocation}}</p>
-        <p>Keywords: {{#each this.experienceKeywords}}{{this}}{{#unless @last}},{{/unless}}
-          {{/each}}</p>
-        <p>Rating: {{this.experienceRating}}/5</p>
-      </div>
-    </div>
-  {{/each}}
+    {{/each}}
+  </div>
 </div>

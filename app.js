@@ -62,6 +62,13 @@ app.get('/searchResults', function (req, res) {
         experienceRating: 3.5,
         experiencePhoto: '/images/golfcourse.jpg',
       },
+      {
+        experienceName: 'Test',
+        experienceLocation: 'test',
+        experienceKeywords: ['test'],
+        experienceRating: 1,
+        experiencePhoto: '/images/default.png',
+      },
     ],
   })
 })
