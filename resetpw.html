@@ -18,7 +18,7 @@
             <div class = "form-group">
               <!FOR JS LATER: id = password>
               <!NEW PASSWORD>
-              <label for ="New Password">Enter New Password:</label><input  type = "text" class="form-control" placeholder="Enter new password" id="newpassword">
+              <label for ="Enter New Password">Enter New Password:</label><input  type = "text" class="form-control" placeholder="Enter new password" id="newpassword">
             </div>
             <!For JS LATER: onclick = newpassword()>
             <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
@@ -31,6 +31,9 @@
       <script src="script.js"></script>
       <!JS to make the fields empty when clicked>
       <script>
+      //this code will pull the username URL from profile page and search so user only needs to enter password
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get("username");
       document.getElementById("newpassword").addEventListener("focus", function() {
         this.placeholder = "";
       });

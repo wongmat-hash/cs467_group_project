@@ -66,7 +66,7 @@ function register()
   // Validate the PASSWORD matches CONFIRM
   else if (password !== confirmPassword)
   {
-    errorMessage = "Passwords do not match.";
+    alert = "Passwords do not match.";
   }
 
   // Create the INSERT query
@@ -92,6 +92,8 @@ function register()
   });
 }
 
+//PROFILE PAGE NEEDS THIS LOGIC: <a href="resetPassword.html?username=user123">Reset Password</a>
+//LINK TO THIS PAGE AND FUNCTION
 //this function will reset the password from the user designated form
 function newpassword()
 {
@@ -102,9 +104,10 @@ function newpassword()
    alert("password field is empty");
    return;
   }
+  let email = document.getElementByID(urlParams.get("username"););
   //check against the DB for the email to reset
   let updatePasswordQuery = "UPDATE Users SET password = ? WHERE email = ?";
-  let updatePasswordData = [newPassword, email];                                //NEED TO FIGURE OUT HOW TO GET THE EMAIL HERE 
+  let updatePasswordData = [newPassword, email];                                //NEED TO FIGURE OUT HOW TO GET THE EMAIL HERE
   db.pool.query(updatePasswordQuery, updatePasswordData, function (error, result)
   {
     if (error)
