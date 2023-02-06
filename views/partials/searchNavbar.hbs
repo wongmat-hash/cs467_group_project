@@ -10,7 +10,10 @@
         {{> searchExperiences}}
       {{/unless}}
       <span class="g-3 ms-auto mb-2 mb-lg-0">
+        {{#if isCreateRender}}
         <button type="button" class="btn btn-success"><i class="bi bi-plus"></i></button>
+              {{/if}}
+
         <img src="/images/default.png" alt="Profile picture" width="50" height="50">
       </span>
     </div>

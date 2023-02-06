@@ -44,6 +44,7 @@ app.get('/', function (req, res) {
     layout: 'index.hbs',
     pageTitle: 'Travel Planner',
     isHomeRender: true,
+    isCreateRender: true,
   })
 })
 
@@ -53,6 +54,7 @@ app.get('/searchResults', function (req, res) {
     layout: 'index.hbs',
     pageTitle: 'Travel Planner',
     isHomeRender: false,
+    isCreateRender: true,
     searchType: 'location',
     searchResults: [
       {
@@ -70,5 +72,23 @@ app.get('/searchResults', function (req, res) {
         experiencePhoto: '/images/default.png',
       },
     ],
+  })
+})
+
+// Page to render for static search results
+app.get('/experience', function (req, res) {
+  res.render('experience.hbs', {
+    layout: 'index.hbs',
+    pageTitle: 'Travel Planner',
+    isHomeRender: true,
+    isCreateRender: false,
+    searchType: 'location',
+    experience: {
+      experienceName: 'Topgolf',
+      experienceLocation: 'Las Vegas',
+      experienceKeywords: ['golf', 'minigolf', 'family', 'games'],
+      experienceRating: 3.5,
+      experiencePhoto: '/images/golfcourse.jpg',
+    },
   })
 })
