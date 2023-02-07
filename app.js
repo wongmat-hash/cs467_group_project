@@ -1,52 +1,85 @@
-/*************************************
-SETUP
-**************************************/
-// Setting up express
-const PORT = 3999
+var express = require('express');
+var exphbs = require('express-handlebars');
+var fileupload = require('express-fileupload');
 
-const express = require('express')
-const app = express()
+var app = express();
+port = 5255;
 
+var db = require('./database/db-connector')
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static(__dirname + '/public'))
 
-// Setting up handlebars
-const { engine } = require('express-handlebars')
-app.engine(
-  '.hbs',
-  engine({
-    defaultLayout: 'index.hbs',
-    extname: '.hbs',
-    layoutsDir: __dirname + '/views/layouts',
-    partialsDir: __dirname + '/views/partials',
-  })
+// default option
+app.use(fileupload());
+
+//Sets handlebars configurations (we will go through them later on)
+app.engine('hbs', exphbs.engine({extname: ".hbs"}));
+//Sets our app to use the handlebars engine
+app.set('view engine', 'hbs');
+
+app.use(express.static('public'))
+
+db.pool.getConnection((err, connection) => {
+    if(err) throw err;
+    console.log('Connected!');
+});
+
+
+app.get('/', function(req,res){
+    res.render('index');
+});
+
+app.get('/Experiences', (req, res) => {
+    //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
+    let tableQuery;
+
+    tableQuery1 = 
+    tableQuery = 'SELECT Experiences.*, Rating.ratingValue FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue IS NULL or Rating.ratingValue IS NOT NULL';
+    db.pool.query(tableQuery, function(error, rows, fiedls) {
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            //res.render('main', {layout : 'index'});
+            res.render('Experiences', {Experiences: rows});
+        }
+    }
 )
-app.set('view engine', '.hbs')
+    
+});
 
-/*************************************
-LISTENER
-**************************************/
-app.listen(process.env.PORT || PORT, function () {
-  console.log(
-    'Express started on http://localhost:' +
-      PORT +
-      '; press Ctrl-C to terminate.'
-  )
-})
+app.post('/', (req, res) => {
+    let sampleImage;
+    let uploadPath;
 
-/*************************************
-HOME ROUTE
-**************************************/
-// Page to render for home
-app.get('/', function (req, res) {
-  res.render('home.hbs', {
-    layout: 'index.hbs',
-    pageTitle: 'Travel Planner',
-    isHomeRender: true,
-    isCreateRender: true,
-  })
-})
+    if(!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send('No files were uploaded.');
+    }
+
+    sampleImage = req.files.sampleImage;
+    uploadPath = __dirname + '/public/upload/' + sampleImage.name;
+    console.log(sampleImage);
+
+    // use mv() to place file on server
+    sampleImage.mv(uploadPath, function(err) {
+        if(err) return res.status(500).send(err);
+
+    //res.send('File Uploaded!');
+
+    let insertQuery = "INSERT INTO Experiences (experienceTitle, description, location, image, note) VALUES (?,?,?,?,?)"
+    let insertData = [req.body.expTitle, req.body.desc, req.body.loc, sampleImage.name, req.body.note]
+    db.pool.query(insertQuery, insertData, function(error, rows, fiedls) {
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            res.redirect('/')
+        }
+      });
+  });
+});
+  
+
+ 
 
 // Page to render for static search results
 app.get('/searchResults', function (req, res) {
@@ -92,3 +125,8 @@ app.get('/experience', function (req, res) {
     },
   })
 })
+    
+
+
+
+app.listen(port, () => console.log(`App listening to port ${port}`));

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!FORGOT PW PAGE>
+      <title>Forgot Password</title>
+      <!Boostrap>
+        <!work cited: https://www.bootstrapdash.com/blog/use-bootstrap-with-html>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <!REGISTER CONTAINER>
+      <div class="d-flex h-100 justify-content-center align-items-center" id="registrationForm" style="margin-top:50px;">
+        <form>
+          <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
+          <h2 class="text">Forgot Password</h2>
+          <div class = "box">
+            <div class="form-group">
+              <!FOR JS LATER: id=email>
+              <!email field>
+              <label for="email">Email:</label><input type="text" class="form-control" placeholder="Enter email" id="email">
+            </div>
+            <!FOR JS LATER: onclick=reset()>
+            <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="reset()">Reset Password</button></div>
+          </div>
+          <!LOGIN / FORGOT redir>
+            <div class="d-flex justify-content-between"><a href="../login/login.html" id="loginLink">Already have an account?</a><a href="../registration/registration.html" id="registerLink">Register for a new account</a></div>
+        </form>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <script src="script.js"></script>
+      <!JS to make the fields empty when clicked>
+      <script>
+      document.getElementById("email").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+
+      document.getElementById("email").addEventListener("blur", function() {
+        this.placeholder = "Enter email";
+      });
+      </script>
+  </body>
+</html>

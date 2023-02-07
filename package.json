@@ -23,7 +23,8 @@
     "bootstrap-icons": "^1.10.3",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
-    "express-handlebars": "^6.0.7"
+    "express-handlebars": "^6.0.7",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
