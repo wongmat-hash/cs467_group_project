@@ -1,0 +1,18 @@
+{{> searchNavbar}}
+
+<div class="mt-5 d-flex align-items-center justify-content-center vstack gap-3">
+  <div class="row m-2">
+    <div class="col-lg-6">
+      {{> experiencePhoto photo=experience.experiencePhoto bootstrapClass='img-thumbnail'}}
+    </div>
+    <div class="col-lg-6 p-3 experienceDetails">
+      {{> experienceDetails this=experience}}
+      <button class="btn btn-success" type="submit">
+        Add to trip
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <p class="col-md-7 mx-auto experienceDetails p-5 m-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+</div>

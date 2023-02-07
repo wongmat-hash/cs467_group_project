@@ -74,11 +74,57 @@ app.post('/', (req, res) => {
         } else {
             res.redirect('/')
         }
-    }
-    
-)});
-
-
+      });
+  });
 });
 
 app.listen(port, () => console.log(`App listening to port ${port}`));
+  
+// Page to render for static search results
+app.get('/searchResults', function (req, res) {
+  res.render('searchResults.hbs', {
+    layout: 'index.hbs',
+    pageTitle: 'Travel Planner',
+    isHomeRender: false,
+    isCreateRender: true,
+    searchType: 'location',
+    searchResults: [
+      {
+        experienceName: 'Topgolf',
+        experienceLocation: 'Las Vegas',
+        experienceKeywords: ['golf', 'minigolf', 'family', 'games'],
+        experienceRating: 3.5,
+        experiencePhoto: '/images/golfcourse.jpg',
+      },
+      {
+        experienceName: 'Test',
+        experienceLocation: 'test',
+        experienceKeywords: ['test'],
+        experienceRating: 1,
+        experiencePhoto: '/images/default.png',
+      },
+    ],
+  })
+})
+
+// Page to render for static search results
+app.get('/experience', function (req, res) {
+  res.render('experience.hbs', {
+    layout: 'index.hbs',
+    pageTitle: 'Travel Planner',
+    isHomeRender: true,
+    isCreateRender: false,
+    searchType: 'location',
+    experience: {
+      experienceName: 'Topgolf',
+      experienceLocation: 'Las Vegas',
+      experienceKeywords: ['golf', 'minigolf', 'family', 'games'],
+      experienceRating: 3.5,
+      experiencePhoto: '/images/golfcourse.jpg',
+    },
+  })
+})
+    
+
+
+
