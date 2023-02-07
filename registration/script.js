@@ -54,7 +54,8 @@ function register()
 
   // Create an array to store the values for the query including phone which has not been used
   let insertData = [username, email, phone, password];
-  // error handling for database connection
+
+  // error handling for database connection check
   db.pool.getConnection(function(err, connection)
   {
     if (err)
@@ -63,9 +64,26 @@ function register()
     return;
     }
   console.log("Connected to database as id", connection.threadId);
-  // Perform your database operations here.
   connection.release();
   });
+
+  // check if the email already exists in the database
+  let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+  let checkEmailData = [email];
+  db.pool.query(checkEmailQuery, checkEmailData, function(error, results) {
+  if (error)
+  {
+    console.error("Error executing query:", error.stack);
+    res.write(JSON.stringify(error));
+    return;
+  }
+
+  if (results.length > 0)
+  {
+    // we found a match and email exists
+    console.error("Email already exists");
+    return;
+  }
 
   // Execute the query using the db.pool.query method
   db.pool.query(insertQuery, insertData, function(error, rows, fields)
