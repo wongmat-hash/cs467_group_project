@@ -48,6 +48,22 @@ function register()
   {
     errorMessage = "Please enter a valid username.";
   }
+  // Validate the EMAIL input (NEED TO BE ABLE TO CHECK AGAINST THE DB)
+  else if (!email)
+  {
+    errorMessage = "Please enter your email.";
+  }
+  // Validate the PASSWORD input (NEED TO BE ABLE TO CHECK AGAINST THE DB)
+  else if (!password)
+  {
+    errorMessage = "Please enter a password.";
+  }
+  // Validate the 2nd PASSWORD input (NEED TO CHECK AGAINST DB)
+  else if (!confirmPassword)
+  {
+    errorMessage = "Please confirm your password.";
+  }
+  // Validate the PASSWORD matches CONFIRM
   else if (password !== confirmPassword)
   {
     alert = "Passwords do not match.";
