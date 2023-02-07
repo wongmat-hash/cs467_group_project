@@ -77,10 +77,9 @@ app.post('/', (req, res) => {
       });
   });
 });
+
+app.listen(port, () => console.log(`App listening to port ${port}`));
   
-
- 
-
 // Page to render for static search results
 app.get('/searchResults', function (req, res) {
   res.render('searchResults.hbs', {
@@ -129,4 +128,3 @@ app.get('/experience', function (req, res) {
 
 
 
-app.listen(port, () => console.log(`App listening to port ${port}`));
