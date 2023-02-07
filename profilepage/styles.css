@@ -1,5 +1,5 @@
 #left-nav-panel {
-  background-color: #f2f2f2;
+  background-color: #4CAF50;
   height: 100%;
   padding: 20px;
 }
@@ -27,4 +27,21 @@ body, html {
 
 .nav {
   margin-top: 20px;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+.nav-link {
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.nav-link.active {
+  background-color: green;
 }
