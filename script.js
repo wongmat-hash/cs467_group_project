@@ -43,26 +43,6 @@ function register()
     alert("all fields must be complete");
     return false;
   }
-  // Validate the USERNAME input (NEED TO BE ABLE TO CHECK AGAINST DB)
-  if (!username)
-  {
-    errorMessage = "Please enter a valid username.";
-  }
-  // Validate the EMAIL input (NEED TO BE ABLE TO CHECK AGAINST THE DB)
-  else if (!email)
-  {
-    errorMessage = "Please enter your email.";
-  }
-  // Validate the PASSWORD input (NEED TO BE ABLE TO CHECK AGAINST THE DB)
-  else if (!password)
-  {
-    errorMessage = "Please enter a password.";
-  }
-  // Validate the 2nd PASSWORD input (NEED TO CHECK AGAINST DB)
-  else if (!confirmPassword)
-  {
-    errorMessage = "Please confirm your password.";
-  }
   // Validate the PASSWORD matches CONFIRM
   else if (password !== confirmPassword)
   {
@@ -74,15 +54,29 @@ function register()
 
   // Create an array to store the values for the query including phone which has not been used
   let insertData = [username, email, phone, password];
+  // error handling for database connection
+  db.pool.getConnection(function(err, connection)
+  {
+    if (err)
+    {
+    console.error("Error connecting to database:", err.stack);
+    return;
+    }
+  console.log("Connected to database as id", connection.threadId);
+  // Perform your database operations here.
+  connection.release();
+  });
 
   // Execute the query using the db.pool.query method
   db.pool.query(insertQuery, insertData, function(error, rows, fields)
   {
     if (error)
     {
+      console.error("Error executing query:", error.stack);
       res.write(JSON.stringify(error));
       return;
     }
+    console.log("Query executed successfully!");
     else
     {
       // Redirect to the homepage or display a success message
