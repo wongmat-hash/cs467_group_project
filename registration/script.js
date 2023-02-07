@@ -28,8 +28,7 @@ function login()
 }
 
 
-function register()
-{
+(function register() {
   let username = document.getElementById("username").value;
   let email = document.getElementById("email").value;
   let phone = document.getElementById("phone").value;
@@ -37,16 +36,15 @@ function register()
   let confirmPassword = document.getElementById("password-confirm").value;
 
   //error handling to see if fields are all completed
-  if (username ==  "" || email == "" || password == "" || confirmPassword == "")
-  {
-    //NEED TO WORK ON GETTING THESE FIELDS TO DISPLAY ERROR MESSAGES ON THE HTML
-    alert("all fields must be complete");
+  if (username == "" || email == "" || password == "" || confirmPassword == "") {
+    alert("All fields must be completed");
     return false;
   }
+
   // Validate the PASSWORD matches CONFIRM
-  else if (password !== confirmPassword)
-  {
-    alert = "Passwords do not match.";
+  else if (password !== confirmPassword) {
+    alert("Passwords do not match");
+    return false;
   }
 
   // Create the INSERT query
@@ -55,54 +53,50 @@ function register()
   // Create an array to store the values for the query including phone which has not been used
   let insertData = [username, email, phone, password];
 
+  // link to Dan's database file
+  var db = require('./database/db-connector.js');
+
   // error handling for database connection check
-  db.pool.getConnection(function(err, connection)
-  {
-    if (err)
-    {
-    console.error("Error connecting to database:", err.stack);
-    return;
-    }
-  console.log("Connected to database as id", connection.threadId);
-  connection.release();
-  });
-
-  // check if the email already exists in the database
-  let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
-  let checkEmailData = [email];
-  db.pool.query(checkEmailQuery, checkEmailData, function(error, results) {
-  if (error)
-  {
-    console.error("Error executing query:", error.stack);
-    res.write(JSON.stringify(error));
-    return;
-  }
-
-  if (results.length > 0)
-  {
-    // we found a match and email exists
-    console.error("Email already exists");
-    return;
-  }
-
-  // Execute the query using the db.pool.query method
-  db.pool.query(insertQuery, insertData, function(error, rows, fields)
-  {
-    if (error)
-    {
-      console.error("Error executing query:", error.stack);
-      res.write(JSON.stringify(error));
+  db.pool.getConnection(function (err, connection) {
+    if (err) {
+      console.error("Error connecting to database:", err.stack);
       return;
     }
-    console.log("Query executed successfully!");
-    else
-    {
-      // Redirect to the homepage or display a success message
-      console.log("User registered successfully!");
-      res.redirect('/login.html') //INSERT URL FOR HOME PAGE WHEN LINKING
-    }
+    console.log("Connected to database as id", connection.threadId);
+
+    // check if the email already exists in the database
+    let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+    let checkEmailData = [email];
+    db.pool.query(checkEmailQuery, checkEmailData, function (error, results) {
+      if (error) {
+        console.error("Error executing query:", error.stack);
+        res.write(JSON.stringify(error));
+        return;
+      }
+
+      if (results.length > 0) {
+        // we found a match and email exists
+        console.error("Email already exists");
+        connection.release();
+        return;
+      }
+
+      // Execute the query using the db.pool.query method
+      db.pool.query(insertQuery, insertData, function (error, rows, fields) {
+        if (error) {
+          console.error("Error executing query:", error.stack);
+          res.write(JSON.stringify(error));
+          return;
+        }
+        console.log("Query executed successfully!");
+        console.log("User registered successfully!");
+        res.redirect("/login.html");
+        connection.release();
+      });
+    });
   });
-}
+})();
+
 
 //PROFILE PAGE NEEDS THIS LOGIC: <a href="resetPassword.html?username=user123">Reset Password</a>
 //LINK TO THIS PAGE AND FUNCTION
