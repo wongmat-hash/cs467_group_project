@@ -4,28 +4,33 @@ function login()
   var password = document.getElementById("password").value;
   var errorMessage = "";
 
-  //error handling to check if the user has a valid account or enters info
-  if(!username)
+  // checks if the user has input all fields possible
+  if (username == "" || password == "")
   {
-    errorMessage = "Please enter a valid username.";
+    alert("All fields must be completed");
+    return false;
   }
-  else if(!password)
+  // check if the email already exists in the database
+  let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+  let checkEmailData = [email];
+  db.pool.query(checkEmailQuery, checkEmailData, function (error, results)
   {
-    errorMessage = "Please enter a valid password.";
-  }
-  else if(username !== "user"||password !== "password")
-  {
-    errorMessage = "Incorrect username or password.";
-  }
+    if (error)
+    {
+      console.error("Error executing query:", error.stack);
+      res.write(JSON.stringify(error));
+      return;
+    }
 
-  if (errorMessage) {
-    document.getElementById("error").innerHTML = errorMessage;
+    if (results.length > 0)
+    {
+      // we found a match and email exists NOW NEED TO LOG USER IN
+      console.error("Email already exists");
+      connection.release();
+      return;
+    }
   }
-  else
-  {
-    // logic to log in user
-  }
-}
+)};
 
 
 function register()
@@ -37,60 +42,75 @@ function register()
   let confirmPassword = document.getElementById("password-confirm").value;
 
   //error handling to see if fields are all completed
-  if (username ==  "" || email == "" || password == "" || confirmPassword == "")
+  if (username == "" || email == "" || password == "" || confirmPassword == "")
   {
-    //NEED TO WORK ON GETTING THESE FIELDS TO DISPLAY ERROR MESSAGES ON THE HTML
-    alert("all fields must be complete");
+    alert("All fields must be completed");
     return false;
   }
-  // Validate the USERNAME input (NEED TO BE ABLE TO CHECK AGAINST DB)
-  if (!username)
-  {
-    errorMessage = "Please enter a valid username.";
-  }
-  // Validate the EMAIL input (NEED TO BE ABLE TO CHECK AGAINST THE DB)
-  else if (!email)
-  {
-    errorMessage = "Please enter your email.";
-  }
-  // Validate the PASSWORD input (NEED TO BE ABLE TO CHECK AGAINST THE DB)
-  else if (!password)
-  {
-    errorMessage = "Please enter a password.";
-  }
-  // Validate the 2nd PASSWORD input (NEED TO CHECK AGAINST DB)
-  else if (!confirmPassword)
-  {
-    errorMessage = "Please confirm your password.";
-  }
+
   // Validate the PASSWORD matches CONFIRM
   else if (password !== confirmPassword)
   {
-    alert = "Passwords do not match.";
+    alert("Passwords do not match");
+    return false;
   }
 
   // Create the INSERT query
-  let insertQuery = "INSERT INTO users (username, email, phone, password) VALUES (?,?,?)";
+  let insertQuery = "INSERT INTO users (username, email, phone, password) VALUES (?,?,?,?)";
 
   // Create an array to store the values for the query including phone which has not been used
   let insertData = [username, email, phone, password];
 
-  // Execute the query using the db.pool.query method
-  db.pool.query(insertQuery, insertData, function(error, rows, fields)
+  // link to Dan's database file
+  var db = require('../database/db-connector.js');
+
+  // error handling for database connection check
+  db.pool.getConnection(function (err, connection)
   {
-    if (error)
+    if (err)
     {
-      res.write(JSON.stringify(error));
+      console.error("Error connecting to database:", err.stack);
       return;
     }
-    else
+    console.log("Connected to database as id", connection.threadId);
+
+    // check if the email already exists in the database
+    let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+    let checkEmailData = [email];
+    db.pool.query(checkEmailQuery, checkEmailData, function (error, results)
     {
-      // Redirect to the homepage or display a success message
-      console.log("User registered successfully!");
-      res.redirect('/login.html') //INSERT URL FOR HOME PAGE WHEN LINKING
-    }
+      if (error)
+      {
+        console.error("Error executing query:", error.stack);
+        res.write(JSON.stringify(error));
+        return;
+      }
+
+      if (results.length > 0) {
+        // we found a match and email exists
+        console.error("Email already exists");
+        connection.release();
+        return;
+      }
+
+      // Execute the query using the db.pool.query method
+      db.pool.query(insertQuery, insertData, function (error, rows, fields)
+      {
+        if (error)
+        {
+          console.error("Error executing query:", error.stack);
+          res.write(JSON.stringify(error));
+          return;
+        }
+        console.log("Query executed successfully!");
+        console.log("User registered successfully!");
+        res.redirect("/login.html");
+        connection.release();
+      });
+    });
   });
-}
+};
+
 
 //PROFILE PAGE NEEDS THIS LOGIC: <a href="resetPassword.html?username=user123">Reset Password</a>
 //LINK TO THIS PAGE AND FUNCTION
@@ -104,7 +124,7 @@ function newpassword()
    alert("password field is empty");
    return;
   }
-  let email = document.getElementByID(urlParams.get("username"););
+  let email = document.getElementByID(urlParams.get("username"));
   //check against the DB for the email to reset
   let updatePasswordQuery = "UPDATE Users SET password = ? WHERE email = ?";
   let updatePasswordData = [newPassword, email];                                //NEED TO FIGURE OUT HOW TO GET THE EMAIL HERE
@@ -120,7 +140,7 @@ function newpassword()
       alert("Password reset successful!");
     }
   }
-};
+)};
 
 function reset()
 {
