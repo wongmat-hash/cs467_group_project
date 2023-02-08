@@ -1,3 +1,44 @@
+
+{{!-- Form to add new Experience to the database --}}
+<div class="container-md p-3 my-3 mx-auto border border-secondary">
+    <h5>Add New Experience</h5>
+    <p>* = required field</p>
+    <form action="/" method="POST" encType="multipart/form-data">
+        <div class="row mb-3">
+            <label for="expereinceTitle" class="col-sm-2 col-form-label">Title of Experience *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="expereinceTitle" name="expTitle">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="description" class="col-sm-2 col-form-label">Description of Experience *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" name="desc">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="location" class="col-sm-2 col-form-label">Enter Location of Experience *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="location" name="loc">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="image" class="col-sm-2 col-form-label">Share Photo of Experience *</label>
+            <div class="col-sm-10">
+                <input type="file" class="form-control" name="sampleImage" accept="image/*"/>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="note" class="col-sm-2 col-form-label">Enter Additional Information *</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="note" name="note">
+            </div>
+        </div>
+        <button type="submit" id="submit" class="btn btn-dark">Submit</button>
+    </form>
+</div>
+
+
 {{!-- <div class="p-3"> --}}
 <div class="container">
 <h3>All Experiences</h3>
@@ -9,6 +50,9 @@
             <div class="row">
                 <div class="col">
                     <img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto>
+                    <hr>
+                    <h5> Experience Number </h5>
+                    <p>{{this.experienceID}}</p>
                     <hr>
                     <h5> Experience Title </h5>
                     <p>{{this.experienceTitle}}</p>
@@ -24,6 +68,17 @@
                     <hr>
                     <h5> Overall Rating </h5>
                     <p>{{this.ratingValue}}</p>
+                    <hr>
+                    <form action="/Experiences" method="POST" encType="multipart/form-data">
+                        <div class="row mb-3">
+                            <label for="ratingValue" class="col-lg-6 col-form-label">Rate This Experience</label>
+                            <div class="col-lg-6 col-sm-offset-8">
+                                <input type="text" class="form-control" id="ratingValue" name="addRatingValue">
+                                <input type="hidden" name="experienceID" value={{this.experienceID}} id="experienceID">
+                            </div>
+                        </div>
+                        <button type="submit" id="submit" class="btn btn-dark">Submit</button>
+                    </form>
                 </div>
             </div>
         </div>
