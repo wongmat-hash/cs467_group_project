@@ -28,12 +28,17 @@ app.get('/', function(req,res){
     res.render('index');
 });
 
+app.get('/Trips', function(req,res){
+    res.render('Trips');
+});
+
+app.get('/Search', function(req,res){
+    res.render('Search');
+});
+
 app.get('/Experiences', (req, res) => {
     //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
-    let tableQuery;
-
-    tableQuery1 = 
-    tableQuery = 'SELECT Experiences.*, Rating.ratingValue FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue IS NULL or Rating.ratingValue IS NOT NULL';
+    let tableQuery = 'SELECT AVG(Rating.ratingValue) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
     db.pool.query(tableQuery, function(error, rows, fiedls) {
         if(error) {
             res.write(JSON.stringify(error));
@@ -46,6 +51,19 @@ app.get('/Experiences', (req, res) => {
 )
     
 });
+
+app.post('/Experiences', function(req, res){
+    let insertQuery = "INSERT INTO Rating (ratingValue, experienceID) VALUES (?,?)";
+    let updateData = [req.body.addRatingValue, req.body.experienceID]
+    db.pool.query(insertQuery, updateData, function(error, rows, fiedls){
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            res.redirect('/Experiences')
+        }
+    })
+})
 
 app.post('/', (req, res) => {
     let sampleImage;
