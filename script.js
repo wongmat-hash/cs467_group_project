@@ -4,28 +4,33 @@ function login()
   var password = document.getElementById("password").value;
   var errorMessage = "";
 
-  //error handling to check if the user has a valid account or enters info
-  if(!username)
+  // checks if the user has input all fields possible
+  if (username == "" || password == "")
   {
-    errorMessage = "Please enter a valid username.";
+    alert("All fields must be completed");
+    return false;
   }
-  else if(!password)
+  // check if the email already exists in the database
+  let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
+  let checkEmailData = [email];
+  db.pool.query(checkEmailQuery, checkEmailData, function (error, results)
   {
-    errorMessage = "Please enter a valid password.";
-  }
-  else if(username !== "user"||password !== "password")
-  {
-    errorMessage = "Incorrect username or password.";
-  }
+    if (error)
+    {
+      console.error("Error executing query:", error.stack);
+      res.write(JSON.stringify(error));
+      return;
+    }
 
-  if (errorMessage) {
-    document.getElementById("error").innerHTML = errorMessage;
+    if (results.length > 0)
+    {
+      // we found a match and email exists NOW NEED TO LOG USER IN
+      console.error("Email already exists");
+      connection.release();
+      return;
+    }
   }
-  else
-  {
-    // logic to log in user
-  }
-}
+)};
 
 
 function register()
