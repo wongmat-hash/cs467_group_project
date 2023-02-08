@@ -28,7 +28,8 @@ function login()
 }
 
 
-(function register() {
+function register()
+{
   let username = document.getElementById("username").value;
   let email = document.getElementById("email").value;
   let phone = document.getElementById("phone").value;
@@ -36,13 +37,15 @@ function login()
   let confirmPassword = document.getElementById("password-confirm").value;
 
   //error handling to see if fields are all completed
-  if (username == "" || email == "" || password == "" || confirmPassword == "") {
+  if (username == "" || email == "" || password == "" || confirmPassword == "")
+  {
     alert("All fields must be completed");
     return false;
   }
 
   // Validate the PASSWORD matches CONFIRM
-  else if (password !== confirmPassword) {
+  else if (password !== confirmPassword)
+  {
     alert("Passwords do not match");
     return false;
   }
@@ -54,11 +57,13 @@ function login()
   let insertData = [username, email, phone, password];
 
   // link to Dan's database file
-  var db = require('./database/db-connector.js');
+  var db = require('../database/db-connector.js');
 
   // error handling for database connection check
-  db.pool.getConnection(function (err, connection) {
-    if (err) {
+  db.pool.getConnection(function (err, connection)
+  {
+    if (err)
+    {
       console.error("Error connecting to database:", err.stack);
       return;
     }
@@ -67,8 +72,10 @@ function login()
     // check if the email already exists in the database
     let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
     let checkEmailData = [email];
-    db.pool.query(checkEmailQuery, checkEmailData, function (error, results) {
-      if (error) {
+    db.pool.query(checkEmailQuery, checkEmailData, function (error, results)
+    {
+      if (error)
+      {
         console.error("Error executing query:", error.stack);
         res.write(JSON.stringify(error));
         return;
@@ -82,8 +89,10 @@ function login()
       }
 
       // Execute the query using the db.pool.query method
-      db.pool.query(insertQuery, insertData, function (error, rows, fields) {
-        if (error) {
+      db.pool.query(insertQuery, insertData, function (error, rows, fields)
+      {
+        if (error)
+        {
           console.error("Error executing query:", error.stack);
           res.write(JSON.stringify(error));
           return;
@@ -95,7 +104,7 @@ function login()
       });
     });
   });
-})();
+};
 
 
 //PROFILE PAGE NEEDS THIS LOGIC: <a href="resetPassword.html?username=user123">Reset Password</a>
@@ -110,7 +119,7 @@ function newpassword()
    alert("password field is empty");
    return;
   }
-  let email = document.getElementByID(urlParams.get("username"););
+  let email = document.getElementByID(urlParams.get("username"));
   //check against the DB for the email to reset
   let updatePasswordQuery = "UPDATE Users SET password = ? WHERE email = ?";
   let updatePasswordData = [newPassword, email];                                //NEED TO FIGURE OUT HOW TO GET THE EMAIL HERE
@@ -126,7 +135,7 @@ function newpassword()
       alert("Password reset successful!");
     }
   }
-};
+)};
 
 function reset()
 {

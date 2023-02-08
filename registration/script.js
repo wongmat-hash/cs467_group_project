@@ -105,11 +105,6 @@ function register()
     });
   });
 };
-document.getElementById("register-form").addEventListener("submit", function(event)
-{
-event.preventDefault();
-register();
-});
 
 
 //PROFILE PAGE NEEDS THIS LOGIC: <a href="resetPassword.html?username=user123">Reset Password</a>

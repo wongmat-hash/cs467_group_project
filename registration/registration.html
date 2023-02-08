@@ -35,7 +35,7 @@
               </div>
                 <div id="error"></div>
                 <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" id="password-confirm"></div>
-                <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="register()">Register</button></div>
+                <div class="form-group text-center"><button type="button" class="btn btn-primary" id = "register-form" style="width: 100%; background-color: green; border-radius: 10px;" onclick="register()">Register</button></div>
             </div>
             <!LOGIN / FORGOT redir>
             <div class="d-flex justify-content-between" style="margin-top:5px;"><a href="../login/login.html" id="loginLink">Already have an account?</a><a href="../forgotpw/forgotpw.html" id="forgotLink">Forgot Password</a></div>
@@ -46,6 +46,11 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
       <!JS to make the fields empty when clicked>
       <script>
+      document.getElementById("register-form").addEventListener("submit", function(event)
+      {
+        event.preventDefault();
+        register();
+      });
       document.getElementById("username").addEventListener("focus", function() {
         this.placeholder = "";
       });
