@@ -4,6 +4,54 @@ body {
   background-color: #f5f5f5;
 }
 
+#left-nav-panel {
+  background-color: #4CAF50;
+  height: 100%;
+  padding: 20px;
+}
+
+#profile-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#tab-section {
+  margin-top: 20px;
+}
+
+h5 {
+  margin-bottom: 20px;
+}
+
+body, html {
+  height: 100%;
+}
+
+.bg-gray {
+  background-color: lightgray;
+}
+
+.nav {
+  margin-top: 20px;
+}
+
+.bg-green {
+  background-color: green;
+}
+
+.nav-link {
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.nav-link.active {
+  background-color: green;
+}
+
 .box {
   border-radius: 10px;
   background-color: #fff;
@@ -14,8 +62,7 @@ body {
   box-shadow: 0px 0px 10px #ccc;
 }
 
-h2
-{
+h2 {
   flex: 1;
   font-size: 20px;
   text-align: left;
