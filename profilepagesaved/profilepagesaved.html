@@ -22,8 +22,41 @@
         </div>
       </div>
       <div class="w-75 p-3">
-        <!-- Add your content here -->
+        <table id="saved-experiences-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Location</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      // Make AJAX call to PHP script to retrieve saved experiences data
+      $.ajax({
+        url: "path/to/your/php/script.php",
+        type: "GET",
+        dataType: "json",
+        success: function(saved_experiences) {
+          // Loop through saved experiences data and add rows to table
+          $.each(saved_experiences, function(index, experience) {
+            $("#saved-experiences-table tbody").append(
+              "<tr>" +
+              "<td>" + experience.name + "</td>" +
+              "<td>" + experience.location + "</td>" +
+              "<td>" + experience.description + "</td>" +
+              "</tr>"
+            );
+          });
+        }
+      });
+    });
+</script>
   </body>
 </html>
