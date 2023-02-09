@@ -11,21 +11,19 @@
   </head>
   <body>
     <!RESET PASSWORD CONTAINER>
-      <div class = "d-flex h-100 justify-content-center align-items-center" id="registrationForm" style="margin-top:50px;">
+      <div class="d-flex h-100 justify-content-center align-items-center" id="registrationForm" style="margin-top:50px;">
         <form>
-          <h1 class = "text-container">Crowd-Sourced Travel Planner</h1>
-          <h2 class = "text">Reset Password</h2>
-          <div class = "box">
-            <div class = "form-group">
-              <!FOR JS LATER: id = email>
-              <!EMAIL>
-              <label for ="Enter email">Enter associated email:</label><input  type = "text" class="form-control" placeholder="Enter associated email" id="email">
-              <!FOR JS LATER: id = password>
-              <!NEW PASSWORD>
-              <label for ="Enter New Password">Enter New Password:</label><input  type = "text" class="form-control" placeholder="Enter new password" id="newpassword">
+          <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
+          <h2 class="text">Reset Password</h2>
+          <div class="box">
+            <div class="form-group">
+              <!FOR JS LATER: id=email>
+                <!EMAIL><label for="Enter email">Enter associated email:</label><input type="text" class="form-control" placeholder="Enter associated email" id="email">
+                  <!FOR JS LATER: id=password>
+                    <!NEW PASSWORD><label for="Enter New Password">Enter New Password:</label><input type="text" class="form-control" placeholder="Enter new password" id="newpassword">
             </div>
-            <!For JS LATER: onclick = newpassword()>
-            <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
+            <!For JS LATER: onclick=newpassword()>
+              <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
           </div>
         </form>
       </div>
@@ -33,21 +31,19 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
       <!JS to make the fields empty when clicked>
-      <script>
-      document.getElementById("email").addEventListener("focus", function() {
-        this.placeholder = "";
-      });
-
-      document.getElementById("email").addEventListener("blur", function() {
-        this.placeholder = "Enter email";
-      });
-      document.getElementById("newpassword").addEventListener("focus", function() {
-        this.placeholder = "";
-      });
-
-      document.getElementById("newpassword").addEventListener("blur", function() {
-        this.placeholder = "Enter Password";
-      });
-      </script>
+        <script>
+          document.getElementById("email").addEventListener("focus", function() {
+            this.placeholder = "";
+          });
+          document.getElementById("email").addEventListener("blur", function() {
+            this.placeholder = "Enter email";
+          });
+          document.getElementById("newpassword").addEventListener("focus", function() {
+            this.placeholder = "";
+          });
+          document.getElementById("newpassword").addEventListener("blur", function() {
+            this.placeholder = "Enter Password";
+          });
+        </script>
   </body>
 </html>
