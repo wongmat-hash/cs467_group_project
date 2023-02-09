@@ -117,14 +117,14 @@ function register()
 //this function will reset the password from the user designated form
 function newpassword()
 {
-  //stores the value of the new password
+  //stores the value of the new password/ email
+  let email = document.getElementByID("email")
   let passwordreset = document.getElementByID("newpassword")
-  if (!newpassword)
+  if (newpassword == ""|| email == "")
   {
    alert("password field is empty");
    return;
   }
-  let email = document.getElementByID(urlParams.get("username"));
   //check against the DB for the email to reset
   let updatePasswordQuery = "UPDATE Users SET password = ? WHERE email = ?";
   let updatePasswordData = [newPassword, email];                                //NEED TO FIGURE OUT HOW TO GET THE EMAIL HERE
