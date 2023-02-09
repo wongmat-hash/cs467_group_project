@@ -23,7 +23,7 @@
                     <!NEW PASSWORD><label for="Enter New Password">Enter New Password:</label><input type="text" class="form-control" placeholder="Enter new password" id="newpassword">
             </div>
             <!For JS LATER: onclick=newpassword()>
-              <div class="form-group text-center"><button type="button" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
+              <div class="form-group text-center"><button type="button" class="btn btn-primary" id = "reset-button" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
           </div>
         </form>
       </div>
@@ -32,6 +32,7 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
       <!JS to make the fields empty when clicked>
         <script>
+          document.getElementById("reset-button").addEventListener("click", newpassword);
           document.getElementById("email").addEventListener("focus", function() {
             this.placeholder = "";
           });

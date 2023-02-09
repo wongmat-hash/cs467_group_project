@@ -103,23 +103,27 @@ function register() {
 //this function will reset the password from the user designated form
 function newpassword() {
     //stores the value of the new password/ email
-    let email = document.getElementByID("email").value;
-    let passwordreset = document.getElementByID("newpassword").value;
-    if (newpassword == "" || email == "") {
+    let email = document.getElementById("email").value;
+    let passwordreset = document.getElementById("newpassword").value;
+    if (passwordreset == "" || email == "") {
         alert("all fields must be completed");
         return false;
     }
     // error handling for email portion
     let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
     let checkEmailData = [email];
-    db.pool.query(checkEmailQuery, checkEmailData, function(error, results) {
-        if (error) {
+    db.pool.query(checkEmailQuery, checkEmailData, function(error, results)
+    {
+        if (error)
+        {
             console.error("Error executing query:", error.stack);
+            alert("email not found...")
             res.write(JSON.stringify(error));
             return;
         }
 
-        if (results.length > 0) {
+        if (results.length > 0)
+        {
             // we found a match and email exists
             console.error("email found resetting");
             connection.release();
@@ -129,15 +133,20 @@ function newpassword() {
     // pass our data in
     let updatePasswordData = [passwordreset, email];
     // open connection and pass in our info
-    db.pool.query(updatePasswordQuery, updatePasswordData, function(error, result) {
-        if (error) {
+    db.pool.query(updatePasswordQuery, updatePasswordData, function(error, result)
+    {
+        if (error)
+        {
             res.write(JSON.stringify(error));
             return;
-        } else {
+        }
+        else
+        {
             alert("Password reset successful!");
         }
     });
-};
+  }
+)};
 
 
 function reset() {
