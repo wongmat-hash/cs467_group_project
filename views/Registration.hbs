@@ -12,33 +12,39 @@
   <body>
     <!REGISTER CONTAINER>
       <div class="d-flex h-100 justify-content-center align-items-center" id="registrationForm" style="margin-top:50px;">
-        <form>
+        <form method="POST" action="/Registration" encType="multipart/form-data">
           <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
           <h2 class="text">Registration</h2>
           <div class = "box">
             <div class="form-group">
               <!FOR JS LATER: id=username>
-              <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" id="username">
+              <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" name="username" id="username">
+                <div id="error"></div>
+              <!FOR JS LATER: id=firstname>
+              <!USERNAME FIELD><label for="firstname">First Name:</label><input type="text" class="form-control" placeholder="Enter your first name" name="firstname" id="firstname">
+                <div id="error"></div>
+              <!FOR JS LATER: id=lastname>
+              <!USERNAME FIELD><label for="lastname">Last Name:</label><input type="text" class="form-control" placeholder="Enter your last name" name="lastname" id="lastname">
                 <div id="error"></div>
               <!FOR JS LATER: id=email>
-              <!EMAIL FIELD><label for="e-mail">Email:</label><input type="email" class="form-control" placeholder="Enter email" id="email">
+              <!EMAIL FIELD><label for="e-mail">Email:</label><input type="email" class="form-control" placeholder="Enter email" name="email" id="email">
               </div>
                 <div id="error"></div>
               <div class="form-group">
               <!FOR JS LATER: id=phone>
-              <!PHONE FIELD><label for="phone">Phone Number:</label><input type="phone" class= "form-control" placeholder="Enter phone number" id="phone">
+              <!PHONE FIELD><label for="phone">Phone Number:</label><input type="phone" class= "form-control" placeholder="Enter phone number" name="phone" id="phone">
               </div>
                 <div id="error"></div>
               <div class="form-group">
               <!FOR JS LATER: id=password>
-              <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" id="password">
+              <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" name="password" id="password">
               </div>
                 <div id="error"></div>
-                <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" id="password-confirm"></div>
-                <div class="form-group text-center"><button type="button" class="btn btn-primary" id = "register-form" style="width: 100%; background-color: green; border-radius: 10px;" onclick="register()">Register</button></div>
+                <div class="form-group"><input type="password" class="form-control" placeholder="Confirm Password" name="passwordconfirm" id="passwordconfirm"></div>
+                <div class="form-group text-center"><button type="submit" id ="submit" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;">Register</button></div>
             </div>
             <!LOGIN / FORGOT redir>
-            <div class="d-flex justify-content-between" style="margin-top:5px;"><a href="../login/login.html" id="loginLink">Already have an account?</a><a href="../forgotpw/forgotpw.html" id="forgotLink">Forgot Password</a></div>
+            <div class="d-flex justify-content-between" style="margin-top:5px;"><a href="/" id="loginLink">Already have an account?</a><a href="/forgotpw" id="forgotLink">Forgot Password</a></div>
         </form>
       <script src="../database/db-connector.js"></script>
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
