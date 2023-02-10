@@ -49,35 +49,38 @@ function newpassword() {
   }
 )};
 
-function sendPasswordResetEmail(email, password) {
-    // function to send reset password email from our email
-    //crowdsourcedtravelplanner@gmail.com
-    //danmelissamatthew
-    console.log("in send password reset now")
-    const nodemailer = require("nodemailer");
+//workcited: https://www.sendinblue.com/blog/send-transactional-emails-with-next-js-and-sendinblue/
 
-    let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-            user: "crowdsourcedtravelplanner@gmail.com",
-            pass: "danmelissamatthew"
-        }
-    });
+const axios = require("axios");
 
-    let mailOptions = {
-        from: "crowdsourcedtravelplanner@gmail.com",
-        to: email,
+async function sendPasswordResetEmail(email, password)
+{
+    console.log("in send password reset now");
+    const API_KEY = "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";
+    const SENDER = "crowdsourcedtravelplanner@gmail.com";
+
+    const requestBody =
+    {
+        to: [{ email: email }],
+        sender: { email: SENDER },
         subject: "Password Reset",
-        text: `Your new password is: ${password}`
+        htmlContent: `Your new password is: ${password}`
     };
 
-    transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log("Message sent: %s", info.messageId);
-        }
-    });
+    try {
+        const response = await axios.post(
+            "https://api.sendinblue.com/v3/smtp/email",
+            requestBody,
+            {
+                headers: {
+                    "api-key": API_KEY,
+                    "content-type": "application/json"
+                }
+            }
+        );
+
+        console.log("Message sent:", response.data);
+    } catch (error) {
+        console.error(error.message);
+    }
 }
