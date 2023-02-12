@@ -26,27 +26,39 @@
       </div>
       </div>
       <script>
-        const navigationSavedBtn = document.querySelector(".navigationSaved-button");
-        const navigationSearchBtn = document.querySelector(".navigationSearch-button");
-        const navigationAddBtn = document.querySelector(".navigationAdd-button");
+        //trips
         const navigationIndexBtn = document.querySelector(".index-button");
+        //add
+        const navigationAddBtn = document.querySelector(".navigationAdd-button");
+        //search
+        const navigationSearchBtn = document.querySelector(".navigationSearch-button");
+        // saved
+        const navigationSavedBtn = document.querySelector(".navigationSaved-button");
+        //reset
+        const navigationResetBtn = document.querySelector(".navigationReset-button");
         const resetForm = document.getElementById("reset-form");
 
-        navigationSavedBtn.addEventListener("click", function() {
+        //trips
+        navigationIndexBtn.addEventListener("click", function() {
           resetForm.style.display = "none";
         });
-
-        navigationSearchBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-
+        //add
         navigationAddBtn.addEventListener("click", function() {
           resetForm.style.display = "none";
         });
-
-        navigationIndexBtn.addEventListener("click", function() {
+        //search
+        navigationSearchBtn.addEventListener("click", function() {
+          resetForm.style.display = "none";
+        });
+        //saved
+        navigationSavedBtn.addEventListener("click", function() {
+          resetForm.style.display = "none";
+        });
+        //reset
+        navigationResetBtn.addEventListener("click", function() {
           resetForm.style.display = "block";
         });
+
       </script>
 
     </div>
