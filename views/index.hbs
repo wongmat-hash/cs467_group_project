@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="../js/scripts.js"></script>
+  </head>
+  <body>
+    <div class="d-flex h-100">
+      {{> nav}}
+      <div class="w-75 p-3">
+      <div id = "reset-form" class = "reset-form">
+        <form action= "#">
+          <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
+          <h2 class="text">Reset Password</h2>
+          <div class="box">
+            <div class="form-group">
+                <label for="Enter email">Enter associated email:</label><input type="text" class="form-control" placeholder="Enter associated email" id="email">
+                <label for="Enter New Password">Enter New Password:</label><input type="text" class="form-control" placeholder="Enter new password" id="newpassword">
+            </div>
+            <div class="form-group text-center"><button type="button" class="btn btn-primary" id = "reset-button" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
+          </div>
+        </form>
+      </div>
+      </div>
+      <script>
+        const navigationSavedBtn = document.querySelector(".navigationSaved-button");
+        const navigationSearchBtn = document.querySelector(".navigationSearch-button");
+        const navigationAddBtn = document.querySelector(".navigationAdd-button");
+        const navigationIndexBtn = document.querySelector(".index-button");
+        const resetForm = document.getElementById("reset-form");
+
+        navigationSavedBtn.addEventListener("click", function() {
+          resetForm.style.display = "none";
+        });
+
+        navigationSearchBtn.addEventListener("click", function() {
+          resetForm.style.display = "none";
+        });
+
+        navigationAddBtn.addEventListener("click", function() {
+          resetForm.style.display = "none";
+        });
+
+        navigationIndexBtn.addEventListener("click", function() {
+          resetForm.style.display = "block";
+        });
+      </script>
+
+    </div>
+    <div class="container mt-5">
+    {{body}}
+    </div>
+  </body>
+</html>
