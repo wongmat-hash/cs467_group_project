@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../script.js"></script>
+    <title>Reset Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+  </head>
+  <body>
+    <div class="d-flex h-100">
+      <div class="bg-gray h-100 w-25 p-3 d-flex flex-column justify-content-start">
+        <div>
+          <h3>Profile</h3>
+        </div>
+        <div>
+          <nav class="nav flex-column">
+            <a class="nav-link" href="#" onclick="displayTemplate('trips')">Trips</a>
+            <a class="nav-link" href="#" onclick="displayTemplate('add_experiences')">Add Experiences</a>
+            <a class="nav-link" href="#" onclick="displayTemplate('search_experiences')">Search Experiences</a>
+            <a class="nav-link" href="#" onclick="displayTemplate('saved_experiences')">Saved Experiences</a>
+            <a class="nav-link active" style="color: white; background-color: green; border-radius: 10px; outline: none;" href="#" onclick="displayTemplate('reset_password')">Reset Password</a>
+          </nav>
+        </div>
+      </div>
+      <div class="w-75 p-3" id="templateContainer">
+      </div>
+    </div>
+    <script>
+      document.getElementById("reset-button").addEventListener("click", newpassword);
+      document.getElementById("email").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+      document.getElementById("email").addEventListener("blur", function() {
+        this.placeholder = "Enter email";
+      });
+      document.getElementById("newpassword").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+      document.getElementById("newpassword").addEventListener("blur", function() {
+        this.placeholder = "Enter Password";
+      });
+    </script>
+  </body>
+</html>
