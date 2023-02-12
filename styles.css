@@ -27,6 +27,11 @@ body, html {
   height: 100%;
 }
 
+
+.Test {
+  border-right: 20px solid black;
+}
+
 .bg-gray {
   background-color: lightgray;
 }
