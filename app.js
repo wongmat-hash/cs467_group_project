@@ -25,31 +25,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// serve the profile trips page
-app.get('/Trips', function (req, res) {
-  res.render('index',{title: 'Trips'});
-});
-
-// serve the profile add page
-app.get('/', function (req, res) {
-  res.render('index',{title: 'Add'});
-});
-
-// serve the profile Search page
-app.get('/', function (req, res) {
-  res.render('index',{title: 'Search'});
-});
-
-// serve the profile Saved page
-app.get('/', function (req, res) {
-  res.render('index',{title: 'Saved'});
-});
-
-// serve the profile Reset page
-app.get('/', function (req, res) {
-  res.render('index',{title: 'Reset'});
-});
-
 // Start the server
 app.listen(3000, () => {
   console.log('Server started on port 3000');
