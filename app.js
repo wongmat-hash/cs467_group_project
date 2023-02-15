@@ -52,8 +52,18 @@ app.get('/forgotpw', function(req,res){
   res.render('forgotpw');
 });
 
+// Will render the addExperience page
+app.get('/addExperience', function(req,res){
+    res.render('addExperience');
+});
+
+// Will render the resetPassword page
+app.get('/resetPassword', function(req,res){
+    res.render('resetPassword');
+});
+
 // Will display all experiences saved to the database and display the rounded average of the rating for each
-app.get('/experience', (req, res) => {
+app.get('/searchExperience', (req, res) => {
     let tableQuery;
     tableQuery = 'SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
     db.pool.query(tableQuery, function(error, rows, fiedls) {
@@ -62,13 +72,13 @@ app.get('/experience', (req, res) => {
             res.end();
         } else {
             //res.render('main', {layout : 'index'});
-            res.render('experience', {Experiences: rows});
+            res.render('searchExperience', {Experiences: rows});
         }
     })
 });
 
 // Allow a user to add a rating to an already existing experience
-app.post('/experience', function(req, res){
+app.post('/searchExperience', function(req, res){
   let insertQuery = "INSERT INTO Rating (ratingValue, experienceID) VALUES (?,?)";
   let updateData = [req.body.addRatingValue, req.body.experienceID]
   db.pool.query(insertQuery, updateData, function(error, rows, fiedls){
@@ -76,13 +86,13 @@ app.post('/experience', function(req, res){
           res.write(JSON.stringify(error));
           res.end();
       } else {
-          res.redirect('/experience')
+          res.redirect('/searchExperience')
       }
   })
 });
 
 // Allow for a user to add a new experience
-app.post('/experience/add', (req, res) => {
+app.post('/addExperience/add', (req, res) => {
     let sampleImage;
     let uploadPath;
 
@@ -107,7 +117,7 @@ app.post('/experience/add', (req, res) => {
             res.write(JSON.stringify(error));
             res.end();
         } else {
-            res.redirect('/experience')
+            res.render('addExperience')
         }
       });
   });
@@ -204,6 +214,64 @@ app.post('/Registration', (req, res) => {
         });
     });
 });
+
+app.get('/Trips', function (req, res) {
+    const testUserName = 'test1234'
+    let getTripQuery = `
+    SELECT * FROM Trips
+    WHERE Trips.userName = "${testUserName}";`
+  
+    db.pool.query(getTripQuery, function (error, rows) {
+      let tripsResults = rows
+  
+      if (error) {
+        res.write(JSON.stringify(error));
+        res.end();
+      } else {
+        res.render('Trips.hbs', {
+          layout: 'index.hbs',
+          pageTitle: 'Trips',
+          isHomeRender: true,
+          isCreateRender: false,
+          userName: testUserName,
+          data: tripsResults
+        })
+      }
+    })
+  })
+  
+  app.post('/Trips', function (req, res) {
+    let data = req.body
+    const addUserName = String(data["userName"]).trim()
+    const addTripName = String(data["tripName"]).trim()
+  
+    let insertTripQuery = "INSERT INTO Trips (tripTitle, userName) VALUES (?,?);"
+    let insertTripData = [addTripName, addUserName]
+  
+    db.pool.query(insertTripQuery, insertTripData, function (error) {
+      if (error) {
+        res.write(JSON.stringify(error));
+        res.end();
+      } else {
+        res.redirect('/Trips')
+      }
+    })
+  })
+  
+  app.delete('/Trips', function (req, res) {
+    let data = req.body
+    let tripID = parseInt(data["tripID"])
+    let deleteQuery = `DELETE FROM Trips WHERE Trips.tripID = ${tripID};`
+    db.pool.query(deleteQuery, function (error) {
+      if (error) {
+        res.write(JSON.stringify(error))
+        res.sendStatus(400)
+        res.end()
+      } else {
+        res.sendStatus(204)
+      }
+    })
+  })
 
 app.listen(port, () => console.log(`App listening to port ${port}`));
 
