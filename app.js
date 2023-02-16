@@ -70,9 +70,6 @@ app.get('/Search', function(req,res){
     res.render('Search');
 });
 
-app.get('/Experiences', (req, res) => {
-    //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
-    let tableQuery = 'SELECT AVG(Rating.ratingValue) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
 // Will display all experiences saved to the database and display the rounded average of the rating for each
 app.get('/searchExperience', (req, res) => {
     let tableQuery;
