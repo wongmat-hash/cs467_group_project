@@ -36,6 +36,9 @@
         const navigationSavedBtn = document.querySelector(".navigationSaved-button");
         //reset
         const navigationResetBtn = document.querySelector(".navigationReset-button");
+        //logout
+        const navigationLogoutBtn = document.querySelector(".logout-button");
+
         const resetForm = document.getElementById("reset-form");
 
         //trips
@@ -58,6 +61,10 @@
         navigationResetBtn.addEventListener("click", function() {
           resetForm.style.display = "block";
         });
+        //Logout
+        navigationLogoutBtn.addEventListener("click", function() {
+          resetForm.style.display = "none";
+        })
 
       </script>
 
