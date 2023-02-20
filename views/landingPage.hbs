@@ -11,19 +11,23 @@
     <div class="d-flex h-100">
       {{> nav}}
       <div class="w-75 p-3">
-      <div id = "reset-form" class = "reset-form">
-        <form action= "#">
-          <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
-          <h2 class="text">Reset Password</h2>
-          <div class="box">
-            <div class="form-group">
-                <label for="Enter email">Enter associated email:</label><input type="text" class="form-control" placeholder="Enter associated email" id="email">
-                <label for="Enter New Password">Enter New Password:</label><input type="text" class="form-control" placeholder="Enter new password" id="newpassword">
+        <div id="reset-form" class="reset-form">
+          <form action="#">
+            <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
+            <h2 class="text">Reset Password</h2>
+            <div class="box">
+              <div class="form-group">
+                <label for="Enter email">Enter associated email:</label>
+                <input type="text" class="form-control" placeholder="Enter associated email" id="email">
+                <label for="Enter New Password">Enter New Password:</label>
+                <input type="text" class="form-control" placeholder="Enter new password" id="newpassword">
+              </div>
+              <div class="form-group text-center">
+                <button type="button" class="btn btn-primary" id="reset-button" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button>
+              </div>
             </div>
-            <div class="form-group text-center"><button type="button" class="btn btn-primary" id = "reset-button" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
       </div>
       <script>
         //trips
@@ -38,9 +42,7 @@
         const navigationResetBtn = document.querySelector(".navigationReset-button");
         //logout
         const navigationLogoutBtn = document.querySelector(".navigationLogout-button");
-
         const resetForm = document.getElementById("reset-form");
-
         //trips
         navigationIndexBtn.addEventListener("click", function() {
           resetForm.style.display = "none";
@@ -63,14 +65,12 @@
         });
         //Logout
         navigationLogoutBtn.addEventListener("click", function() {
-          window.location.href="/";
+          window.location.href = "/";
         });
-
       </script>
-
     </div>
     <div class="container mt-5">
-    {{body}}
+      {{body}}
     </div>
   </body>
 </html>
