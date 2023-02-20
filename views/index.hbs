@@ -1,69 +1,55 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../styles/styles.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="../js/scripts.js"></script>
+    <script src="../script.js"></script>
+    <!LOGIN PAGE>
+      <title>Login Page</title>
+      <!Boostrap>
+        <!work cited: https://www.bootstrapdash.com/blog/use-bootstrap-with-html>
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+          <link rel="stylesheet" type="text/css" href="../styles.css">
   </head>
   <body>
-    <div class="d-flex h-100">
-      {{> nav}}
-      <div class="w-75 p-3">
-      <div id = "reset-form" class = "reset-form">
-        <form action= "#">
+    <!LOGIN CONTAINER>
+      <div class="d-flex h-100 justify-content-center align-items-center" id="loginForm" style="margin-top:50px;">
+        <form method="POST" action="/login" encType="multipart/form-data">
           <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
-          <h2 class="text">Reset Password</h2>
-          <div class="box">
+          <h2 class="text">Login</h2>
+          <div class = "box">
             <div class="form-group">
-                <label for="Enter email">Enter associated email:</label><input type="text" class="form-control" placeholder="Enter associated email" id="email">
-                <label for="Enter New Password">Enter New Password:</label><input type="text" class="form-control" placeholder="Enter new password" id="newpassword">
+              <!FOR JS LATER: id=username>
+              <!USERNAME FIELD><label for="username">Username:</label><input type="text" class="form-control" placeholder="Enter username" name="username" id="logusername">
             </div>
-            <div class="form-group text-center"><button type="button" class="btn btn-primary" id = "reset-button" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
-          </div>
+            <div class="form-group">
+              <!FOR JS LATER: id=password>
+              <!PASSWORD FIELD><label for="password">Password:</label><input type="password" class="form-control" placeholder="Enter password" name="password" id="logpassword">
+            </div>
+            <!FOR JS LATER: onclick=login()>
+            <div class="form-group text-center"><button type="submit" id ="submit" class="btn btn-primary" style="width: 100%; background-color: green; border-radius: 10px;">Sign In</button></div>
+            </div>
+          <div class="d-flex justify-content-between"><a href="/Registration" id="registerLink">Don't have an account? Register</a><a href="/forgotpw" id="forgotLink">Forgot Password</a></div>
         </form>
       </div>
-      </div>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+      <!JS to make the fields empty when clicked>
       <script>
-        //trips
-        const navigationIndexBtn = document.querySelector(".index-button");
-        //add
-        const navigationAddBtn = document.querySelector(".navigationAdd-button");
-        //search
-        const navigationSearchBtn = document.querySelector(".navigationSearch-button");
-        // saved
-        const navigationSavedBtn = document.querySelector(".navigationSaved-button");
-        //reset
-        const navigationResetBtn = document.querySelector(".navigationReset-button");
-        const resetForm = document.getElementById("reset-form");
+      document.getElementById("username").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
 
-        //trips
-        navigationIndexBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-        //add
-        navigationAddBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-        //search
-        navigationSearchBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-        //saved
-        navigationSavedBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-        //reset
-        navigationResetBtn.addEventListener("click", function() {
-          resetForm.style.display = "block";
-        });
+      document.getElementById("username").addEventListener("blur", function() {
+        this.placeholder = "Enter username";
+      });
 
+      document.getElementById("password").addEventListener("focus", function() {
+        this.placeholder = "";
+      });
+
+      document.getElementById("password").addEventListener("blur", function() {
+        this.placeholder = "Enter password";
+      });
       </script>
-
-    </div>
-    <div class="container mt-5">
-    {{body}}
-    </div>
   </body>
 </html>

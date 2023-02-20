@@ -1,0 +1,21 @@
+<div class="modal fade" id="createTripModal" tabindex="-1" aria-labelledby="createTripLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method='POST' action="/Trips" id="create-trip-form">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="userName" value="{{userName}}" />
+                    <div class="mb-3">
+                        <label for="tripName" class="col-form-label">New trip name</label>
+                        <input type="text" class="form-control" id="trip-name" name="tripName">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Create trip</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
