@@ -37,28 +37,36 @@ $(document).ready(function() {
     });
 });
 
-function login() {
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var errorMessage = "";
+// this function is used by our index.hbs to log the user in
+function login()
+{
+    // store the user variables from our hbs page in username and password by ID
+    let username = document.getElementById("logusername").value;
+    let password = document.getElementById("logpassword").value;
+    // error message for handling
+    let errorMessage = "";
 
     // checks if the user has input all fields possible
-    if (username == "" || password == "") {
+    if (username == "" || password == "")
+    {
         alert("All fields must be completed");
         return false;
     }
     // check if the email already exists in the database
     let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
-    let checkEmailData = [email];
-    db.pool.query(checkEmailQuery, checkEmailData, function(error, results) {
-        if (error) {
+    let checkEmailData = [username];
+    db.pool.query(checkEmailQuery, checkEmailData, function(error, results)
+    {
+        if (error)
+        {
             console.error("Error executing query:", error.stack);
             res.write(JSON.stringify(error));
             return;
         }
 
-        if (results.length > 0) {
-            // we found a match and email exists NOW NEED TO LOG USER IN
+        if (results.length > 0)
+        {
+            // we found a match and email exists
             console.error("Email already exists");
             connection.release();
             return;
@@ -66,8 +74,10 @@ function login() {
     })
 };
 
-
-function register() {
+// registration function used by registration.hbs
+function register()
+{
+    //storage variables to grab information from page by ID
     let username = document.getElementById("username").value;
     let email = document.getElementById("email").value;
     let phone = document.getElementById("phone").value;
@@ -75,13 +85,15 @@ function register() {
     let confirmPassword = document.getElementById("password-confirm").value;
 
     //error handling to see if fields are all completed
-    if (username == "" || email == "" || password == "" || confirmPassword == "") {
+    if (username == "" || email == "" || password == "" || confirmPassword == "")
+    {
         alert("All fields must be completed");
         return false;
     }
 
     // Validate the PASSWORD matches CONFIRM
-    else if (password !== confirmPassword) {
+    else if (password !== confirmPassword)
+    {
         alert("Passwords do not match");
         return false;
     }
@@ -92,28 +104,34 @@ function register() {
     // Create an array to store the values for the query including phone which has not been used
     let insertData = [username, email, phone, password];
 
-    // link to Dan's database file
+    // link to Dan's database file (team mates OSU db he set up)
     var db = require('../database/db-connector.js');
 
     // error handling for database connection check
-    db.pool.getConnection(function(err, connection) {
-        if (err) {
+    db.pool.getConnection(function(err, connection)
+    {
+        if (err)
+        {   //error message
             console.error("Error connecting to database:", err.stack);
             return;
         }
+        //otherwise show that we connected
         console.log("Connected to database as id", connection.threadId);
 
         // check if the email already exists in the database
         let checkEmailQuery = "SELECT * FROM users WHERE email = ?";
         let checkEmailData = [email];
-        db.pool.query(checkEmailQuery, checkEmailData, function(error, results) {
-            if (error) {
+        db.pool.query(checkEmailQuery, checkEmailData, function(error, results)
+        {
+            if (error)
+            {   //more error handling
                 console.error("Error executing query:", error.stack);
                 res.write(JSON.stringify(error));
                 return;
             }
 
-            if (results.length > 0) {
+            if (results.length > 0)
+            {
                 // we found a match and email exists
                 console.error("Email already exists");
                 connection.release();
@@ -121,8 +139,10 @@ function register() {
             }
 
             // Execute the query using the db.pool.query method
-            db.pool.query(insertQuery, insertData, function(error, rows, fields) {
-                if (error) {
+            db.pool.query(insertQuery, insertData, function(error, rows, fields)
+            {
+                if (error)
+                {
                     console.error("Error executing query:", error.stack);
                     res.write(JSON.stringify(error));
                     return;
@@ -136,36 +156,43 @@ function register() {
     });
 };
 
-
-//PROFILE PAGE NEEDS THIS LOGIC: <a href="resetPassword.html?username=user123">Reset Password</a>
-//LINK TO THIS PAGE AND FUNCTION
-//this function will reset the password from the user designated form
-function newpassword() {
+//newpassword function used by landingpage.hbs
+function newpassword()
+{
     //stores the value of the new password
-    let passwordreset = document.getElementByID("newpassword")
-    if (!newpassword) {
+    let passwordreset = document.getElementById("newpassword")
+    let email = document.getElementById(urlParams.get("email"));
+    if (!passwordreset)
+    {
         alert("password field is empty");
         return;
     }
-    let email = document.getElementByID(urlParams.get("username"));
+
     //check against the DB for the email to reset
     let updatePasswordQuery = "UPDATE Users SET password = ? WHERE email = ?";
-    let updatePasswordData = [newPassword, email]; //NEED TO FIGURE OUT HOW TO GET THE EMAIL HERE
-    db.pool.query(updatePasswordQuery, updatePasswordData, function(error, result) {
-        if (error) {
+    let updatePasswordData = [passwordreset, email]; //NEED TO FIGURE OUT HOW TO GET THE EMAIL HERE
+    db.pool.query(updatePasswordQuery, updatePasswordData, function(error, result)
+    {
+        if (error)
+        {
             res.write(JSON.stringify(error));
             return;
-        } else {
+        } else
+        {
             alert("Password reset successful!");
         }
     })
 };
 
-function reset() {
+// used by the reset password function (forgot password)
+function reset()
+{
     //grabs from the page by email value
     let email = document.getElementById("email").value;
+
     //error handling for empty email field
-    if (!email) {
+    if (!email)
+    {
         alert("email field is empty")
         return;
     }
@@ -173,18 +200,24 @@ function reset() {
     //checks against DB for email to reset
     let checkQuery = "SELECT * FROM Users WHERE email = ?";
     let checkData = [email];
-    db.pool.query(checkQuery, checkData, function(error, rows, fields) {
-        if (error) {
+    db.pool.query(checkQuery, checkData, function(error, rows, fields)
+    {
+        if (error)
+        {
             res.write(JSON.stringify(error));
             return;
-        } else if (rows.length === 0) {
+        } else if (rows.length === 0)
+        {
             alert("Email not found.");
-        } else {
+        }
+        else
+        {
             //found email and we can begin reset
             let newPassword = generatePassword();
             let updatePasswordQuery = "UPDATE Users SET password = ? WHERE email = ?";
             let updatePasswordData = [newPassword, email];
-            db.pool.query(updatePasswordQuery, updatePasswordData, function(error, rows, fields) {
+            db.pool.query(updatePasswordQuery, updatePasswordData, function(error, rows, fields)
+            {
                 if (error) {
                     res.write(JSON.stringify(error));
                     return;
@@ -196,18 +229,23 @@ function reset() {
 }
 
 // this function will generate a new password and pass it back
-function generatePassword(length) {
+function generatePassword(length)
+{
+    //just randomly generate using a library
     console.log("in generate password now")
     const charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let password = "";
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++)
+    {
         password += charSet.charAt(Math.floor(Math.random() * charSet.length));
     }
     return password;
 }
 
-function sendPasswordResetEmail(email, password) {
+// this should work with forgot passsword to send new password email NOT WORKING
+function sendPasswordResetEmail(email, password)
+{
     // function to send reset password email from our email
     //crowdsourcedtravelplanner@gmail.com
     //danmelissamatthew
