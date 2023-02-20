@@ -70,6 +70,12 @@ app.get('/Search', function(req,res){
     res.render('Search');
 });
 
+app.get('/Logout', function(req, res)
+  {
+    //now we push back to our index home
+    res.render('index', { title: 'express', session : req.session});
+  });
+
 // Will display all experiences saved to the database and display the rounded average of the rating for each
 app.get('/searchExperience', (req, res) => {
     let tableQuery;
@@ -144,6 +150,10 @@ app.post('/addExperience/add', (req, res) => {
   });
 });
 
+//allow user to log out
+app.post('/Logout', (req, res) => {
+  res.redirect("/login");
+})
 // Allow a user to log in with correct username and password
 app.post('/login', (req, res) => {
     const username = req.body.username;

@@ -37,7 +37,7 @@
         //reset
         const navigationResetBtn = document.querySelector(".navigationReset-button");
         //logout
-        const navigationLogoutBtn = document.querySelector(".logout-button");
+        const navigationLogoutBtn = document.querySelector(".navigationLogout-button");
 
         const resetForm = document.getElementById("reset-form");
 
@@ -63,8 +63,8 @@
         });
         //Logout
         navigationLogoutBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        })
+          window.location.href="/";
+        });
 
       </script>
 

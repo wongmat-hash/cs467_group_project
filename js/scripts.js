@@ -29,6 +29,13 @@ $(document).ready(function() {
     $(this).addClass('active');
     // Load reset password template in the right column
   });
+
+  $('.navigationLogout-button').click(function() {
+    $('.nav-link').removeClass('active');
+    $(this).addClass('active');
+    // redirect to logout 
+  });
+
 });
 
 function newpassword()
