@@ -20,3 +20,7 @@ html {
 .experienceDetails {
   background-color: var(--color-gray-100);
 }
+
+.card.emptyCard {
+  border-style: dashed;
+}

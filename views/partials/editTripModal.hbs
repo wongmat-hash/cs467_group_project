@@ -1,0 +1,21 @@
+<div class="modal fade" id="editTripModal" tabindex="-1" aria-labelledby="editTripLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="edit-trip-form">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="editTripID" value="{{trip.tripID}}" />
+                    <div class="mb-3">
+                        <label for="editTripName" class="col-form-label">Edit trip name</label>
+                        <input type="text" class="form-control" id="edit-trip-name" name="editTripName">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Edit trip</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
