@@ -21,7 +21,13 @@
      height: 100%;
 }
  .reset-form {
+    position: absolute;
      width: 50% margin: 0 auto;
+}
+
+.reset-form2 {
+    position: absolute; top: 0;
+    width: 50% margin: 0 auto;
 }
  .Test {
      border-right: 20px solid black;
@@ -94,4 +100,3 @@
  input[type=submit]:hover {
      background-color: #45a049;
 }
- 

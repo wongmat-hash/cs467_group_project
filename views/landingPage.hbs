@@ -10,6 +10,7 @@
   <body>
     <div class="d-flex h-100">
       {{> nav}}
+      <!FORM 1 BEGIN>
       <div class="w-75 p-3">
         <div id="reset-form" class="reset-form">
           <form action="#">
@@ -28,47 +29,101 @@
             </div>
           </form>
         </div>
+        <!end form action 1>
+          <div id="reset-form2" class="reset-form2">
+            <div id="add-exp" class="add-exp">
+              <h5>Add New Experience</h5>
+              <p>* = required field</p>
+              <form action="/addExperience/add" method="POST" encType="multipart/form-data">
+                <div class="row mb-3"><label for="expereinceTitle" class="col-sm-2 col-form-label">Title of Experience *</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="expereinceTitle" name="addexpTitle"></div>
+                </div>
+                <div class="row mb-3"><label for="description" class="col-sm-2 col-form-label">Description of Experience *</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="description" name="adddesc"></div>
+                </div>
+                <div class="row mb-3"><label for="location" class="col-sm-2 col-form-label">Enter Location of Experience *</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="location" name="addloc"></div>
+                </div>
+                <div class="row mb-3"><label for="image" class="col-sm-2 col-form-label">Share Photo of Experience *</label>
+                  <div class="col-sm-10"><input type="file" class="form-control" name="sampleImage" accept="image/*" /></div>
+                </div>
+                <div class="row mb-3"><label for="note" class="col-sm-2 col-form-label">Enter Additional Information *</label>
+                  <div class="col-sm-10"><input type="text" class="form-control" id="note" name="addnote"></div>
+                </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
+              </form>
+            </div>
+          </div>
+        <!end form action 2>
+          <div id = "reset-form3" class = "reset-form3">
+          </div>
       </div>
-      <script>
-        //trips
-        const navigationIndexBtn = document.querySelector(".index-button");
-        //add
-        const navigationAddBtn = document.querySelector(".navigationAdd-button");
-        //search
-        const navigationSearchBtn = document.querySelector(".navigationSearch-button");
-        // saved
-        const navigationSavedBtn = document.querySelector(".navigationSaved-button");
-        //reset
-        const navigationResetBtn = document.querySelector(".navigationReset-button");
-        //logout
-        const navigationLogoutBtn = document.querySelector(".navigationLogout-button");
-        const resetForm = document.getElementById("reset-form");
-        //trips
-        navigationIndexBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-        //add
-        navigationAddBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-        //search
-        navigationSearchBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-        //saved
-        navigationSavedBtn.addEventListener("click", function() {
-          resetForm.style.display = "none";
-        });
-        //reset
-        navigationResetBtn.addEventListener("click", function() {
-          resetForm.style.display = "block";
-        });
-        //Logout
-        navigationLogoutBtn.addEventListener("click", function() {
-          sessionStorage.clear();
-          window.location.href = "/";
-        });
-      </script>
+    </div>
+    <script>
+      //page load logic to hide all the divs
+      window.onload = function() {
+          console.log("window loaded...")
+          document.getElementById('reset-form').style.display = 'none';
+          document.getElementById('reset-form2').style.display = 'none';
+          document.getElementById('reset-form3').style.display = 'none';
+      }
+
+      //trips
+      const navigationIndexBtn = document.querySelector(".index-button");
+      //add
+      const navigationAddBtn = document.querySelector(".navigationAdd-button");
+      //search
+      const navigationSearchBtn = document.querySelector(".navigationSearch-button");
+      // saved
+      const navigationSavedBtn = document.querySelector(".navigationSaved-button");
+      //reset
+      const navigationResetBtn = document.querySelector(".navigationReset-button");
+      //logout
+      const navigationLogoutBtn = document.querySelector(".navigationLogout-button");
+      const resetForm = document.getElementById("reset-form");
+      const resetForm2 = document.getElementById("reset-form2");
+      const resetForm3 = document.getElementById("reset-form3");
+      //trips
+      navigationIndexBtn.addEventListener("click", function() {
+        console.log("you pressed add Trips...")
+        resetForm.style.display = "none";
+        resetForm2.style.display = "none";
+        resetForm3.style.display = "none";
+      });
+      //add
+      navigationAddBtn.addEventListener("click", function() {
+        console.log("you pressed add experience...")
+        resetForm.style.display = "none";
+        resetForm2.style.display = "block";
+        resetForm3.style.display = "none";
+      });
+      //search
+      navigationSearchBtn.addEventListener("click", function() {
+        console.log("you pressed Search...")
+        resetForm.style.display = "none";
+        resetForm2.style.display = "none";
+        resetForm3.style.display = "block";
+        window.location.href = "/searchExperience"
+      });
+      //saved
+      navigationSavedBtn.addEventListener("click", function() {
+        console.log("you pressed Saved...")
+        resetForm.style.display = "none";
+        resetForm2.style.display = "none";
+        resetForm3.style.display = "none";
+      });
+      //reset
+      navigationResetBtn.addEventListener("click", function() {
+        console.log("you pressed Reset...")
+        resetForm.style.display = "block";
+        resetForm2.style.display = "none";
+        resetForm3.style.display = "none";
+      });
+      //Logout
+      navigationLogoutBtn.addEventListener("click", function() {
+        sessionStorage.clear();
+        window.location.href = "/";
+      });
+    </script>
     </div>
     <div class="container mt-5">
       {{body}}
