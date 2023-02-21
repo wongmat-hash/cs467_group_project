@@ -65,6 +65,7 @@
         });
         //Logout
         navigationLogoutBtn.addEventListener("click", function() {
+          sessionStorage.clear();
           window.location.href = "/";
         });
       </script>
