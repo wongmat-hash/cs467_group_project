@@ -10,7 +10,7 @@
   <body>
     <div class="d-flex h-100">
       {{> nav}}
-        <div class="w-75 p-3">
+      <div class="w-75 p-3">
         <!FORM 1 BEGIN THIS IS FOR RESET PASSWORD>
           <div id="reset-form" class="reset-form">
             <form action="#">
@@ -22,200 +22,187 @@
               </div>
             </form>
           </div>
-          <div id = "reset-form5" class ="reset-form5">
-            <img src="../images/logo.png" alt="logo">
-          </div>
-        <!END FORM 1 RESET PW>
-        <!FORM 2 BEGIN THIS IS FOR ADD NEW EXP>
-            <div id="reset-form2" class="reset-form2">
-              <div id="add-exp" class="add-exp">
-                <h5>Add New Experience</h5>
-                <p>* = required field</p>
-                <div class="box">
-                  <form action="/landingPage/add" method="POST" enctype="multipart/form-data" id=addExpForm>
-                    <div class="row mb-3"><label for="expereinceTitle" class="col-sm-2 col-form-label">Title of Experience *</label>
-                      <div class="col-sm-10"><input type="text" class="form-control" id="expereinceTitle" name="addexpTitle"></div>
-                    </div>
-                    <div class="row mb-3"><label for="description" class="col-sm-2 col-form-label">Description of Experience *</label>
-                      <div class="col-sm-10"><input type="text" class="form-control" id="description" name="adddesc"></div>
-                    </div>
-                    <div class="row mb-3"><label for="location" class="col-sm-2 col-form-label">Enter Location of Experience *</label>
-                      <div class="col-sm-10"><input type="text" class="form-control" id="location" name="addloc"></div>
-                    </div>
-                    <div class="row mb-3"><label for="image" class="col-sm-2 col-form-label">Share Photo of Experience *</label>
-                      <div class="col-sm-10"><input type="file" class="form-control" name="sampleImage" accept="image/*" /></div>
-                    </div>
-                    <div class="row mb-3"><label for="note" class="col-sm-2 col-form-label">Enter Additional Information *</label>
-                      <div class="col-sm-10"><input type="text" class="form-control" id="note" name="addnote"></div>
-                    </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
-                  </form>
+          <div id="reset-form5" class="reset-form5"><img src="../images/logo.png" alt="logo"></div>
+          <!END FORM 1 RESET PW>
+            <!FORM 2 BEGIN THIS IS FOR ADD NEW EXP>
+              <div id="reset-form2" class="reset-form2">
+                <div id="add-exp" class="add-exp">
+                  <h5>Add New Experience</h5>
+                  <p>* = required field</p>
+                  <div class="box">
+                    <form action="/landingPage/add" method="POST" enctype="multipart/form-data" id=addExpForm>
+                      <div class="row mb-3"><label for="expereinceTitle" class="col-sm-2 col-form-label">Title of Experience *</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="expereinceTitle" name="addexpTitle"></div>
+                      </div>
+                      <div class="row mb-3"><label for="description" class="col-sm-2 col-form-label">Description of Experience *</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="description" name="adddesc"></div>
+                      </div>
+                      <div class="row mb-3"><label for="location" class="col-sm-2 col-form-label">Enter Location of Experience *</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="location" name="addloc"></div>
+                      </div>
+                      <div class="row mb-3"><label for="image" class="col-sm-2 col-form-label">Share Photo of Experience *</label>
+                        <div class="col-sm-10"><input type="file" class="form-control" name="sampleImage" accept="image/*" /></div>
+                      </div>
+                      <div class="row mb-3"><label for="note" class="col-sm-2 col-form-label">Enter Additional Information *</label>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="note" name="addnote"></div>
+                      </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
+                    </form>
+                  </div>
                 </div>
               </div>
-            </div>
-        <!END FORM 2 ADD NEW EXP>
-        <!FORM 4 BEGIN THIS IS TRIPS>
-            <div id="reset-form4" class="reset-form4">
-              <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
-                  <div class="row m-2">
-                      <div class="col-lg-6">
-                          <img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto>
-                      </div>
-                      <main class="m-2">
+              <!END FORM 2 ADD NEW EXP>
+                <!FORM 4 BEGIN THIS IS TRIPS>
+                  <div id="reset-form4" class="reset-form4">
+                    <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
+                      <div class="row m-2">
+                        <div class="col-lg-6"><img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto></div>
+                        <main class="m-2">
                           <h1 class="col-lg-8 mx-auto p-4 py-md-5">Your Trips</h1>
                           <div class="py-5 bg-light">
-                              <div class="container">
+                            <div class="container">
                               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                                <div class="col">
+                                  {{> emptyTripCard }}
+                                </div>
+                                {{#each data}}
                                   <div class="col">
-                                      {{> emptyTripCard }}
+                                    {{> tripCard trip=this}}
                                   </div>
-                                      {{#each data}}
-                                  <div class="col">
-                                      {{> tripCard trip=this}}
-                                  </div>
-                                      {{/each}}
-                                  </div>
+                                {{/each}}
                               </div>
+                            </div>
                           </div>
-                      </main>
-                  </div>
-              </div>
-            </div>
-        <!END FORM 4 TRIPS>
-        <!FORM 3 BEGIN THIS IS FOR SEARCH EXP>
-              <div id="reset-form3" class="reset-form3">
-                {{> searchNavbar}}
-                <div class="d-flex justify-content-evenly h-35">
-                  {{#each Experiences}}
-                    <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
-                      <div id="search-exp" class="search-exp">
-                        <div class="row m-2">
-                          <div class="col-lg-6"><img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto></div>
-                          <div class="col-lg-6 p-3 experienceDetails">
-                            <p>Experience Title: {{this.experienceTitle}}</p>
-                            <p>Description: {{this.description}}</p>
-                            <p>Location: {{this.location}}</p>
-                            <p>Keywords: {{this.note}}</p>
-                            <p>Overall Rating {{this.ratingValue}}</p>
-                            <form action="/searchExperience" method="POST" encType="multipart/form-data">
-                              <div class="row mb-3"><label for="ratingValue" class="col-lg-6 col-form-label">Rate This Experience</label>
-                                <div class="col-lg-6 col-sm-offset-8"><input type="text" class="form-control" id="ratingValue" name="addRatingValue"><input type="hidden" name="experienceID" value={{this.experienceID}} id="experienceID"></div>
-                              </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
-                            </form>
-                          </div>
-                        </div>
+                        </main>
                       </div>
                     </div>
-                </div>
-                <div class="row">
-                  <p class="col-md-7 mx-auto experienceDetails p-5 m-3">{{this.description}}</p>
-                </div>
-                {{/each}}
-              </div>
-        <!END FORM 3 SEARCH EXP>
-        </div><!ends the div w-75 above>
-    </div><!end right colum div>
-    <script>
-      //page load logic to hide all the divs
-      window.onload = function() {
-        console.log("window loaded...")
-        document.getElementById('reset-form').style.display = 'none'; //form for the reset form
-        document.getElementById('reset-form2').style.display = 'none'; //form for the addExperience
-        document.getElementById('reset-form3').style.display = 'none'; //form for search experience
-        document.getElementById('reset-form4').style.display = 'none'; //form for the trips
-        document.getElementById('reset-form5').style.display = "block";
-      }
-      //this section of JS will set const variables to the buttons so we know when they are active states
-      //trips
-      const navigationIndexBtn = document.querySelector(".index-button");
-      //add
-      const navigationAddBtn = document.querySelector(".navigationAdd-button");
-      //search
-      const navigationSearchBtn = document.querySelector(".navigationSearch-button");
-      // saved
-      const navigationSavedBtn = document.querySelector(".navigationSaved-button");
-      //reset
-      const navigationResetBtn = document.querySelector(".navigationReset-button");
-      //logout
-      const navigationLogoutBtn = document.querySelector(".navigationLogout-button");
-      // this does the same for the reset forms attaching them to variables
-      const resetForm = document.getElementById("reset-form");
-      const resetForm2 = document.getElementById("reset-form2");
-      const resetForm3 = document.getElementById("reset-form3");
-      const resetForm4 = document.getElementById("reset-form4");
-      const resetForm5 = document.getElementById("reset-form5");
-      //const for form push.state to submit addEXP form (this changes the URL without loading a new HTML page)
-      const addExpForm = document.getElementById('addExpForm');
-      const submitButton = addExpForm.querySelector('button[type="submit"]');
-      submitButton.addEventListener('click', (event) => {
-        event.preventDefault();
-        const formData = new FormData(addExpForm);
-        // Use push.state to send the form data to the server
-        window.history.pushState(null, null, '/landingPage/add');
-        fetch('/landingPage/add', {
-          method: 'POST',
-          body: formData
-        }).then(response => {
-          // Handle the server response
-        }).catch(error => {
-          console.error('Error:', error);
+                  </div>
+                  <!END FORM 4 TRIPS>
+                    <!FORM 3 BEGIN THIS IS FOR SEARCH EXP>
+                      <div id="reset-form3" class="reset-form3">
+                        {{> searchNavbar}}
+                        <div class="d-flex justify-content-evenly h-35">
+                          {{#each Experiences}}
+                            <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
+                              <div id="search-exp" class="search-exp">
+                                <div class="row m-2">
+                                  <div class="col-lg-6"><img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto></div>
+                                  <div class="col-lg-6 p-3 experienceDetails">
+                                    <p>Experience Title: {{this.experienceTitle}}</p>
+                                    <p>Description: {{this.description}}</p>
+                                    <p>Location: {{this.location}}</p>
+                                    <p>Keywords: {{this.note}}</p>
+                                    <p>Overall Rating {{this.ratingValue}}</p>
+                                    <form action="/searchExperience" method="POST" encType="multipart/form-data">
+                                      <div class="row mb-3"><label for="ratingValue" class="col-lg-6 col-form-label">Rate This Experience</label>
+                                        <div class="col-lg-6 col-sm-offset-8"><input type="text" class="form-control" id="ratingValue" name="addRatingValue"><input type="hidden" name="experienceID" value={{this.experienceID}} id="experienceID"></div>
+                                      </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <p class="col-md-7 mx-auto experienceDetails p-5 m-3">{{this.description}}</p>
+                        </div>
+                        {{/each}}
+                      </div>
+                      <!END FORM 3 SEARCH EXP>
+      </div>
+      <!ends the div w-75 above>
+    </div>
+    <!end right colum div>
+      <script>
+        //page load logic to hide all the divs
+        window.onload = function() {
+          console.log("window loaded...")
+          document.getElementById('reset-form').style.display = 'none'; //form for the reset form
+          document.getElementById('reset-form2').style.display = 'none'; //form for the addExperience
+          document.getElementById('reset-form3').style.display = 'none'; //form for search experience
+          document.getElementById('reset-form4').style.display = 'none'; //form for the trips
+          document.getElementById('reset-form5').style.display = "block";
+        }
+        //this section of JS will set const variables to the buttons so we know when they are active states
+        //trips
+        const navigationIndexBtn = document.querySelector(".index-button");
+        //add
+        const navigationAddBtn = document.querySelector(".navigationAdd-button");
+        //search
+        const navigationSearchBtn = document.querySelector(".navigationSearch-button");
+        //reset
+        const navigationResetBtn = document.querySelector(".navigationReset-button");
+        //logout
+        const navigationLogoutBtn = document.querySelector(".navigationLogout-button");
+        // this does the same for the reset forms attaching them to variables
+        const resetForm = document.getElementById("reset-form");
+        const resetForm2 = document.getElementById("reset-form2");
+        const resetForm3 = document.getElementById("reset-form3");
+        const resetForm4 = document.getElementById("reset-form4");
+        const resetForm5 = document.getElementById("reset-form5");
+        //const for form push.state to submit addEXP form (this changes the URL without loading a new HTML page)
+        const addExpForm = document.getElementById('addExpForm');
+        const submitButton = addExpForm.querySelector('button[type="submit"]');
+        submitButton.addEventListener('click', (event) => {
+          event.preventDefault();
+          const formData = new FormData(addExpForm);
+          // Use push.state to send the form data to the server
+          window.history.pushState(null, null, '/landingPage/add');
+          fetch('/landingPage/add', {
+            method: 'POST',
+            body: formData
+          }).then(response => {
+            // Handle the server response
+          }).catch(error => {
+            console.error('Error:', error);
+          });
         });
-      });
-      //this section is my event Listeners. They hide and unhide specific divs depending on button clicks by user
-      //trips
-      navigationIndexBtn.addEventListener("click", function() {
-        console.log("you pressed add Trips...")
-        resetForm.style.display = "none";
-        resetForm2.style.display = "none";
-        resetForm3.style.display = "none";
-        resetForm4.style.display = "block";
-        resetForm5.style.display = "none";
-      });
-      //add
-      navigationAddBtn.addEventListener("click", function() {
-        console.log("you pressed add experience...")
-        resetForm.style.display = "none";
-        resetForm2.style.display = "block";
-        resetForm3.style.display = "none";
-        resetForm4.style.display = "none";
-        resetForm5.style.display = "none";
-      });
-      //search
-      navigationSearchBtn.addEventListener("click", function() {
-        console.log("you pressed Search...")
-        resetForm.style.display = "none";
-        resetForm2.style.display = "none";
-        resetForm3.style.display = "block";
-        //window.location.href = "/searchExperience"
-        resetForm4.style.display = "none";
-        resetForm5.style.display = "none";
-      });
-      //saved
-      navigationSavedBtn.addEventListener("click", function() {
-        console.log("you pressed Saved...")
-        resetForm.style.display = "none";
-        resetForm2.style.display = "none";
-        resetForm3.style.display = "none";
-        resetForm4.style.display = "none";
-        resetForm5.style.display = "none";
-      });
-      //reset
-      navigationResetBtn.addEventListener("click", function() {
-        console.log("you pressed Reset...")
-        resetForm.style.display = "block";
-        resetForm2.style.display = "none";
-        resetForm3.style.display = "none";
-        resetForm4.style.display = "none";
-        resetForm5.style.display = "none";
-      });
-      //Logout
-      navigationLogoutBtn.addEventListener("click", function() {
-        sessionStorage.clear();
-        window.location.href = "/";
-      });
-    </script>
-    </div>
-    <div class="container mt-5">
-      {{body}}
-    </div>
+        //this section is my event Listeners. They hide and unhide specific divs depending on button clicks by user
+        //trips
+        navigationIndexBtn.addEventListener("click", function() {
+          console.log("you pressed add Trips...")
+          resetForm.style.display = "none";
+          resetForm2.style.display = "none";
+          resetForm3.style.display = "none";
+          resetForm4.style.display = "block";
+          resetForm5.style.display = "none";
+        });
+        //add
+        navigationAddBtn.addEventListener("click", function() {
+          console.log("you pressed add experience...")
+          resetForm.style.display = "none";
+          resetForm2.style.display = "block";
+          resetForm3.style.display = "none";
+          resetForm4.style.display = "none";
+          resetForm5.style.display = "none";
+        });
+        //search
+        navigationSearchBtn.addEventListener("click", function() {
+          console.log("you pressed Search...")
+          resetForm.style.display = "none";
+          resetForm2.style.display = "none";
+          resetForm3.style.display = "block";
+          //window.location.href = "/searchExperience"
+          resetForm4.style.display = "none";
+          resetForm5.style.display = "none";
+        });
+        //reset
+        navigationResetBtn.addEventListener("click", function() {
+          console.log("you pressed Reset...")
+          resetForm.style.display = "block";
+          resetForm2.style.display = "none";
+          resetForm3.style.display = "none";
+          resetForm4.style.display = "none";
+          resetForm5.style.display = "none";
+        });
+        //Logout
+        navigationLogoutBtn.addEventListener("click", function() {
+          sessionStorage.clear();
+          window.location.href = "/";
+        });
+      </script>
+      </div>
+      <div class="container mt-5">
+        {{body}}
+      </div>
   </body>
 </html>
