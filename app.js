@@ -245,6 +245,7 @@ app.get('/Trips', function (req, res) {
     let getTripQuery = `
     SELECT * FROM Trips
     WHERE Trips.userName = "${session.userName}";`
+
     db.pool.query(getTripQuery, function (error, rows) {
         let tripsResults = rows
         if (error) {
@@ -292,7 +293,6 @@ app.delete('/Trips', function (req, res) {
     })
 })
 
-
 app.put('/Trips', function (req, res) {
     let data = req.body
 
@@ -300,7 +300,6 @@ app.put('/Trips', function (req, res) {
     const tripName = String(data["tripName"]).trim()
     let updateTripData = [tripName]
     let updateTripQuery = `UPDATE Trips SET tripTitle = (?) WHERE Trips.tripID = ${tripID};`
-    console.log(updateTripQuery)
     db.pool.query(updateTripQuery, [updateTripData], function (error) {
         if (error) {
             console.log(error)
@@ -311,6 +310,28 @@ app.put('/Trips', function (req, res) {
     })
 })
 
+app.post('/TripExperiences', function (req, res){
+    let data = req.body
+    console.log(data)
+    const tripID = parseInt(data["tripID"])
+
+    let getExperienceQuery = `
+    SELECT * FROM TripExperiences
+    WHERE TripExperiences.tripID = "${tripID}";`
+    console.log(tripID)
+    console.log(getExperienceQuery)
+    db.pool.query(getExperienceQuery, function (error, rows) {
+        let tripExpResults = rows
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            console.log(tripExpResults)
+            console.log('hello')
+        }
+    })
+
+})
 app.listen(port, () => console.log(`App listening to port ${port}`));
 
 module.exports = app;

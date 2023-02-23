@@ -3,6 +3,7 @@
         <div class="modal-content">
             <form id="edit-trip-form">
                 <div class="modal-header">
+                    <h5 class="modal-title">Editing {{trip.tripTitle}}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -10,6 +11,14 @@
                     <div class="mb-3">
                         <label for="editTripName" class="col-form-label">Edit trip name</label>
                         <input type="text" class="form-control" id="edit-trip-name" name="editTripName">
+                        <p>Experiences</p>
+                            <ul class="list-group">
+                                <li class="list-group-item">An item</li>
+                                <li class="list-group-item">A second item</li>
+                                <li class="list-group-item">A third item</li>
+                                <li class="list-group-item">A fourth item</li>
+                                <li class="list-group-item">And a fifth one</li>
+                            </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Edit trip</button>
