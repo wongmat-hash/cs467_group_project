@@ -10,8 +10,8 @@
   <body>
     <div class="d-flex h-100">
       {{> nav}}
-        <!FORM 1 BEGIN THIS IS FOR RESET PASSWORD>
         <div class="w-75 p-3">
+        <!FORM 1 BEGIN THIS IS FOR RESET PASSWORD>
           <div id="reset-form" class="reset-form">
             <form action="#">
               <h1 class="text-container">Crowd-Sourced Travel Planner</h1>
@@ -21,6 +21,9 @@
                 <div class="form-group text-center"><button type="button" class="btn btn-primary" id="reset-button" style="width: 100%; background-color: green; border-radius: 10px;" onclick="newpassword()">Reset Password</button></div>
               </div>
             </form>
+          </div>
+          <div id = "reset-form5" class ="reset-form5">
+            <img src="../images/logo.png" alt="logo">
           </div>
         <!END FORM 1 RESET PW>
         <!FORM 2 BEGIN THIS IS FOR ADD NEW EXP>
@@ -119,6 +122,7 @@
         document.getElementById('reset-form2').style.display = 'none'; //form for the addExperience
         document.getElementById('reset-form3').style.display = 'none'; //form for search experience
         document.getElementById('reset-form4').style.display = 'none'; //form for the trips
+        document.getElementById('reset-form5').style.display = "block";
       }
       //this section of JS will set const variables to the buttons so we know when they are active states
       //trips
@@ -138,6 +142,7 @@
       const resetForm2 = document.getElementById("reset-form2");
       const resetForm3 = document.getElementById("reset-form3");
       const resetForm4 = document.getElementById("reset-form4");
+      const resetForm5 = document.getElementById("reset-form5");
       //const for form push.state to submit addEXP form (this changes the URL without loading a new HTML page)
       const addExpForm = document.getElementById('addExpForm');
       const submitButton = addExpForm.querySelector('button[type="submit"]');
@@ -163,6 +168,7 @@
         resetForm2.style.display = "none";
         resetForm3.style.display = "none";
         resetForm4.style.display = "block";
+        resetForm5.style.display = "none";
       });
       //add
       navigationAddBtn.addEventListener("click", function() {
@@ -171,6 +177,7 @@
         resetForm2.style.display = "block";
         resetForm3.style.display = "none";
         resetForm4.style.display = "none";
+        resetForm5.style.display = "none";
       });
       //search
       navigationSearchBtn.addEventListener("click", function() {
@@ -180,6 +187,7 @@
         resetForm3.style.display = "block";
         //window.location.href = "/searchExperience"
         resetForm4.style.display = "none";
+        resetForm5.style.display = "none";
       });
       //saved
       navigationSavedBtn.addEventListener("click", function() {
@@ -188,6 +196,7 @@
         resetForm2.style.display = "none";
         resetForm3.style.display = "none";
         resetForm4.style.display = "none";
+        resetForm5.style.display = "none";
       });
       //reset
       navigationResetBtn.addEventListener("click", function() {
@@ -196,6 +205,7 @@
         resetForm2.style.display = "none";
         resetForm3.style.display = "none";
         resetForm4.style.display = "none";
+        resetForm5.style.display = "none";
       });
       //Logout
       navigationLogoutBtn.addEventListener("click", function() {
