@@ -3,6 +3,7 @@ var exphbs = require('express-handlebars');
 var fileupload = require('express-fileupload');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var nodeGeocoder = require('node-geocoder');
 
 var app = express();
 app.use(session({
@@ -12,7 +13,21 @@ app.use(session({
 
 }))
 
-port = 5256;
+let options = {
+    provider: 'openstreetmap'
+};
+let geoCoder = nodeGeocoder(options);
+geoCoder.geocode('Orlando, FL')
+.then((res) => {
+    const Latitude = res[0].latitude;
+    const Longitude = res[0].longitude;
+    console.log(Latitude, Longitude);
+})
+.catch((err) => {
+    console.log(err)
+});
+
+port = 5257;
 
 var db = require('./database/db-connector');
 const { request } = require('express');
@@ -73,6 +88,7 @@ app.get('/Search', function(req,res){
 // Will display all experiences saved to the database and display the rounded average of the rating for each
 app.get('/searchExperience', (req, res) => {
     let tableQuery;
+    
     tableQuery = 'SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
     db.pool.query(tableQuery, function(error, rows, fiedls) {
         if(error) {
@@ -81,6 +97,21 @@ app.get('/searchExperience', (req, res) => {
         } else {
             //res.render('main', {layout : 'index'});
             res.render('searchExperience', {Experiences: rows});
+        }
+    })
+});
+
+app.get('/searchExperience/search', (req, res) => {
+    let tableQuery
+    const userInput = req.query.searchExp;
+    tableQuery = "SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE (Rating.ratingValue >= 0 or Rating.ratingValue IS NULL) AND (Experiences.note LIKE ? OR Experiences.location LIKE ?) GROUP BY Experiences.experienceID";
+    
+    db.pool.query(tableQuery, [userInput, userInput], function(error, rows, fiedls){
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            res.render('searchExperience', {Experiences: rows})
         }
     })
 });
@@ -99,23 +130,20 @@ app.post('/searchExperience', function(req, res){
   })
 });
 
-app.post('/Experiences', function(req, res){
-    let insertQuery = "INSERT INTO Rating (ratingValue, experienceID) VALUES (?,?)";
-    let updateData = [req.body.addRatingValue, req.body.experienceID]
-    db.pool.query(insertQuery, updateData, function(error, rows, fiedls){
-        if(error) {
-            res.write(JSON.stringify(error));
-            res.end();
-        } else {
-            res.redirect('/Experiences')
-        }
-    })
-})
 
 // Allow for a user to add a new experience
 app.post('/addExperience/add', (req, res) => {
     let sampleImage;
     let uploadPath;
+
+    let geoCoder = nodeGeocoder(options);
+    geoCoder.geocode(req.body.addloc)
+    .then((res) => {
+        console.log(res.data);
+    })
+    .catch((err) => {
+        console.log(err)
+    });
 
     if(!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');

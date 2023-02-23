@@ -9,6 +9,7 @@
         <script type="text/javascript" src="../js/scripts.js"></script>
     </head>
     <body>
+
         <div class="d-flex justify-content-evenly h-35">
             {{> nav}}
             {{#each Experiences}}
@@ -16,7 +17,7 @@
             <div id="search-exp" class="search-exp">
                 <div class="row m-2">
                     <div class="col-lg-6">
-                        <img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto>
+                        <img class="experienceImage" src='../upload/{{this.image}}' width="200" height:auto>
                     </div>
                     <div class="col-lg-6 p-3 experienceDetails">
                         <p>Experience Title: {{this.experienceTitle}}</p>
@@ -24,7 +25,7 @@
                         <p>Location: {{this.location}}</p>
                         <p>Keywords: {{this.note}}</p>
                         <p>Overall Rating {{this.ratingValue}}</p>
-                        <form action="/searchExperience" method="POST" encType="multipart/form-data">
+                        <form action="/searchExperience" class="addRating" method="POST" encType="multipart/form-data">
                             <div class="row mb-3">
                                 <label for="ratingValue" class="col-lg-6 col-form-label">Rate This Experience</label>
                                 <div class="col-lg-6 col-sm-offset-8">
@@ -46,6 +47,8 @@
         {{/each}}
         </div>
         <script>
+            const keywordRadio = document.getElementById('byKeywordRadio');
+            const userInput = document.getElementsByName('searchExp');
             //trips
             const navigationIndexBtn = document.querySelector(".index-button");
             //add
