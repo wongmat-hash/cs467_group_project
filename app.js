@@ -118,8 +118,10 @@ app.post('/Experiences', function(req, res){
     })
 })
 
+
 // Allow for a user to add a new experience
-app.post('/addExperience/add', (req, res) => {
+app.post('/landingPage/add', (req, res) => {
+    console.log("POOP")
     let sampleImage;
     let uploadPath;
 
@@ -139,7 +141,7 @@ app.post('/addExperience/add', (req, res) => {
 
     let insertQuery = "INSERT INTO Experiences (experienceTitle, description, location, image, note) VALUES (?,?,?,?,?)"
     let insertData = [req.body.addexpTitle, req.body.adddesc, req.body.addloc, sampleImage.name, req.body.addnote]
-    db.pool.query(insertQuery, insertData, function(error, rows, fiedls) {
+    db.pool.query(insertQuery, insertData, function(error, rows, fields) {
         if(error) {
             res.write(JSON.stringify(error));
             res.end();
@@ -154,6 +156,7 @@ app.post('/addExperience/add', (req, res) => {
 app.post('/Logout', (req, res) => {
   res.redirect("/login");
 })
+
 // Allow a user to log in with correct username and password
 app.post('/login', (req, res) => {
     const username = req.body.username;
