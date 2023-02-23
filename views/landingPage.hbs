@@ -10,7 +10,7 @@
   <body>
     <div class="d-flex h-100">
       {{> nav}}
-        <!FORM 1 BEGIN>
+        <!FORM 1 BEGIN THIS IS FOR RESET PASSWORD>
         <div class="w-75 p-3">
           <div id="reset-form" class="reset-form">
             <form action="#">
@@ -22,8 +22,8 @@
               </div>
             </form>
           </div>
-        <!end form action 1>
-        <!start form2>
+        <!END FORM 1 RESET PW>
+        <!FORM 2 BEGIN THIS IS FOR ADD NEW EXP>
             <div id="reset-form2" class="reset-form2">
               <div id="add-exp" class="add-exp">
                 <h5>Add New Experience</h5>
@@ -49,8 +49,8 @@
                 </div>
               </div>
             </div>
-          <!end form action 2>
-          <!start form4>
+        <!END FORM 2 ADD NEW EXP>
+        <!FORM 4 BEGIN THIS IS TRIPS>
             <div id="reset-form4" class="reset-form4">
               <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
                   <div class="row m-2">
@@ -77,8 +77,8 @@
                   </div>
               </div>
             </div>
-          <!end form4>
-          <!start form3>
+        <!END FORM 4 TRIPS>
+        <!FORM 3 BEGIN THIS IS FOR SEARCH EXP>
               <div id="reset-form3" class="reset-form3">
                 {{> searchNavbar}}
                 <div class="d-flex justify-content-evenly h-35">
@@ -108,11 +108,9 @@
                 </div>
                 {{/each}}
               </div>
-              <!end form 3>
-        </div>
-        <!ends the div w-75 above>
-          <!end right colum div>
-    </div>
+        <!END FORM 3 SEARCH EXP>
+        </div><!ends the div w-75 above>
+    </div><!end right colum div>
     <script>
       //page load logic to hide all the divs
       window.onload = function() {
