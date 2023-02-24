@@ -317,7 +317,7 @@ function formSet()
   document.getElementById("expereinceTitle").value = "";
   document.getElementById("description").value = "";
   document.getElementById("location").value = "";
-  document.getElementById("sampleImage").value = "";
+  //document.getElementById("sampleImage").value = "";
   document.getElementById("note").value = "";
   document.getElementById("sampleImage").innerHTML = "";
 };
