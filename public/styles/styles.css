@@ -20,14 +20,29 @@
  body, html {
      height: 100%;
 }
- .reset-form {
-    position: absolute;
-     width: 50% margin: 0 auto;
+.reset-form {
+  position: absolute;
+  width: 50%;
+  margin: 0 auto;
 }
 
 .reset-form2 {
-    position: absolute; top: 0;
-    width: 50% margin: 0 auto;
+  position: absolute;
+  top: 0;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.resetFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.reset-form5 {
+  max-width: 100%;
+  height: auto;
 }
  .Test {
      border-right: 20px solid black;
