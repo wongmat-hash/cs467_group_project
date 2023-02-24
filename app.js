@@ -12,7 +12,7 @@ app.use(session({
 
 }))
 
-port = 5256;
+port = 5258;
 
 var db = require('./database/db-connector');
 const { request } = require('express');
@@ -77,7 +77,7 @@ app.get('/Logout', function(req, res)
   });
 
 // Will display all experiences saved to the database and display the rounded average of the rating for each
-app.get('/searchExperience', (req, res) => {
+app.get('/landingPage/allExp', (req, res) => {
     let tableQuery;
     tableQuery = 'SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
     db.pool.query(tableQuery, function(error, rows, fiedls) {
