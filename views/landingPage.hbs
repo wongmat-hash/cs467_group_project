@@ -28,7 +28,7 @@
               <!THIS DISPLAYS WHEN THE USER ADDS AN EXPERIENCE>
                 <div id="experienceAdded">
                   <div class="box">
-                    <h1 class="text-container">Experience Added</h1>
+                    <h2 class="text-container">Experience Added</h2>
                   </div>
                 </div>
                 <!FORM 2 BEGIN THIS IS FOR ADD NEW EXP>
@@ -120,7 +120,7 @@
     </div>
     <!end right colum div>
       <script>
-        //page load logic to hide all the divs
+        //This section below will wait for page load and hide all our stacked div forms and only display the logo on page load
         window.onload = function() {
           console.log("window loaded...")
           document.getElementById('reset-form').style.display = 'none'; //form for the reset form
@@ -149,6 +149,8 @@
         const resetForm5 = document.getElementById("reset-form5");
         const expAdded = document.getElementById("experienceAdded");
         //const for form push.state to submit addEXP form (this changes the URL without loading a new HTML page)
+        // work cited: https://medium.com/@nagachaitanyakonada/javascript-window-history-pushstate-tutorial-56e2126eaff1
+        // work cited: https://stackoverflow.com/questions/60435350/is-there-a-particular-behavior-with-fetch-and-pushstate
         const addExpForm = document.getElementById('addExpForm');
         const submitButton = addExpForm.querySelector('button[type="submit"]');
         submitButton.addEventListener('click', (event) => {
@@ -159,7 +161,9 @@
           fetch('/landingPage/add', {
             method: 'POST',
             body: formData
-          }).then(response => response.text()).then(html => {
+          })
+          .then(response => response.text())
+          .then(html => {
             console.log("I am now in the push.state function")
             document.getElementById("reset-form2").style.display = "none"; //hide our form
             document.getElementById("experienceAdded").style.display = "block"; //show our success message
@@ -215,8 +219,21 @@
         });
         //Logout
         navigationLogoutBtn.addEventListener("click", function() {
-          sessionStorage.clear();
-          window.location.href = "/";
+          const xhr = new XMLHttpRequest();
+
+          // Set up the request
+          xhr.open('POST', '/logout');
+
+          // Set up the callback function for when the request completes
+          xhr.onload = function() {
+            // Redirect the user to the home page
+            window.location.href = '/';
+          };
+
+          // Send the request
+          xhr.send();
+          //sessionStorage.clear();
+          //window.location.href = "/";
         });
       </script>
       </div>
