@@ -1,3 +1,14 @@
+//page load logic to hide all the divs
+window.onload = function() {
+  console.log("window loaded...")
+  document.getElementById('reset-form').style.display = 'none'; //form for the reset form
+  document.getElementById('reset-form2').style.display = 'none'; //form for the addExperience
+  document.getElementById('reset-form3').style.display = 'none'; //form for search experience
+  document.getElementById('reset-form4').style.display = 'none'; //form for the trips
+  document.getElementById('reset-form5').style.display = "block";
+}
+
+// this makes all the nav buttons green or not green
 $(document).ready(function() {
     //trips
     $('.index-button').click(function() {
