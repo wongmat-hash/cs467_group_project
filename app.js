@@ -146,7 +146,8 @@ app.post('/landingPage/add', (req, res) => {
             res.write(JSON.stringify(error));
             res.end();
         } else {
-            res.render('landingPage')
+          console.log("redirecting back")
+            res.redirect('/landingPage')
         }
       });
   });
