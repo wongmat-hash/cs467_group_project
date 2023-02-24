@@ -171,8 +171,8 @@
             const addExpUrl = "/landingPage/add";
             history.pushState(null, null, addExpUrl);
           }).catch(error => console.error(error));
-          console.log("right before the push back to regular url")
-          window.history.pushState(null, null, '/landingPage');                 //redirects the user 
+          //console.log("right before the push back to regular url")
+          window.history.pushState(null, null, '/landingPage');                 //redirects the user
         });
 
         //this section is my event Listeners. They hide and unhide specific divs depending on button clicks by user
