@@ -1,13 +1,3 @@
-//page load logic to hide all the divs
-window.onload = function() {
-  console.log("window loaded...")
-  document.getElementById('reset-form').style.display = 'none'; //form for the reset form
-  document.getElementById('reset-form2').style.display = 'none'; //form for the addExperience
-  document.getElementById('reset-form3').style.display = 'none'; //form for search experience
-  document.getElementById('reset-form4').style.display = 'none'; //form for the trips
-  document.getElementById('reset-form5').style.display = "block";
-}
-
 // this makes all the nav buttons green or not green
 $(document).ready(function() {
     //trips
@@ -84,6 +74,8 @@ function login()
         }
     })
 };
+
+
 
 // registration function used by registration.hbs
 function register()
@@ -317,3 +309,15 @@ function newpassword() {
         }
     });
 }
+
+//function to reset our add form on landingPage
+function formSet()
+{
+  console.log("Inside Formset");
+  document.getElementById("expereinceTitle").value = "";
+  document.getElementById("description").value = "";
+  document.getElementById("location").value = "";
+  document.getElementById("sampleImage").value = "";
+  document.getElementById("note").value = "";
+  document.getElementById("sampleImage").innerHTML = "";
+};

@@ -121,31 +121,34 @@ app.post('/Experiences', function(req, res){
 
 // Allow for a user to add a new experience
 app.post('/landingPage/add', (req, res) => {
-  let sampleImage;
-  let uploadPath;
+    console.log("POOP")
+    let sampleImage;
+    let uploadPath;
 
-  if (!req.files || Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
-  }
+    if(!req.files || Object.keys(req.files).length === 0) {
+        return res.status(400).send('No files were uploaded.');
+    }
 
-  sampleImage = req.files.sampleImage;
-  uploadPath = __dirname + '/public/upload/' + sampleImage.name;
-  console.log(sampleImage);
+    sampleImage = req.files.sampleImage;
+    uploadPath = __dirname + '/public/upload/' + sampleImage.name;
+    console.log(sampleImage);
 
-  // use mv() to place file on server
-  sampleImage.mv(uploadPath, function(err) {
-    if (err) return res.status(500).send(err);
+    // use mv() to place file on server
+    sampleImage.mv(uploadPath, function(err) {
+        if(err) return res.status(500).send(err);
+
+    //res.send('File Uploaded!');
 
     let insertQuery = "INSERT INTO Experiences (experienceTitle, description, location, image, note) VALUES (?,?,?,?,?)"
     let insertData = [req.body.addexpTitle, req.body.adddesc, req.body.addloc, sampleImage.name, req.body.addnote]
     db.pool.query(insertQuery, insertData, function(error, rows, fields) {
-      if (error) {
-        res.write(JSON.stringify(error));
-        res.end();
-      } else {
-        res.status(201).json({ message: "Experience added successfully" });
-      }
-    });
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            res.render('landingPage')
+        }
+      });
   });
 });
 

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../styles/styles.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script type="text/javascript" src="../js/scripts.js" defer></script>       <!defer will allow scripts to load in background while HTML loads first>
+    <script type="text/javascript" src="../js/scripts.js"></script>
   </head>
   <body>
     <div class="d-flex h-100">
@@ -32,7 +32,7 @@
                   <div class="box">
                     <form action="/landingPage/add" method="POST" enctype="multipart/form-data" id=addExpForm>
                       <div class="row mb-3"><label for="expereinceTitle" class="col-sm-2 col-form-label">Title of Experience *</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" id="expereinceTitle" name="addExpTitle"></div>
+                        <div class="col-sm-10"><input type="text" class="form-control" id="expereinceTitle" name="addexpTitle"></div>
                       </div>
                       <div class="row mb-3"><label for="description" class="col-sm-2 col-form-label">Description of Experience *</label>
                         <div class="col-sm-10"><input type="text" class="form-control" id="description" name="adddesc"></div>
@@ -113,7 +113,15 @@
     </div>
     <!end right colum div>
       <script>
-        // moved the window on load to the script.js file find it at the top
+        //page load logic to hide all the divs
+        window.onload = function() {
+          console.log("window loaded...")
+          document.getElementById('reset-form').style.display = 'none'; //form for the reset form
+          document.getElementById('reset-form2').style.display = 'none'; //form for the addExperience
+          document.getElementById('reset-form3').style.display = 'none'; //form for search experience
+          document.getElementById('reset-form4').style.display = 'none'; //form for the trips
+          document.getElementById('reset-form5').style.display = "block";
+        }
         //this section of JS will set const variables to the buttons so we know when they are active states
         //trips
         const navigationIndexBtn = document.querySelector(".index-button");
@@ -131,35 +139,23 @@
         const resetForm3 = document.getElementById("reset-form3");
         const resetForm4 = document.getElementById("reset-form4");
         const resetForm5 = document.getElementById("reset-form5");
-
         //const for form push.state to submit addEXP form (this changes the URL without loading a new HTML page)
         const addExpForm = document.getElementById('addExpForm');
-        addExpForm.addEventListener("submit", function(event)
-        {
+        const submitButton = addExpForm.querySelector('button[type="submit"]');
+        submitButton.addEventListener('click', (event) => {
           event.preventDefault();
-
-          //make new FormData and add the form information to pass to DB
           const formData = new FormData(addExpForm);
-
-          //create a POST request to call /landingPage/add from app.js
-          fetch("/landingPage/add", {
-            method: "POST",
-            body: formData,
-          })
-
-        .then(response => response.text())
-        .then(html => {
-          //reload our page with the content return from our mysql db
-          const landingPageContent = document.getElementById("landingPageContent");
-          landingPageContent.innerHTML = html;
-
-          //update our URL using push.state without needing to reload
-          const addExpUrl = "/landingPage/add";
-          history.pushState(null, null, addExpUrl);
-          })
-        .catch(error => console.error(error));
+          // Use push.state to send the form data to the server
+          window.history.pushState(null, null, '/landingPage/add');
+          fetch('/landingPage/add', {
+            method: 'POST',
+            body: formData
+          }).then(response => {
+            // Handle the server response
+          }).catch(error => {
+            console.error('Error:', error);
+          });
         });
-
         //this section is my event Listeners. They hide and unhide specific divs depending on button clicks by user
         //trips
         navigationIndexBtn.addEventListener("click", function() {
@@ -200,7 +196,7 @@
         });
         //Logout
         navigationLogoutBtn.addEventListener("click", function() {
-          sessionStorage.clear();                                               //check if this is working
+          sessionStorage.clear();                                               
           window.location.href = "/";
         });
       </script>
