@@ -52,30 +52,6 @@ app.get('/forgotpw', function(req,res){
   res.render('forgotpw');
 });
 
-// Will render the addExperience page
-app.get('/addExperience', function(req,res){
-    res.render('addExperience');
-});
-
-// Will render the resetPassword page
-app.get('/resetPassword', function(req,res){
-    res.render('resetPassword');
-});
-
-app.get('/Trips', function(req,res){
-    res.render('Trips');
-});
-
-app.get('/Search', function(req,res){
-    res.render('Search');
-});
-
-app.get('/Logout', function(req, res)
-  {
-    //now we push back to our index home
-    res.render('index', { title: 'express', session : req.session});
-  });
-
 // Will display all experiences saved to the database and display the rounded average of the rating for each
 app.get('/searchExperience', (req, res) => {
     let tableQuery;

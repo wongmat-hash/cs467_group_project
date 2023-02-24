@@ -23,98 +23,98 @@
             </form>
           </div>
           <!This displays the logo for the landing page>
-          <div id="reset-form5" class="reset-form5"><img src="../images/logo.png" alt="logo"></div>
-          <!END FORM 1 RESET PW>
-          <!THIS DISPLAYS WHEN THE USER ADDS AN EXPERIENCE>
-            <div id="experienceAdded">
-              <div class="box">
-                <h1 class="text-container">Experience Added</h1>
-              </div>
-            </div>
-            <!FORM 2 BEGIN THIS IS FOR ADD NEW EXP>
-              <div id="reset-form2" class="reset-form2">
-                <div id="add-exp" class="add-exp">
-                  <h5>Add New Experience</h5>
-                  <p>* = required field</p>
+            <div id="reset-form5" class="reset-form5"><img src="../images/logo.png" alt="logo"></div>
+            <!END FORM 1 RESET PW>
+              <!THIS DISPLAYS WHEN THE USER ADDS AN EXPERIENCE>
+                <div id="experienceAdded">
                   <div class="box">
-                    <form action="/landingPage/add" method="POST" enctype="multipart/form-data" id=addExpForm>
-                      <div class="row mb-3"><label for="expereinceTitle" class="col-sm-2 col-form-label">Title of Experience *</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" id="expereinceTitle" name="addexpTitle"></div>
-                      </div>
-                      <div class="row mb-3"><label for="description" class="col-sm-2 col-form-label">Description of Experience *</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" id="description" name="adddesc"></div>
-                      </div>
-                      <div class="row mb-3"><label for="location" class="col-sm-2 col-form-label">Enter Location of Experience *</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" id="location" name="addloc"></div>
-                      </div>
-                      <div class="row mb-3"><label for="image" class="col-sm-2 col-form-label">Share Photo of Experience *</label>
-                        <div class="col-sm-10"><input type="file" class="form-control" name="sampleImage" accept="image/*" /></div>
-                      </div>
-                      <div class="row mb-3"><label for="note" class="col-sm-2 col-form-label">Enter Additional Information *</label>
-                        <div class="col-sm-10"><input type="text" class="form-control" id="note" name="addnote"></div>
-                      </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
-                    </form>
+                    <h1 class="text-container">Experience Added</h1>
                   </div>
                 </div>
-              </div>
-              <!END FORM 2 ADD NEW EXP>
-                <!FORM 4 BEGIN THIS IS TRIPS>
-                  <div id="reset-form4" class="reset-form4">
-                    <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
-                      <div class="row m-2">
-                        <div class="col-lg-6"><img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto></div>
-                        <main class="m-2">
-                          <h1 class="col-lg-8 mx-auto p-4 py-md-5">Your Trips</h1>
-                          <div class="py-5 bg-light">
-                            <div class="container">
-                              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                                <div class="col">
-                                  {{> emptyTripCard }}
-                                </div>
-                                {{#each data}}
-                                  <div class="col">
-                                    {{> tripCard trip=this}}
-                                  </div>
-                                {{/each}}
-                              </div>
-                            </div>
+                <!FORM 2 BEGIN THIS IS FOR ADD NEW EXP>
+                  <div id="reset-form2" class="reset-form2">
+                    <div id="add-exp" class="add-exp">
+                      <h5>Add New Experience</h5>
+                      <p>* = required field</p>
+                      <div class="box">
+                        <form action="/landingPage/add" method="POST" enctype="multipart/form-data" id=addExpForm>
+                          <div class="row mb-3"><label for="expereinceTitle" class="col-sm-2 col-form-label">Title of Experience *</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" id="expereinceTitle" name="addexpTitle"></div>
                           </div>
-                        </main>
+                          <div class="row mb-3"><label for="description" class="col-sm-2 col-form-label">Description of Experience *</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" id="description" name="adddesc"></div>
+                          </div>
+                          <div class="row mb-3"><label for="location" class="col-sm-2 col-form-label">Enter Location of Experience *</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" id="location" name="addloc"></div>
+                          </div>
+                          <div class="row mb-3"><label for="image" class="col-sm-2 col-form-label">Share Photo of Experience *</label>
+                            <div class="col-sm-10"><input type="file" class="form-control" name="sampleImage" accept="image/*" /></div>
+                          </div>
+                          <div class="row mb-3"><label for="note" class="col-sm-2 col-form-label">Enter Additional Information *</label>
+                            <div class="col-sm-10"><input type="text" class="form-control" id="note" name="addnote"></div>
+                          </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
+                        </form>
                       </div>
                     </div>
                   </div>
-                  <!END FORM 4 TRIPS>
-                    <!FORM 3 BEGIN THIS IS FOR SEARCH EXP>
-                      <div id="reset-form3" class="reset-form3">
-                        {{> searchNavbar}}
-                        <div class="d-flex justify-content-evenly h-35">
-                          {{#each Experiences}}
-                            <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
-                              <div id="search-exp" class="search-exp">
-                                <div class="row m-2">
-                                  <div class="col-lg-6"><img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto></div>
-                                  <div class="col-lg-6 p-3 experienceDetails">
-                                    <p>Experience Title: {{this.experienceTitle}}</p>
-                                    <p>Description: {{this.description}}</p>
-                                    <p>Location: {{this.location}}</p>
-                                    <p>Keywords: {{this.note}}</p>
-                                    <p>Overall Rating {{this.ratingValue}}</p>
-                                    <form action="/searchExperience" method="POST" encType="multipart/form-data">
-                                      <div class="row mb-3"><label for="ratingValue" class="col-lg-6 col-form-label">Rate This Experience</label>
-                                        <div class="col-lg-6 col-sm-offset-8"><input type="text" class="form-control" id="ratingValue" name="addRatingValue"><input type="hidden" name="experienceID" value={{this.experienceID}} id="experienceID"></div>
-                                      </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
-                                    </form>
+                  <!END FORM 2 ADD NEW EXP>
+                    <!FORM 4 BEGIN THIS IS TRIPS>
+                      <div id="reset-form4" class="reset-form4">
+                        <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
+                          <div class="row m-2">
+                            <div class="col-lg-6"><img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto></div>
+                            <main class="m-2">
+                              <h1 class="col-lg-8 mx-auto p-4 py-md-5">Your Trips</h1>
+                              <div class="py-5 bg-light">
+                                <div class="container">
+                                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                                    <div class="col">
+                                      {{> emptyTripCard }}
+                                    </div>
+                                    {{#each data}}
+                                      <div class="col">
+                                        {{> tripCard trip=this}}
+                                      </div>
+                                    {{/each}}
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            </main>
+                          </div>
                         </div>
-                        <div class="row">
-                          <p class="col-md-7 mx-auto experienceDetails p-5 m-3">{{this.description}}</p>
-                        </div>
-                        {{/each}}
                       </div>
-                      <!END FORM 3 SEARCH EXP>
+                      <!END FORM 4 TRIPS>
+                        <!FORM 3 BEGIN THIS IS FOR SEARCH EXP>
+                          <div id="reset-form3" class="reset-form3">
+                            {{> searchNavbar}}
+                            <div class="d-flex justify-content-evenly h-35">
+                              {{#each Experiences}}
+                                <div class="mt-5 d-flex align-items-center justify-content-between vstack gap-3">
+                                  <div id="search-exp" class="search-exp">
+                                    <div class="row m-2">
+                                      <div class="col-lg-6"><img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto></div>
+                                      <div class="col-lg-6 p-3 experienceDetails">
+                                        <p>Experience Title: {{this.experienceTitle}}</p>
+                                        <p>Description: {{this.description}}</p>
+                                        <p>Location: {{this.location}}</p>
+                                        <p>Keywords: {{this.note}}</p>
+                                        <p>Overall Rating {{this.ratingValue}}</p>
+                                        <form action="/searchExperience" method="POST" encType="multipart/form-data">
+                                          <div class="row mb-3"><label for="ratingValue" class="col-lg-6 col-form-label">Rate This Experience</label>
+                                            <div class="col-lg-6 col-sm-offset-8"><input type="text" class="form-control" id="ratingValue" name="addRatingValue"><input type="hidden" name="experienceID" value={{this.experienceID}} id="experienceID"></div>
+                                          </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                              <p class="col-md-7 mx-auto experienceDetails p-5 m-3">{{this.description}}</p>
+                            </div>
+                            {{/each}}
+                          </div>
+                          <!END FORM 3 SEARCH EXP>
       </div>
       <!ends the div w-75 above>
     </div>
@@ -159,10 +159,7 @@
           fetch('/landingPage/add', {
             method: 'POST',
             body: formData
-          })
-          .then(response => response.text())
-          .then(html => {
-
+          }).then(response => response.text()).then(html => {
             console.log("I am now in the push.state function")
             document.getElementById("reset-form2").style.display = "none"; //hide our form
             document.getElementById("experienceAdded").style.display = "block"; //show our success message
@@ -172,9 +169,8 @@
             history.pushState(null, null, addExpUrl);
           }).catch(error => console.error(error));
           //console.log("right before the push back to regular url")
-          window.history.pushState(null, null, '/landingPage');                 //redirects the user
+          window.history.pushState(null, null, '/landingPage'); //redirects the user
         });
-
         //this section is my event Listeners. They hide and unhide specific divs depending on button clicks by user
         //trips
         navigationIndexBtn.addEventListener("click", function() {
