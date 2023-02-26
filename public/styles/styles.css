@@ -33,6 +33,12 @@
   margin: 0 auto;
 }
 
+.reset-form3 {
+  position: absolute;
+  top: 0;
+  margin: 0 auto;
+}
+
 .resetFlex {
   display: flex;
   justify-content: center;
