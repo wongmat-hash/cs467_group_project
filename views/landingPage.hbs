@@ -23,12 +23,12 @@
             </form>
           </div>
           <!This displays the logo for the landing page>
-            <div class = "resetFlex h-100">
-            <div id="reset-form5" class="reset-form5"><img src="../images/logo.png" alt="logo"></div>
+            <div class="resetFlex h-100">
+              <div id="reset-form5" class="reset-form5"><img src="../images/logo.png" alt="logo"></div>
             </div>
             <!END FORM 1 RESET PW>
               <!THIS DISPLAYS WHEN THE USER ADDS AN EXPERIENCE>
-                <div id="experienceAdded">
+                <div id="experienceAdded" style="position: absolute; top: 20;">
                   <div class="box">
                     <h2 class="text-container">Experience Added</h2>
                   </div>
@@ -96,12 +96,12 @@
                                     <div class="row m-2">
                                       <div class="col-lg-6"><img class="experienceImage" src='upload/{{this.image}}' width="200" height:auto></div>
                                       <div class="col-lg-6 p-3 experienceDetails">
-                                        <p>Experience Title: {{this.experienceTitle}}</p>
-                                        <p>Description: {{this.description}}</p>
-                                        <p>Location: {{this.location}}</p>
-                                        <p>Keywords: {{this.note}}</p>
-                                        <p>Overall Rating {{this.ratingValue}}</p>
-                                        <form action="/searchExperience" method="POST" encType="multipart/form-data">
+                                          <p>Experience Title: {{this.experienceTitle}}</p>
+                                          <p>Description: {{this.description}}</p>
+                                          <p>Location: {{this.location}}</p>
+                                          <p>Keywords: {{this.note}}</p>
+                                          <p>Overall Rating {{this.ratingValue}}</p>
+                                        <form action="/searchExperience" method="POST" encType="multipart/form-data" id = searchForm>
                                           <div class="row mb-3"><label for="ratingValue" class="col-lg-6 col-form-label">Rate This Experience</label>
                                             <div class="col-lg-6 col-sm-offset-8"><input type="text" class="form-control" id="ratingValue" name="addRatingValue"><input type="hidden" name="experienceID" value={{this.experienceID}} id="experienceID"></div>
                                           </div><button type="submit" id="submit" class="btn btn-success">Submit</button>
@@ -110,11 +110,11 @@
                                     </div>
                                   </div>
                                 </div>
+                              <div class="row">
+                                {{/each}}
+                                <p class="col-md-7 mx-auto experienceDetails p-5 m-3">{{this.description}}</p>
+                              </div>
                             </div>
-                            <div class="row">
-                              <p class="col-md-7 mx-auto experienceDetails p-5 m-3">{{this.description}}</p>
-                            </div>
-                            {{/each}}
                           </div>
                           <!END FORM 3 SEARCH EXP>
       </div>
@@ -150,6 +150,19 @@
         const resetForm4 = document.getElementById("reset-form4");
         const resetForm5 = document.getElementById("reset-form5");
         const expAdded = document.getElementById("experienceAdded");
+
+
+
+
+
+
+
+
+
+
+
+
+
         //const for form push.state to submit addEXP form (this changes the URL without loading a new HTML page)
         // work cited: https://medium.com/@nagachaitanyakonada/javascript-window-history-pushstate-tutorial-56e2126eaff1
         // work cited: https://stackoverflow.com/questions/60435350/is-there-a-particular-behavior-with-fetch-and-pushstate
@@ -163,9 +176,7 @@
           fetch('/landingPage/add', {
             method: 'POST',
             body: formData
-          })
-          .then(response => response.text())
-          .then(html => {
+          }).then(response => response.text()).then(html => {
             console.log("I am now in the push.state function")
             document.getElementById("reset-form2").style.display = "none"; //hide our form
             document.getElementById("experienceAdded").style.display = "block"; //show our success message
@@ -234,6 +245,23 @@
           //sessionStorage.clear();
           //window.location.href = "/";
         });
+
+        const searchReq = document.getElementById('searchForm');
+        const searchSubmit = searchReq.querySelector('button[type = "submit"]');
+        searchSubmit.addEventListener('click', (event) => {
+          event.preventDefault();
+          window.history.pushState(null, null, '/searchExperience');
+
+          const passData = new PassData(searchReq);
+          fetch('/searchExperience', {
+            method: 'GET',
+            body: passData
+          }).then(response => response.text()).then(html => {
+            const searchURL = '/searchExperience'
+            history.pushState(null, null, searchURL);
+          }).catch(error => console.error(error));
+        });
+
       </script>
       </div>
       <div class="container mt-5">

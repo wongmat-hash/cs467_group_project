@@ -36,6 +36,10 @@ $(document).ready(function() {
         $(this).addClass('active');
         // redirect to logout
     });
+
+    $('#search-form').on('submit', function(event) {
+      event.preventDefault();
+    });
 });
 
 // this function is used by our index.hbs to log the user in

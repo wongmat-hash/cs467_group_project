@@ -257,7 +257,7 @@ app.get('/Trips', function(req, res) {
         }
     })
 })
-//logout route 
+//logout route
 app.post('/logout', function(req, res) {
   console.log('in logout function')
   req.session.destroy(function(err) {
