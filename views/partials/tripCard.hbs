@@ -4,7 +4,7 @@
             <i class="bi bi-geo-alt"></i>
         </div>
         <h5 class="card-title d-flex justify-content-center" data-id="{{trip.tripID}}">{{trip.tripTitle}}</h5>
-        <button type="button" onclick='loadExperiences({{trip.tripID}})' class="btn btn-primary" id="edit-trip-button" data-bs-toggle="modal" data-bs-target="#editTripModal" data-bs-whatever="editTrip">Edit</button>
+        <button type="button" onclick='loadExperiences({{trip.tripID}}); this.onclick=null;' class="btn btn-primary" id="edit-trip-button" data-bs-toggle="modal" data-bs-target="#editTripModal" data-bs-whatever="editTrip">Edit</button>
         {{> editTripModal }}
         <button class='btn btn-danger' onclick='deleteTrip({{trip.tripID}})'>Delete</button>
     </div>

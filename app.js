@@ -310,28 +310,37 @@ app.put('/Trips', function (req, res) {
     })
 })
 
-app.post('/TripExperiences', function (req, res){
-    let data = req.body
-    console.log(data)
-    const tripID = parseInt(data["tripID"])
+app.post('/TripExperiences', function (req, res) {
+  let data = req.body
+  const tripID = parseInt(data['tripID'])
 
-    let getExperienceQuery = `
+  let getExperienceQuery = `
     SELECT * FROM TripExperiences
     WHERE TripExperiences.tripID = "${tripID}";`
-    console.log(tripID)
-    console.log(getExperienceQuery)
-    db.pool.query(getExperienceQuery, function (error, rows) {
-        let tripExpResults = rows
-        if (error) {
-            console.log(error)
-            res.sendStatus(400)
-        } else {
-            console.log(tripExpResults)
-            console.log('hello')
-        }
-    })
-
+  db.pool.query(getExperienceQuery, function (error, rows) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400)
+    } else {
+      res.status(200).send(rows)
+    }
+  })
 })
+
+app.delete('/TripsExperience', function (req, res) {
+  let data = req.body
+  let experienceID = parseInt(data['experienceID'])
+  let deleteQuery = `DELETE FROM TripExperiences WHERE TripExperiences.experienceID = ${experienceID};`
+  db.pool.query(deleteQuery, function (error) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400)
+    } else {
+      res.sendStatus(204)
+    }
+  })
+})
+
 app.listen(port, () => console.log(`App listening to port ${port}`));
 
 module.exports = app;
