@@ -327,7 +327,7 @@ app.post('/TripExperiences', function (req, res) {
   })
 })
 
-app.delete('/TripsExperience', function (req, res) {
+app.delete('/TripExperiences', function (req, res) {
   let data = req.body
   let experienceID = parseInt(data['experienceID'])
   let deleteQuery = `DELETE FROM TripExperiences WHERE TripExperiences.experienceID = ${experienceID};`

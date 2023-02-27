@@ -4,7 +4,7 @@ function deleteTripExperience(deleteID) {
     experienceID: deleteID,
   }
   let xhttp = new XMLHttpRequest()
-  xhttp.open('DELETE', '/TripsExperience', true)
+  xhttp.open('DELETE', '/TripExperiences', true)
   xhttp.setRequestHeader('Content-type', 'application/json')
   xhttp.onreadystatechange = () => {
     if (xhttp.readyState == 4 && xhttp.status == 204) {
