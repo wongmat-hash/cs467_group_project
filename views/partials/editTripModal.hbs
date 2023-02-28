@@ -4,7 +4,7 @@
             <form id="edit-trip-form">
                 <div class="modal-header">
                     <h5 class="modal-title">Editing {{trip.tripTitle}}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" onclick="$('#editTripModal').modal('hide');" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="editTripID" value="{{trip.tripID}}" />

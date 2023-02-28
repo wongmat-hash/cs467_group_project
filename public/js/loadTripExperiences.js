@@ -29,7 +29,7 @@ function updateExperiences(experiences) {
     listItemDelete.className = 'btn btn-danger float-end'
     listItemDelete.onclick = function (event) {
       event.preventDefault()
-      deleteTripExperience(parsedData[experience].experienceID, { once: true })
+      deleteTripExperience(parsedData[experience].experienceID)
     }
     expListItem.appendChild(listItemDelete)
     experienceList.appendChild(expListItem)
