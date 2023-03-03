@@ -61,6 +61,7 @@ app.get('/forgotpw', function(req, res) {
     res.render('forgotpw');
 });
 
+
 // Will display all experiences saved to the database and display the rounded average of the rating for each
 app.get('/searchExperience', (req, res) => {
     let tableQuery;
@@ -71,26 +72,28 @@ app.get('/searchExperience', (req, res) => {
             res.end();
         } else {
             //res.render('main', {layout : 'index'});
-            res.render('searchExperience', {
-                Experiences: rows
+            //res.render('/searchExperience', { Experiences: experiences
+            res(json(rows));
             });
         }
     })
 });
 
+
 // Allow a user to add a rating to an already existing experience
-app.post('/searchExperience', function(req, res) {
-    let insertQuery = "INSERT INTO Rating (ratingValue, experienceID) VALUES (?,?)";
-    let updateData = [req.body.addRatingValue, req.body.experienceID]
-    db.pool.query(insertQuery, updateData, function(error, rows, fiedls) {
-        if (error) {
-            res.write(JSON.stringify(error));
-            res.end();
-        } else {
-            res.redirect('/searchExperience')
-        }
-    })
+app.post('/searchExperience', function(req, res){
+  let insertQuery = "INSERT INTO Rating (ratingValue, experienceID) VALUES (?,?)";
+  let updateData = [req.body.addRatingValue, req.body.experienceID]
+  db.pool.query(insertQuery, updateData, function(error, rows, fiedls){
+      if(error) {
+          res.write(JSON.stringify(error));
+          res.end();
+      } else {
+          res.redirect('/searchExperience')
+      }
+  })
 });
+
 
 // I DONT THINK WE NEED THIS ANYMORE
 app.post('/Experiences', function(req, res) {
