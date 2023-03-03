@@ -1,0 +1,19 @@
+<!-- This partial renders in the TripExperiences page where available experiences in the db can be added to the
+    selected trip. -->
+<h3>Add experiences</h3>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <b>Experience name</b>
+        </thead>
+        <tbody>
+            {{#each expData}}
+            <tr>
+                <td>{{jsonHelper this.experienceTitle}}</td>
+                <td><button type="submit" class="btn btn-primary">Add</button></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

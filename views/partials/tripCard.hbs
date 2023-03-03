@@ -1,11 +1,15 @@
-<div class="card mb-4 rounded-3 shadow-sm mx-1">
-    <div class="card-body">
-        <div class="d-flex justify-content-center fs-1">
-            <i class="bi bi-geo-alt"></i>
-        </div>
-        <h5 class="card-title d-flex justify-content-center" data-id="{{trip.tripID}}">{{trip.tripTitle}}</h5>
-        <button type="button" onclick='loadExperiences({{trip.tripID}}); this.onclick=null;' class="btn btn-primary" id="edit-trip-button" data-bs-toggle="modal" data-bs-target="#editTripModal" data-bs-whatever="editTrip">Edit</button>
-        {{> editTripModal }}
-        <button class='btn btn-danger' onclick='deleteTrip({{trip.tripID}})'>Delete</button>
+<article class="card m-4 rounded-3 shadow-sm">
+    <div class="m-3 d-flex justify-content-center fs-1">
+        <i class="bi bi-geo-alt"></i>
     </div>
-</div>
+    <h4 class="card-title d-flex justify-content-center m-3">
+        {{trip.tripTitle}}
+    </h4>
+    <div class="d-flex align-items-center justify-content-center my-1">
+        <a class="btn btn-primary m-1" id="edit-trip-button" href="/Trips/{{trip.tripID}}/edit/{{trip.tripTitle}}">View
+            &
+            Edit</a>
+        <button class="btn btn-danger m-1" data-trip-id="{{trip.tripID}}"
+            onclick="deleteTrip({{trip.tripID}});">Delete</button>
+    </div>
+</article>

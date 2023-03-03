@@ -4,32 +4,31 @@
 <head>
   <title>{{pageTitle}}</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="../css/styles.css">
-  <link rel="stylesheet" type="text/css" href="../css/landing.css">
+  <link rel="stylesheet" type="text/css" href="css/trips.css">
+  <link rel="stylesheet" type="text/css" href="css/landing.css">
+  <link rel="stylesheet" type="text/css" href="../styles.css">
 </head>
 
 <body>
-  <div class="d-flex h-35">
     {{> nav}}
-    <main>
-      <h1 class="col-lg-8 mx-auto p-4 py-md-5">Your Trips</h1>
-      <div class="py-5 bg-light">
-          <div class="row">
-            <div class="col">
-              {{> emptyTripCard }}
-            </div>
-            {{#each data}}
-              <div class="col">
-                {{> tripCard trip=this}}
-              </div>
-            {{/each}}
+    <div class="container d-flex flex-column col-lg-6">
+      <h1 class="mx-auto p-4 py-md-5 col">Your Trips</h1>
+      <div class="row">
+        <div class="row py-5">
+          <div class="col">
+            {{> emptyTripCard }}
           </div>
+          {{#each data}}
+          <div class="col">
+            {{> tripCard trip=this}}
+          </div>
+          {{/each}}
         </div>
-    </main>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script type="text/javascript" src="js/EditTrips.js"></script>
-  <script type="text/javascript" src="js/scripts.js"></script>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/js/EditTrips.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
 </body>
 
 </html>

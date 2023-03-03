@@ -1,0 +1,12 @@
+<!-- This partial renders in the TripExperiences page where it displays the edit trip name form. -->
+
+<form data-form-id="editTripForm">
+    <input type="hidden" data-trip-id="tripID" value="{{trip.tripID}}" />
+    <div class="mb-3">
+        <label for="editTripName" class="col-form-label">Edit trip name</label>
+        <input type="text" class="form-control" data-id="editTripName" name="editTripName" value="{{tripName}}" />
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Edit trip</button>
+    </div>
+</form>

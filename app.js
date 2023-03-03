@@ -28,7 +28,8 @@ app.use(fileupload());
 
 //Sets handlebars configurations (we will go through them later on)
 app.engine('hbs', exphbs.engine({
-    extname: ".hbs"
+    extname: ".hbs",
+    helpers: require(__dirname + '/public/js/helpers.js'),
 }));
 //Sets our app to use the handlebars engine
 app.set('view engine', 'hbs');
@@ -261,22 +262,59 @@ app.get('/Trips', function (req, res) {
     })
 })
 
-app.post('/Trips', function (req, res) {
-    let data = req.body
-    const addUserName = String(data["userName"]).trim()
-    const addTripName = String(data["tripName"]).trim()
-
-    let insertTripQuery = "INSERT INTO Trips (tripTitle, userName) VALUES (?,?);"
-    let insertTripData = [addTripName, addUserName]
-
-    db.pool.query(insertTripQuery, insertTripData, function (error) {
+app.get('/Trips/:id/edit/:trip', function (req, res) {
+  // get the trip info first
+  let getSingleTripExpsQuery = `
+        SELECT * FROM TripExperiences
+        WHERE TripExperiences.tripID = "${req.params.id}";`
+  console.log(req.params)
+  db.pool.query(getSingleTripExpsQuery, function (error, rows) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400)
+    } else {
+      let tripInformation = rows
+      let getAllExperiences = `SELECT 
+        experienceID,
+        experienceTitle
+        FROM Experiences;`
+      db.pool.query(getAllExperiences, function (error, rows) {
+        // now get all experiences
+        let experiences = rows
         if (error) {
-            console.log(error)
-            res.sendStatus(400)
+          console.log(error)
+          res.sendStatus(400)
         } else {
-            res.redirect('/Trips')
+            console.log(tripInformation, experiences)
+          res.render('TripExperiences.hbs', {
+            pageTitle: `Updating ${req.params.trip}`,
+            tripData: tripInformation,
+            expData: experiences,
+            tripName: req.params.trip,
+          })
         }
-    })
+      })
+    }
+  })
+})
+
+app.post('/Trips', function (req, res) {
+  let data = req.body
+  const addUserName = String(data['userName']).trim()
+  const addTripName = String(data['tripName']).trim()
+  console.log(addUserName)
+  let insertTripQuery = 'INSERT INTO Trips (tripTitle, userName) VALUES (?,?);'
+  console.log(insertTripQuery)
+  let insertTripData = [addTripName, addUserName]
+
+  db.pool.query(insertTripQuery, insertTripData, function (error) {
+    if (error) {
+      console.log(error)
+      res.sendStatus(400)
+    } else {
+      res.redirect('/Trips')
+    }
+  })
 })
 
 app.delete('/Trips', function (req, res) {
@@ -310,22 +348,6 @@ app.put('/Trips', function (req, res) {
     })
 })
 
-app.post('/TripExperiences', function (req, res) {
-  let data = req.body
-  const tripID = parseInt(data['tripID'])
-
-  let getExperienceQuery = `
-    SELECT * FROM TripExperiences
-    WHERE TripExperiences.tripID = "${tripID}";`
-  db.pool.query(getExperienceQuery, function (error, rows) {
-    if (error) {
-      console.log(error)
-      res.sendStatus(400)
-    } else {
-      res.status(200).send(rows)
-    }
-  })
-})
 
 app.delete('/TripExperiences', function (req, res) {
   let data = req.body

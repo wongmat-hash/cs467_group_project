@@ -1,11 +1,5 @@
-body {
-  overflow-x: hidden;
-  width: 100vw;
-}
-
 html {
-  --color-gray-100: rgb(207, 201, 195);
-  --color-yellow-500: #ffd700;
+  overflow-x: hidden;
 }
 
 .bg-travel-yellow {
@@ -23,4 +17,9 @@ html {
 
 .card.emptyCard {
   border-style: dashed;
+}
+
+.card {
+  min-height: 14rem !important;
+  min-width: 18rem !important;
 }
