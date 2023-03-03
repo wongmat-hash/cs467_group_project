@@ -15,10 +15,10 @@
         {{> tripInformation }}
         <div data-id="expRows" class="row">
             <div data-id="tripExps" class="col">
-                {{> tripExperiences }}
+                {{> tripExperiences tripID=tripID tripName=tripName }}
             </div>
             <div data-id="availExps" class="col">
-                {{> availableExperiences }}
+                {{> availableExperiences tripID=tripID tripName=tripName}}
             </div>
         </div>
     </div>

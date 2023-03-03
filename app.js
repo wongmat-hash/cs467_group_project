@@ -266,9 +266,8 @@ app.post('/Trips', function (req, res) {
     let data = req.body
     const addUserName = String(data['userName']).trim()
     const addTripName = String(data['tripName']).trim()
-    console.log(addUserName)
+
     let insertTripQuery = 'INSERT INTO Trips (tripTitle, userName) VALUES (?,?);'
-    console.log(insertTripQuery)
     let insertTripData = [addTripName, addUserName]
   
     db.pool.query(insertTripQuery, insertTripData, function (error) {
@@ -279,7 +278,7 @@ app.post('/Trips', function (req, res) {
         res.redirect('/Trips')
       }
     })
-  })
+})
 
 app.delete('/Trips', function (req, res) {
     let data = req.body
@@ -348,7 +347,6 @@ app.put('/Trips/:id/edit/:trip', function (req, res) {
     })
 })
 
-
 app.post('/Trips/:id/edit/:trip', function (req, res) {
     let data = req.body
     console.log(data)
@@ -357,15 +355,17 @@ app.post('/Trips/:id/edit/:trip', function (req, res) {
     const tripName = String(data["tripName"]).trim()
     const expID = parseInt(data["expID"])
     const expName = String(data["expName"]).trim()
-    let updateTripData = [tripName]
-    let updateTripQuery = `UPDATE Trips SET tripTitle = (?) WHERE Trips.tripID = ${tripID};`
-    db.pool.query(updateTripQuery, [updateTripData], function (error) {
-        if (error) {
-            console.log(error)
-            res.sendStatus(400)
-        } else {
-            res.sendStatus(200)
-        }
+    
+    let insertTripExpData = [tripID, expID, expName, tripName]
+    let insertTripExpQuery = `INSERT INTO TripExperiences (tripID, experienceID, experienceTitle, tripTitle) VALUES (?,?,?,?);`
+    console.log(insertTripExpQuery)
+    db.pool.query(insertTripExpQuery, insertTripExpData, function (error) {
+      if (error) {
+        console.log(error)
+        res.sendStatus(400)
+      } else {
+        res.redirect('/Trips/:id/edit/:trip')
+      }
     })
 })
 
