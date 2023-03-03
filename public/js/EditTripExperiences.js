@@ -1,9 +1,11 @@
 const editTripForm = document.getElementById('editTripForm')
+const tripID = document.getElementById('expTripID').value
+const tripName = document.getElementById('expTripName').value
+
 
 // update trip name
 editTripForm.addEventListener('submit', function () {
-  let editedTripID = document.getElementById('editTripID')
-  editedTripID = editedTripID.value
+  let editedTripID = tripID
   let editedTripName = document.getElementById('editTripName')
   editedTripName = editedTripName.value
   let data = {
@@ -25,15 +27,12 @@ editTripForm.addEventListener('submit', function () {
   xhttp.send(JSON.stringify(data))
 })
 
+// add experience to trip
 function addExperienceToTrip(expID, expName) {
-  let addExpTripID = document.getElementById('addExpTripID')
-  addExpTripID = addExpTripID.value
-
-  let addExpTripName = document.getElementById('addExpTripName')
-  addExpTripName = addExpTripName.value
+  let addExpTripID = tripID
+  let addExpTripName = tripName
 
   let addExpID = expID
-
   let addExpName = expName
 
   let data = {
@@ -53,6 +52,30 @@ function addExperienceToTrip(expID, expName) {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
       window.location = `/Trips/${addExpTripID}/edit/${addExpTripName}`
     } else if (xhttp.readyState == 4 && xhttp.status != 200) {
+      console.log('There was an error with the input.')
+    }
+  }
+  xhttp.send(JSON.stringify(data))
+}
+
+
+// delete trip experience
+function deleteTripExperience(deleteExpID) {
+  console.log(tripID, tripName)
+  let delExpTripID = tripID
+  let delExpTripName = tripName
+  let data = {
+    tripID: delExpTripID,
+    expID: deleteExpID,
+  }
+  console.log(data)
+  let xhttp = new XMLHttpRequest()
+  xhttp.open('DELETE',`/Trips/${delExpTripID}/edit/${delExpTripName}`, true)
+  xhttp.setRequestHeader('Content-type', 'application/json')
+  xhttp.onreadystatechange = () => {
+    if (xhttp.readyState == 4 && xhttp.status == 204) {
+      window.location = `/Trips/${delExpTripID}/edit/${delExpTripName}`
+    } else if (xhttp.readyState == 4 && xhttp.status != 204) {
       console.log('There was an error with the input.')
     }
   }

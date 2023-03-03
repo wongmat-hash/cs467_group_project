@@ -306,9 +306,11 @@ app.get('/Trips/:id/edit/:trip', function (req, res) {
     } else {
       let tripInformation = rows
       let getAllExperiences = `SELECT 
-        experienceID,
-        experienceTitle
-        FROM Experiences;`
+      Experiences.experienceID,
+      Experiences.experienceTitle
+        FROM Experiences
+        LEFT JOIN TripExperiences ON TripExperiences.experienceID = Experiences.experienceID
+        WHERE TripExperiences.experienceID IS NULL;`
       db.pool.query(getAllExperiences, function (error, rows) {
         // now get all experiences
         let experiences = rows
@@ -349,7 +351,7 @@ app.put('/Trips/:id/edit/:trip', function (req, res) {
 
 app.post('/Trips/:id/edit/:trip', function (req, res) {
     let data = req.body
-    console.log(data)
+    //console.log(data)
 
     const tripID = parseInt(data["tripID"])
     const tripName = String(data["tripName"]).trim()
@@ -358,7 +360,7 @@ app.post('/Trips/:id/edit/:trip', function (req, res) {
     
     let insertTripExpData = [tripID, expID, expName, tripName]
     let insertTripExpQuery = `INSERT INTO TripExperiences (tripID, experienceID, experienceTitle, tripTitle) VALUES (?,?,?,?);`
-    console.log(insertTripExpQuery)
+    //console.log(insertTripExpQuery)
     db.pool.query(insertTripExpQuery, insertTripExpData, function (error) {
       if (error) {
         console.log(error)
@@ -366,6 +368,22 @@ app.post('/Trips/:id/edit/:trip', function (req, res) {
       } else {
         res.redirect('/Trips/:id/edit/:trip')
       }
+    })
+})
+
+app.delete('/Trips/:id/edit/:trip', function (req, res) {
+    let data = req.body
+    const tripID = parseInt(data["tripID"])
+    let expID = parseInt(data["expID"])
+    let deleteQuery = `DELETE FROM TripExperiences WHERE TripExperiences.experienceID = ${expID} AND TripExperiences.tripID = ${tripID};`
+    //console.log(deleteQuery)
+    db.pool.query(deleteQuery, function (error) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            res.sendStatus(204)
+        }
     })
 })
 
