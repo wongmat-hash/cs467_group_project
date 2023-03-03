@@ -10,8 +10,12 @@
         <tbody>
             {{#each expData}}
             <tr>
+                <input type="hidden" id="addExpTripID" value="{{tripID}}" />
+                <input type="hidden" id="addExpTripName" value="{{tripName}}" />
+                <input type="hidden" id="addExpID" value="{{jsonHelper this.experienceID}}" />
+                <input type="hidden" id="addExpName" value="{{jsonHelper this.experienceTitle}}" />
                 <td>{{jsonHelper this.experienceTitle}}</td>
-                <td><button type="submit" class="btn btn-primary">Add</button></td>
+                <td><button class="btn btn-primary" onclick="addExperienceToTrip()">Add</button></td>
             </tr>
             {{/each}}
         </tbody>

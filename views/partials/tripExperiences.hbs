@@ -1,27 +1,24 @@
 <!-- This partial renders in the TripExperiences page where it displays any experiences relating to the trip. -->
 
-
 <h3>Current trip experiences</h3>
 
-<div class="table-responsive">
-    <table class="table">
-        <thead>
-            <b>Experience name</b>
-        </thead>
-        <tbody>
-            {{#if tripData}}
-
-            {{#each tripData}}
-            <tr>
-                <td>{{jsonHelper this.experienceTitle}}</td>
-                <td><button type="submit" class="btn btn-primary">Add</button></td>
-            </tr>
-            {{/each}}
-            {{/if}}
-            {{#unless tripData}}
-            <p>No experiences added yet.</p>
-            {{/unless}}
-
-        </tbody>
-    </table>
+<div class='table-responsive'>
+  <table class='table'>
+    <thead>
+      <b>Experience name</b>
+    </thead>
+    <tbody>
+      {{#if tripData}}
+        {{#each tripData}}
+          <tr>
+            <td>{{jsonHelper this.experienceTitle}}</td>
+            <td><button type='submit' class='btn btn-primary'>Add</button></td>
+          </tr>
+        {{/each}}
+      {{/if}}
+      {{#unless tripData}}
+        <p>No experiences added yet.</p>
+      {{/unless}}
+    </tbody>
+  </table>
 </div>

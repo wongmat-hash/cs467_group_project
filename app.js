@@ -262,12 +262,44 @@ app.get('/Trips', function (req, res) {
     })
 })
 
+app.post('/Trips', function (req, res) {
+    let data = req.body
+    const addUserName = String(data['userName']).trim()
+    const addTripName = String(data['tripName']).trim()
+    console.log(addUserName)
+    let insertTripQuery = 'INSERT INTO Trips (tripTitle, userName) VALUES (?,?);'
+    console.log(insertTripQuery)
+    let insertTripData = [addTripName, addUserName]
+  
+    db.pool.query(insertTripQuery, insertTripData, function (error) {
+      if (error) {
+        console.log(error)
+        res.sendStatus(400)
+      } else {
+        res.redirect('/Trips')
+      }
+    })
+  })
+
+app.delete('/Trips', function (req, res) {
+    let data = req.body
+    let tripID = parseInt(data["tripID"])
+    let deleteQuery = `DELETE FROM Trips WHERE Trips.tripID = ${tripID};`
+    db.pool.query(deleteQuery, function (error) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            res.sendStatus(204)
+        }
+    })
+})
+
 app.get('/Trips/:id/edit/:trip', function (req, res) {
   // get the trip info first
   let getSingleTripExpsQuery = `
         SELECT * FROM TripExperiences
         WHERE TripExperiences.tripID = "${req.params.id}";`
-  console.log(req.params)
   db.pool.query(getSingleTripExpsQuery, function (error, rows) {
     if (error) {
       console.log(error)
@@ -285,12 +317,12 @@ app.get('/Trips/:id/edit/:trip', function (req, res) {
           console.log(error)
           res.sendStatus(400)
         } else {
-            console.log(tripInformation, experiences)
           res.render('TripExperiences.hbs', {
             pageTitle: `Updating ${req.params.trip}`,
             tripData: tripInformation,
             expData: experiences,
             tripName: req.params.trip,
+            tripID: req.params.id
           })
         }
       })
@@ -298,41 +330,9 @@ app.get('/Trips/:id/edit/:trip', function (req, res) {
   })
 })
 
-app.post('/Trips', function (req, res) {
-  let data = req.body
-  const addUserName = String(data['userName']).trim()
-  const addTripName = String(data['tripName']).trim()
-  console.log(addUserName)
-  let insertTripQuery = 'INSERT INTO Trips (tripTitle, userName) VALUES (?,?);'
-  console.log(insertTripQuery)
-  let insertTripData = [addTripName, addUserName]
-
-  db.pool.query(insertTripQuery, insertTripData, function (error) {
-    if (error) {
-      console.log(error)
-      res.sendStatus(400)
-    } else {
-      res.redirect('/Trips')
-    }
-  })
-})
-
-app.delete('/Trips', function (req, res) {
+app.put('/Trips/:id/edit/:trip', function (req, res) {
     let data = req.body
-    let tripID = parseInt(data["tripID"])
-    let deleteQuery = `DELETE FROM Trips WHERE Trips.tripID = ${tripID};`
-    db.pool.query(deleteQuery, function (error) {
-        if (error) {
-            console.log(error)
-            res.sendStatus(400)
-        } else {
-            res.sendStatus(204)
-        }
-    })
-})
-
-app.put('/Trips', function (req, res) {
-    let data = req.body
+    console.log(data)
 
     const tripID = parseInt(data["tripID"])
     const tripName = String(data["tripName"]).trim()
@@ -349,18 +349,24 @@ app.put('/Trips', function (req, res) {
 })
 
 
-app.delete('/TripExperiences', function (req, res) {
-  let data = req.body
-  let experienceID = parseInt(data['experienceID'])
-  let deleteQuery = `DELETE FROM TripExperiences WHERE TripExperiences.experienceID = ${experienceID};`
-  db.pool.query(deleteQuery, function (error) {
-    if (error) {
-      console.log(error)
-      res.sendStatus(400)
-    } else {
-      res.sendStatus(204)
-    }
-  })
+app.post('/Trips/:id/edit/:trip', function (req, res) {
+    let data = req.body
+    console.log(data)
+
+    const tripID = parseInt(data["tripID"])
+    const tripName = String(data["tripName"]).trim()
+    const expID = parseInt(data["expID"])
+    const expName = String(data["expName"]).trim()
+    let updateTripData = [tripName]
+    let updateTripQuery = `UPDATE Trips SET tripTitle = (?) WHERE Trips.tripID = ${tripID};`
+    db.pool.query(updateTripQuery, [updateTripData], function (error) {
+        if (error) {
+            console.log(error)
+            res.sendStatus(400)
+        } else {
+            res.sendStatus(200)
+        }
+    })
 })
 
 app.listen(port, () => console.log(`App listening to port ${port}`));
