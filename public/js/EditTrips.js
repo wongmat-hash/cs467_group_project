@@ -1,3 +1,13 @@
+$(document).ready(function() {
+    
+  var dynamic = $('.dynamic');
+  var static = $('.static');
+  
+  static.height(dynamic.height());
+
+});
+
+
 // delete trip from Trips page
 function deleteTrip(deleteID) {
   let data = {

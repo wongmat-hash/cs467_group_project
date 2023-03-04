@@ -2,6 +2,36 @@ const editTripForm = document.getElementById('editTripForm')
 const tripID = document.getElementById('expTripID').value
 const tripName = document.getElementById('expTripName').value
 
+$(document).ready(function () {
+  $('#allExpsTable').DataTable({
+    responsive: true,
+    language: {
+      search: '' /*Empty to remove the label*/,
+    },
+  })
+  $('.dataTables_length').addClass('bs-select')
+  $('.dataTables_filter input').attr("placeholder", "Search...");
+
+})
+
+$(document).ready(function () {
+  $('#tripExpTable').DataTable({
+    responsive: true,
+    language: {
+      search: '' /*Empty to remove the label*/,
+    },
+  })
+  $('.dataTables_length').addClass('bs-select')
+  $('.dataTables_filter input').attr("placeholder", "Search...");
+
+})
+
+$(document).ready(function () {
+  var dynamic = $('.dynamic')
+  var static = $('.static')
+
+  static.height(dynamic.height())
+})
 
 // update trip name
 editTripForm.addEventListener('submit', function () {
@@ -58,7 +88,6 @@ function addExperienceToTrip(expID, expName) {
   xhttp.send(JSON.stringify(data))
 }
 
-
 // delete trip experience
 function deleteTripExperience(deleteExpID) {
   console.log(tripID, tripName)
@@ -70,7 +99,7 @@ function deleteTripExperience(deleteExpID) {
   }
   console.log(data)
   let xhttp = new XMLHttpRequest()
-  xhttp.open('DELETE',`/Trips/${delExpTripID}/edit/${delExpTripName}`, true)
+  xhttp.open('DELETE', `/Trips/${delExpTripID}/edit/${delExpTripName}`, true)
   xhttp.setRequestHeader('Content-type', 'application/json')
   xhttp.onreadystatechange = () => {
     if (xhttp.readyState == 4 && xhttp.status == 204) {

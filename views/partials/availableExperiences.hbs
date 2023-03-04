@@ -3,15 +3,16 @@
 <h3>Add experiences</h3>
 
 <div class='table-responsive'>
-    <table class='table'>
+    <table id="allExpsTable">
         <thead>
-            <b>Experience name</b>
+            <tr>
+                <th>Experience name</th>
+                <th>Action</th>
+            </tr>
         </thead>
         <tbody>
             {{#each expData}}
             <tr>
-                <input type='hidden' name='addExpID' value='{{jsonHelper this.experienceID}}' />
-                <input type='hidden' name='addExpName' value='{{jsonHelper this.experienceTitle}}' />
                 <td>{{jsonHelper this.experienceTitle}}</td>
                 <td class="d-flex justify-content-end"><button id='addExpTripSubmit' class='btn btn-primary'
                         onclick="addExperienceToTrip({{this.experienceID}}, '{{this.experienceTitle}}');">Add</button>
