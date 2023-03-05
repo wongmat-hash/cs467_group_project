@@ -16,16 +16,6 @@
         </div>
       </div>
       <script>
-        //trips
-        const navigationIndexBtn = document.querySelector(".index-button");
-        //add
-        const navigationAddBtn = document.querySelector(".navigationAdd-button");
-        //search
-        const navigationSearchBtn = document.querySelector(".navigationSearch-button");
-        // saved
-        const navigationSavedBtn = document.querySelector(".navigationSaved-button");
-        //reset
-        const navigationResetBtn = document.querySelector(".navigationReset-button");
         //logout
         const navigationLogoutBtn = document.querySelector(".navigationLogout-button");
         const resetForm = document.getElementById("reset-form");
@@ -37,6 +27,7 @@
           // Set up the callback function for when the request completes
           xhr.onload = function() {
             // Redirect the user to the home page
+            sessionStorage.clear();
             window.location.href = '/';
           };
           // Send the request
