@@ -77,7 +77,7 @@ app.get('/Search', function(req,res){
 
 app.get('/expNew', function(req,res){
     let tableQuery;
-    
+
     tableQuery = 'SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
     db.pool.query(tableQuery, function(error, rows, fiedls) {
         if(error) {
@@ -93,7 +93,7 @@ app.get('/expNew', function(req,res){
 // Will display all experiences saved to the database and display the rounded average of the rating for each
 app.get('/searchExperience', (req, res) => {
     let tableQuery;
-    
+
     tableQuery = 'SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
     db.pool.query(tableQuery, function(error, rows, fiedls) {
         if(error) {
@@ -110,7 +110,7 @@ app.get('/searchExperience/search', (req, res) => {
     let tableQuery
     const userInput = req.query.searchExp;
     tableQuery = "SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE (Rating.ratingValue >= 0 or Rating.ratingValue IS NULL) AND (Experiences.note LIKE ? OR Experiences.location LIKE ?) GROUP BY Experiences.experienceID";
-    
+
     db.pool.query(tableQuery, [userInput, userInput], function(error, rows, fiedls){
         if(error) {
             res.write(JSON.stringify(error));
@@ -120,6 +120,18 @@ app.get('/searchExperience/search', (req, res) => {
         }
     })
 });
+
+//logout route
+app.post('/logout', function(req, res) {
+  console.log('in logout function')
+  req.session.destroy(function(err) {
+    if (err) {
+      console.log(err);
+    }
+    res.sendStatus(200);
+  });
+});
+
 
 // Allow a user to add a rating to an already existing experience
 app.post('/searchExperience', function(req, res){
@@ -203,7 +215,7 @@ app.post('/login', (req, res) => {
                 res.send('Please Enter Email Address and Password Details');
                 res.end();
             }
-        }   
+        }
     });
 });
 
@@ -273,10 +285,10 @@ app.get('/Trips', function (req, res) {
     let getTripQuery = `
     SELECT * FROM Trips
     WHERE Trips.userName = "${testUserName}";`
-  
+
     db.pool.query(getTripQuery, function (error, rows) {
       let tripsResults = rows
-  
+
       if (error) {
         res.write(JSON.stringify(error));
         res.end();
@@ -292,15 +304,15 @@ app.get('/Trips', function (req, res) {
       }
     })
   })
-  
+
   app.post('/Trips', function (req, res) {
     let data = req.body
     const addUserName = String(data["userName"]).trim()
     const addTripName = String(data["tripName"]).trim()
-  
+
     let insertTripQuery = "INSERT INTO Trips (tripTitle, userName) VALUES (?,?);"
     let insertTripData = [addTripName, addUserName]
-  
+
     db.pool.query(insertTripQuery, insertTripData, function (error) {
       if (error) {
         res.write(JSON.stringify(error));
@@ -310,7 +322,7 @@ app.get('/Trips', function (req, res) {
       }
     })
   })
-  
+
   app.delete('/Trips', function (req, res) {
     let data = req.body
     let tripID = parseInt(data["tripID"])
