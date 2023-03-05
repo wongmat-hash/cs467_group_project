@@ -24,6 +24,8 @@
         const navigationSavedBtn = document.querySelector(".navigationSaved-button");
         //reset
         const navigationResetBtn = document.querySelector(".navigationReset-button");
+        //logout
+        const navigationLogoutBtn = document.querySelector(".navigationLogout-button");
         const resetForm = document.getElementById("reset-form");
         //trips
         navigationIndexBtn.addEventListener("click", function() {
@@ -44,6 +46,21 @@
         //reset
         navigationResetBtn.addEventListener("click", function() {
           resetForm.style.display = "block";
+        });
+        //Logout
+        navigationLogoutBtn.addEventListener("click", function() {
+          const xhr = new XMLHttpRequest();
+          // Set up the request
+          xhr.open('POST', '/logout');
+          // Set up the callback function for when the request completes
+          xhr.onload = function() {
+            // Redirect the user to the home page
+            window.location.href = '/';
+          };
+          // Send the request
+          xhr.send();
+          //sessionStorage.clear();
+          //window.location.href = "/";
         });
       </script>
 
