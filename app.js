@@ -334,7 +334,6 @@ app.post('/Trips', function (req, res) {
         res.redirect('/Trips')
       }
     })
-  })
 })
 
 app.delete('/Trips', function (req, res) {
