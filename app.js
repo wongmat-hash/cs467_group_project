@@ -2,6 +2,7 @@ var express = require('express');
 var exphbs = require('express-handlebars');
 var fileupload = require('express-fileupload');
 var session = require('express-session');
+var nodeGeocoder = require('node-geocoder');
 
 var app = express();
 
@@ -11,7 +12,11 @@ app.use(session({
     saveUninitialized: true,
 }))
 
-port = 5256;
+let options = {
+    provider: 'openstreetmap'
+};
+
+port = 5260;
 
 var db = require('./database/db-connector');
 
@@ -73,9 +78,25 @@ app.get('/Search', function (req, res) {
     res.render('Search');
 });
 
+app.get('/expNew', function(req,res){
+    let tableQuery;
+
+    tableQuery = 'SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
+    db.pool.query(tableQuery, function(error, rows, fiedls) {
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            //res.render('main', {layout : 'index'});
+            res.render('expNew', {Experiences: rows});
+        }
+    })
+});
+
 // Will display all experiences saved to the database and display the rounded average of the rating for each
 app.get('/searchExperience', (req, res) => {
     let tableQuery;
+
     tableQuery = 'SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
     db.pool.query(tableQuery, function (error, rows, fiedls) {
         if (error) {
@@ -89,6 +110,33 @@ app.get('/searchExperience', (req, res) => {
         }
     })
 });
+
+app.get('/searchExperience/search', (req, res) => {
+    let tableQuery
+    const userInput = req.query.searchExp;
+    tableQuery = "SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE (Rating.ratingValue >= 0 or Rating.ratingValue IS NULL) AND (Experiences.note LIKE ? OR Experiences.location LIKE ?) GROUP BY Experiences.experienceID";
+
+    db.pool.query(tableQuery, [userInput, userInput], function(error, rows, fiedls){
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            res.render('searchExperience', {Experiences: rows})
+        }
+    })
+});
+
+//logout route
+app.post('/logout', function(req, res) {
+  console.log('in logout function')
+  req.session.destroy(function(err) {
+    if (err) {
+      console.log(err);
+    }
+    res.sendStatus(200);
+  });
+});
+
 
 // Allow a user to add a rating to an already existing experience
 app.post('/searchExperience', function (req, res) {
@@ -118,9 +166,18 @@ app.post('/Experiences', function (req, res) {
 })
 
 // Allow for a user to add a new experience
-app.post('/addExperience/add', (req, res) => {
+app.post('/addExperience/add', async (req, res) => {
     let sampleImage;
     let uploadPath;
+
+    // use nodeGeocoder to get the lat and long of input city, state and/or country
+    let geoCoder = nodeGeocoder(options);
+    let latLong = await geoCoder.geocode(req.body.addloc);
+    let latitude = latLong[0].latitude;
+    let longitude = latLong[0].longitude;
+    // variable used to upload to the database
+    geoLocate = latitude + ', '+ longitude;
+    //console.log(latitude + ', '+ longitude);
 
     if (!req.files || Object.keys(req.files).length === 0) {
         return res.status(400).send('No files were uploaded.');
@@ -134,20 +191,19 @@ app.post('/addExperience/add', (req, res) => {
     sampleImage.mv(uploadPath, function (err) {
         if (err) return res.status(500).send(err);
 
-        //res.send('File Uploaded!');
-
-        let insertQuery = "INSERT INTO Experiences (experienceTitle, description, location, image, note) VALUES (?,?,?,?,?)"
-        let insertData = [req.body.addexpTitle, req.body.adddesc, req.body.addloc, sampleImage.name, req.body.addnote]
-        db.pool.query(insertQuery, insertData, function (error, rows, fiedls) {
-            if (error) {
-                res.write(JSON.stringify(error));
-                res.end();
-            } else {
-                res.render('addExperience')
-            }
-        });
-    });
+    let insertQuery = "INSERT INTO Experiences (experienceTitle, description, location, image, note) VALUES (?,?,?,?,?)"
+    let insertData = [req.body.addexpTitle, req.body.adddesc, geoLocate, sampleImage.name, req.body.addnote]
+    db.pool.query(insertQuery, insertData, function(error, rows, fiedls) {
+        if(error) {
+            res.write(JSON.stringify(error));
+            res.end();
+        } else {
+            res.render('addExperience')
+        }
+      });
+  });
 });
+
 
 // Allow a user to log in with correct username and password
 app.post('/login', (req, res) => {
@@ -269,7 +325,7 @@ app.post('/Trips', function (req, res) {
 
     let insertTripQuery = 'INSERT INTO Trips (tripTitle, userName) VALUES (?,?);'
     let insertTripData = [addTripName, addUserName]
-  
+
     db.pool.query(insertTripQuery, insertTripData, function (error) {
       if (error) {
         console.log(error)
@@ -278,6 +334,7 @@ app.post('/Trips', function (req, res) {
         res.redirect('/Trips')
       }
     })
+  })
 })
 
 app.delete('/Trips', function (req, res) {

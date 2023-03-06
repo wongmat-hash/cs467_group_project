@@ -1,30 +1,33 @@
-<form class="row g-3 align-items-center" role="search">
+<form class="row g-3 align-items-center" class="search" role="search" method="get" action="/searchExperience/search" >
   <div class="col-auto">
     <div class="input-group">
       <span class="input-group-text" id="searchBar">
         <i class="bi bi-search"></i>
       </span>
-      <input class="form-control" type="search" placeholder="Search experiences..." aria-label="Search experiences..." />
+      <input id="inputCriteria" class="form-control" type="text" name="searchExp" placeholder="Search experiences..." aria-label="Search experiences..." />
     </div>
   </div>
-  <div class="col-auto">
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="experienceSearchRadio" id="byKeywordRadio" checked>
-      <label class="form-check-label" for="byKeywordRadio">
-        by keyword
-      </label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="experienceSearchRadio" id="byLocationRadio">
-      <label class="form-check-label" for="byLocationRadio">
-        by location
-      </label>
-    </div>
-  </div>
-
   <div class="col-auto">
     <button class="btn btn-success" type="submit">
       Search
     </button>
+  </div>
+
+  <div class="col-auto">
+    <div class="form-check form-check-inline">
+      <a href="/Trips">Trips</a>
+    </div>
+    <div class="form-check form-check-inline">
+      <a href="/addExperience">Add an Experience</a>
+    </div>
+    <div class="form-check form-check-inline">
+      <a href="/searchExperience">Search for an Experience</a>
+    </div>
+    <div class="form-check form-check-inline">
+      <a href="/resetPassword">Reset your Password</a>
+    </div>
+    <div class="form-check form-check-inline">
+      <a href="/logout">Logout</a>
+    </div>
   </div>
 </form>
