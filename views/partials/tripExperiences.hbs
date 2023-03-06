@@ -1,0 +1,28 @@
+<!-- This partial renders in the TripExperiences page where it displays any experiences relating to the trip. -->
+
+<h3>Current trip experiences</h3>
+
+<div class='table-responsive'>
+  <table id="tripExpTable">
+    <thead>
+      <tr>
+        <th>Experience name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#if tripData}}
+      {{#each tripData}}
+      <tr>
+        <td>{{jsonHelper this.experienceTitle}}</td>
+        <td class="d-flex justify-content-end"><button type='submit' class='btn btn-danger'
+            onclick="deleteTripExperience({{jsonHelper this.experienceID}});">Delete</button></td>
+      </tr>
+      {{/each}}
+      {{/if}}
+      {{#unless tripData}}
+      <p>No experiences added yet.</p>
+      {{/unless}}
+    </tbody>
+  </table>
+</div>
