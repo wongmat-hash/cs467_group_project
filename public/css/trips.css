@@ -1,0 +1,28 @@
+@import url('https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css');
+
+
+html {
+  overflow-x: hidden;
+}
+
+.bg-travel-yellow {
+  background-color: var(--color-yellow-500) !important;
+}
+
+.img-responsive {
+  max-width: 3.5em;
+  max-height: 3.5em;
+}
+
+.experienceDetails {
+  background-color: var(--color-gray-100);
+}
+
+.card.emptyCard {
+  border-style: dashed;
+}
+
+.card {
+  min-height: 14rem !important;
+  min-width: 18rem !important;
+}

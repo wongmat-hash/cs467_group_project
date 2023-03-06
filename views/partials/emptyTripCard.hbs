@@ -1,10 +1,15 @@
-<div class="card emptyCard mb-4 rounded-3 shadow-sm">
-    <div class="card-body">
-        <div class="d-flex justify-content-center fs-1">
-            <i class="bi bi-compass"></i>
+<article class="card m-4 emptyCard rounded-3 shadow-sm">
+    <div class="m-3 d-flex justify-content-center fs-1">
+        <i class="bi bi-compass"></i>
+    </div>
+    <h4 class="card-title d-flex justify-content-center m-3">
+        Create a new trip
+    </h4>
+    <div class="d-flex align-items-center justify-content-center my-1">
+        <div class="d-flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTripModal"
+                data-bs-whatever="createTrip">Create</button>
         </div>
-        <h5 class="card-title d-flex justify-content-center">Create a new trip</h5>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTripModal" data-bs-whatever="createTrip">Create</button>
         {{> createTripModal }}
     </div>
-</div>  
+</article>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{pageTitle}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.css"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/trips.css" />
+    <link rel="stylesheet" type="text/css" href="/css/landing.css" />
+    <link rel="stylesheet" type="text/css" href="../styles.css" />
+</head>
+
+<body>
+
+    <div class="d-flex flex-row">
+        {{> nav}}
+        <div class="flex-column col dynamic">
+                <input type='hidden' id='expTripID' value='{{tripID}}' />
+                <input type='hidden' id='expTripName' value='{{tripName}}' />
+                {{> tripInformation }}
+                <div data-id="expRows" class="row">
+                    <div data-id="tripExps" class="col">
+                        {{> tripExperiences tripID=tripID}}
+                    </div>
+                    <div data-id="availExps" class="col">
+                        {{> availableExperiences tripName=tripName}}
+                    </div>
+                </div>
+        </div>
+		
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="/js/EditTripExperiences.js"></script>
+    <script type="text/javascript" src="/js/scripts.js"></script>
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.js"></script>
+</body>
+
+</html>
