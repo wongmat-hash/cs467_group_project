@@ -74,25 +74,6 @@ app.get('/resetPassword', function (req, res) {
     res.render('resetPassword');
 });
 
-app.get('/Search', function (req, res) {
-    res.render('Search');
-});
-
-app.get('/expNew', function(req,res){
-    let tableQuery;
-
-    tableQuery = 'SELECT ROUND(AVG(Rating.ratingValue), 2) as ratingValue, Experiences.* FROM Experiences LEFT JOIN Rating ON Rating.experienceID=Experiences.experienceID WHERE Rating.ratingValue >= 0 or Rating.ratingValue IS NULL GROUP BY Experiences.experienceID';
-    db.pool.query(tableQuery, function(error, rows, fiedls) {
-        if(error) {
-            res.write(JSON.stringify(error));
-            res.end();
-        } else {
-            //res.render('main', {layout : 'index'});
-            res.render('expNew', {Experiences: rows});
-        }
-    })
-});
-
 // Will display all experiences saved to the database and display the rounded average of the rating for each
 app.get('/searchExperience', (req, res) => {
     let tableQuery;
@@ -151,19 +132,6 @@ app.post('/searchExperience', function (req, res) {
         }
     })
 });
-
-app.post('/Experiences', function (req, res) {
-    let insertQuery = "INSERT INTO Rating (ratingValue, experienceID) VALUES (?,?)";
-    let updateData = [req.body.addRatingValue, req.body.experienceID]
-    db.pool.query(insertQuery, updateData, function (error, rows, fiedls) {
-        if (error) {
-            res.write(JSON.stringify(error));
-            res.end();
-        } else {
-            res.redirect('/Experiences')
-        }
-    })
-})
 
 // Allow for a user to add a new experience
 app.post('/addExperience/add', async (req, res) => {
