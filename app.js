@@ -266,7 +266,7 @@ app.post('/Registration', (req, res) => {
     });
 });
 
-app.get('/Trips', function (req, res) {
+app.get('/Trips', function (res) {
     let getTripQuery = `
     SELECT * FROM Trips
     WHERE Trips.userName = "${session.userName}";`
@@ -288,6 +288,7 @@ app.get('/Trips', function (req, res) {
 
 app.post('/Trips', function (req, res) {
     let data = req.body
+
     const addUserName = String(data['userName']).trim()
     const addTripName = String(data['tripName']).trim()
 
@@ -306,6 +307,7 @@ app.post('/Trips', function (req, res) {
 
 app.delete('/Trips', function (req, res) {
     let data = req.body
+
     let tripID = parseInt(data["tripID"])
     let deleteQuery = `DELETE FROM Trips WHERE Trips.tripID = ${tripID};`
     db.pool.query(deleteQuery, function (error) {
@@ -357,7 +359,6 @@ app.get('/Trips/:id/edit/:trip', function (req, res) {
 
 app.put('/Trips/:id/edit/:trip', function (req, res) {
     let data = req.body
-    console.log(data)
 
     const tripID = parseInt(data["tripID"])
     const tripName = String(data["tripName"]).trim()
@@ -375,7 +376,6 @@ app.put('/Trips/:id/edit/:trip', function (req, res) {
 
 app.post('/Trips/:id/edit/:trip', function (req, res) {
     let data = req.body
-    //console.log(data)
 
     const tripID = parseInt(data["tripID"])
     const tripName = String(data["tripName"]).trim()
@@ -384,7 +384,7 @@ app.post('/Trips/:id/edit/:trip', function (req, res) {
     
     let insertTripExpData = [tripID, expID, expName, tripName]
     let insertTripExpQuery = `INSERT INTO TripExperiences (tripID, experienceID, experienceTitle, tripTitle) VALUES (?,?,?,?);`
-    //console.log(insertTripExpQuery)
+
     db.pool.query(insertTripExpQuery, insertTripExpData, function (error) {
       if (error) {
         console.log(error)
@@ -400,7 +400,7 @@ app.delete('/Trips/:id/edit/:trip', function (req, res) {
     const tripID = parseInt(data["tripID"])
     let expID = parseInt(data["expID"])
     let deleteQuery = `DELETE FROM TripExperiences WHERE TripExperiences.experienceID = ${expID} AND TripExperiences.tripID = ${tripID};`
-    //console.log(deleteQuery)
+
     db.pool.query(deleteQuery, function (error) {
         if (error) {
             console.log(error)
